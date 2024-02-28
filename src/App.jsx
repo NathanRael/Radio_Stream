@@ -1,23 +1,25 @@
-import { ButtonLg, ButtonIcon, ButtonIconLg, Icon } from "./components/Buttons";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { DataProvider } from "./context/DataContext";
-import SignIn from "./pages/SignIn";
-import Login from "./pages/Login";
-import NotFound from "./pages/NotFound";
-import Profile from "./pages/Profile";
+import Header from "./pages/landingPage/Header";
+import Hero from "./pages/landingPage/Hero";
 const App = () => {
   return (
-    <Router>
-      <DataProvider>
+    <>
+      <Router>
         <Routes>
-          <Route path="/SignIn" element={<SignIn />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Profile/:id" element={<Profile />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<LandingPage/>} />
         </Routes>
-      </DataProvider>
-    </Router>
+      </Router>
+    </>
   );
 };
 
 export default App;
+
+const LandingPage = () => {
+  return (
+    <html>
+      <Header />
+      <Hero/>
+    </html>
+  );
+};

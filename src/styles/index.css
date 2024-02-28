@@ -3,36 +3,53 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: 'Roboto';
-    src: url('../assets/fonts/Roboto-Regular.ttf');
+    font-family: 'Futura';
+    src: url('../assets/fonts/FuturaPTDemi.otf');
 }
 @font-face {
-    font-family: 'RobotoMd';
-    src: url('../assets/fonts/Roboto-Medium.ttf');
+    font-family: 'FuturaMd';
+    src: url('../assets/fonts/FuturaPTMedium.otf');
 }
 @font-face {
-    font-family: 'RobotoBold';
-    src: url('../assets/fonts/Roboto-Bold.ttf');
+    font-family: 'FuturaBold';
+    src: url('../assets/fonts/FuturaPTBold.otf');
 }
 @font-face {
-    font-family: 'RobotoThin';
-    src: url('../assets/fonts/Roboto-Thin.ttf');
+    font-family: 'FuturaLight';
+    src: url('../assets/fonts/FuturaPTLight.otf');
 }
 
 @layer base{
-    .btn-gradient-1{
-        @apply bg-gradient-to-r from-primary from-10%  to-pink 
-    }
-    .btn-gradient-2{
-        @apply bg-gradient-to-r from-primary from-10%  to-primary-40 
-    }
 
     .btn-primary{
         @apply bg-primary
     }
 
+    .btn-danger{
+        @apply bg-danger
+    }
+
     .input{
+        @apply px-6 py-3 text-base text-white-60 rounded-md border-white-10 bg-white-10 placeholder:text-white-60 outline-none  focus:ring-primary focus:ring-2
+    }
+    .inputLg{
         @apply px-8 py-4 text-base text-white-60 rounded-md border-white-10 bg-white-10 placeholder:text-white-60 outline-none  focus:ring-primary focus:ring-2
+    }
+
+    .profile-container{
+        @apply bg-black p-6 flex flex-col  justify-between gap-10 w-full sm:w-[472px] absolute top-0 left-1/2 -translate-x-1/2
+    }
+
+    .line{
+        @apply border border-white-10 w-[50%] mx-auto
+    }
+
+    .navLink{
+        @apply text-lead text-black hover:text-primary cursor-pointer
+    }
+
+    .active-link{
+        @apply text-primary
     }
 
 }
