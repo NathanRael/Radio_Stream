@@ -1,0 +1,14 @@
+
+.radio-text.animate{
+    animation: 8s infinite ease-in-out left-right;
+}
+
+@keyframes left-right {
+    from {
+        transform: translateX(180%);
+    }
+
+    to{
+        transform: translateX(-180%);
+    }
+}

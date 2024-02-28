@@ -1,25 +1,20 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./pages/landingPage/Header";
-import Hero from "./pages/landingPage/Hero";
+import { useEffect, useState } from "react";
+import LandingPage from "./pages/landingPage/LandingPage";
+import { AppProvider } from "./context/Appcontext";
+
 const App = () => {
   return (
     <>
       <Router>
-        <Routes>
-          <Route path="/" element={<LandingPage/>} />
-        </Routes>
+        <AppProvider>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+          </Routes>
+        </AppProvider>
       </Router>
     </>
   );
 };
 
 export default App;
-
-const LandingPage = () => {
-  return (
-    <html>
-      <Header />
-      <Hero/>
-    </html>
-  );
-};

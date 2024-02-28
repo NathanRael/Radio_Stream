@@ -1,8 +1,8 @@
 import profileImage from  "../assets/images/profile.png"
 
-const ProfileImg = () => {
+const ProfileImg = ({image = profileImage, handleClick}) => {
   return (
-    <img src={profileImage} className="rounded-full" width={44} height={44} alt="" />
+    <img src={profileImage} className="rounded-full cursor-pointer" width={44} height={44} alt=""  onClick={handleClick}/>
   )
 }
 

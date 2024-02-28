@@ -1,0 +1,27 @@
+.sound-wave.disabled path{
+    fill: #0e0a171a;
+}
+.sound-wave.animate path{
+    animation: 1s infinite ease-in-out switchColor alternate;
+    fill: "#1DB954";
+}
+
+.sound-wave path:nth-child(2){
+    animation-delay: 0.2s;
+}
+.sound-wave path:nth-child(4){
+    animation-delay: 0.4s;
+}
+.sound-wave path:nth-child(8){
+    animation-delay: 0.6s;
+}
+
+@keyframes switchColor {
+    0% , 100%{
+        fill-opacity: 1;
+    }
+
+    50%{
+        fill-opacity: 0.4;
+    }
+}
