@@ -7,13 +7,13 @@ const RadioPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   return (
-    <div className="rounded-lg p-6 flex flex-col gap-4 items-center justify-center bg-black-10 overflow-hidden min-w-[330px] max-md:w-full">
+    <div className="rounded-lg p-6 flex flex-col gap-4 items-center justify-center bg-black-10 overflow-hidden min-w-[330px] max-md:w-full dark:bg-white-10">
       <RadioPlayIcon
         isPlaying={isPlaying}
         handleClick={() => setIsPlaying((prev) => !prev)}
       />
       <p
-        className={`text-base text-black radio-text ${
+        className={`text-base text-black radio-text  dark:text-white ${
           isPlaying ? "animate" : ""
         }`}
       >
@@ -41,7 +41,7 @@ export default RadioPlayer;
 const RadioPlayIcon = ({ handleClick, isPlaying }) => {
   return (
     <div
-      className="rounded-full bg-primary text-black size-[88px] flex items-center justify-center cursor-pointer icon-anim"
+      className="rounded-full bg-primary text-black size-[88px] flex items-center justify-center cursor-pointer icon-anim play-anim"
       onClick={handleClick}
     >
       <i

@@ -7,10 +7,10 @@ const Radio = () => {
       id="Radio"
     >
       <div className="flex flex-col max-md:flex-row gap-6">
-        <p className="text-black text-title-2 max-md:text-subtitle-2">
+        <p className="text-black text-title-2 max-md:text-subtitle-2 dark:text-white">
           Radio Rofia
         </p>
-        <p className="text-subtitle-1 max-md:text-subtitle-3 text-black-60">
+        <p className="text-subtitle-1 max-md:text-subtitle-3 text-black-60 dark:text-white-60">
           91.4MHz
         </p>
       </div>

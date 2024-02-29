@@ -1,0 +1,19 @@
+.icon-hidden{
+    top:16px;
+}
+
+.nav-hidden{
+    top: 50%;
+}
+
+@keyframes hide {
+    0%,100%{
+        opacity: 0;
+        transform: scale(0.4);
+    }
+
+    50%{
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}

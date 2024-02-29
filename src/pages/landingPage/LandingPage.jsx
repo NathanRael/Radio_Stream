@@ -8,20 +8,25 @@ import Loader from "../../components/Loader";
 import AppContext from "../../context/Appcontext";
 import { useContext } from "react";
 const LandingPage = () => {
-  const { isLoading } = useContext(AppContext);
-  console.log(isLoading);
+  const { isLoading, isNavToggled } = useContext(AppContext);
   return (
     <>
       {isLoading ? (
         <Loader />
       ) : (
         <>
-            <Header />
+          <Header />
+          <section
+            className={`transition-transform duration-500 ease-out ${
+              isNavToggled ? "scale-[0.6]" : ""
+            }`}
+          >
             <Hero />
             <Historique />
             <Radio />
             <Application />
             <Footer />
+          </section>
         </>
       )}
     </>

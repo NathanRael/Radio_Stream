@@ -2,7 +2,7 @@ import "../animations/SoundWave.css";
 const SoundWave = ({animate}) => {
   return (
     <svg
-    className={`${animate ? 'animate' : 'disabled'} sound-wave`}
+    className={`${animate ? 'animate' : '*:fill-black-10 dark:*:fill-white-10'} sound-wave`}
       width="88"
       height="88"
       viewBox="0 0 88 88"

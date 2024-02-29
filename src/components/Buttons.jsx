@@ -69,7 +69,7 @@ export const Icon = ({ icon = "bi bi-arrow-left", color = "btn-primary", handleC
   return (
     <button
       onClick={handleClick}
-      className={`${color} rounded-full text-base font-robotoMd text-black p-3 flex items-center justify-center w-10 h-10 icon-anim`}
+      className={`${color} dark-text-white rounded-full text-base font-robotoMd text-black p-3 flex items-center justify-center w-10 h-10 icon-anim`}
     >
       <i className={`${icon} font-FuturaMd`}></i>
     </button>
@@ -80,7 +80,7 @@ export const IconLg = ({ icon = "bi bi-arrow-left", color = "btn-primary", handl
   return (
     <button
       onClick={handleClick}
-      className={`${color} rounded-full text-icon font-FuturaMd text-black p-4 flex items-center justify-center w-11 h-11 cursor-pointer icon-anim`}
+      className={`${color} dark:text-white rounded-full text-icon font-FuturaMd text-black p-4 flex items-center justify-center w-11 h-11 cursor-pointer icon-anim`}
     >
       <i className={`${icon} ${iconSize}`}></i>
     </button>
