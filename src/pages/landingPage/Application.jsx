@@ -57,7 +57,7 @@ const Application = () => {
           </li>
         </ul>
         <Image color="bg-black-10 dark:bg-white-10" active={active.decouvrer} text="Découvrer les différentes fonctionalités de l’application web" />
-        <Image color="bg-light dark:text-white" active={active.utiliser} text="Utiliser le dans votre quotidient" />
+        <Image color="bg-light dark:bg-white-40" active={active.utiliser} text="Utiliser le dans votre quotidient" />
         <Image color="bg-primary" active={active.experimenter} text="Experiemnter l'application" />
         <h3 className="mt-[348px] text-subtitle-3 text-black max-md:text-lead dark:text-white">
           <span className="text-primary">L'application web</span> Radio Rofia

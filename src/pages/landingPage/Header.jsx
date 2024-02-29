@@ -10,6 +10,11 @@ const Header = () => {
   useEffect(() =>{
      document.body.style.overflow = isNavToggled ? 'hidden' : 'auto';
   }, [isNavToggled])
+
+  const toogleDarkMode = () =>{
+    setDarkMode((prev) => !prev);
+    localStorage.darkMode = darkMode;
+  }
   return (
     <header className=" flex items-center justify-between box py-4 border-b dark:border-b-white-10 border-b-black-10 fixed top-0  w-full z-50 bg-white shadow-sm dark:bg-black">
       <div className="text-black text-subtitle-3 dark:text-white">
@@ -34,7 +39,7 @@ const Header = () => {
       <div className={` flex items-center justify-between max-w-[128px] gap-6  max-md:fixed left-4 max-md:flex-row-reverse transition-all duration-500 top-4 z-30 ${isNavToggled ? 'icon-hidden' : 'max-md:-top-1/2'}`}>
         <div className={!isNavToggled ? '' : ''}>
           {/* <i className="bi bi-moon text-[28px]"></i> */}
-          <IconLg color="bg-white dark:bg-black" icon={!darkMode ? "bi bi-moon" : "bi bi-sun"} iconSize="text-[28px]" handleClick={() => setDarkMode((prev) => !prev)}/>
+          <IconLg color="bg-white dark:bg-black" icon={!darkMode ? "bi bi-moon" : "bi bi-sun"} iconSize="text-[28px]" handleClick={toogleDarkMode}/>
         </div>
         <div className={!isNavToggled ? '' : ''}>
           <ProfileImg />

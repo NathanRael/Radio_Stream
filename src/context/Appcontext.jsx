@@ -5,6 +5,9 @@ const AppContext = createContext({});
 export const AppProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [darkMode,setDarkMode] = useState(false);
+  useEffect(() => {
+    setDarkMode(localStorage.darkMode);
+  }, []);
   const Load = () => {
     setIsLoading(false);
   };
