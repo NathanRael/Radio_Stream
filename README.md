@@ -1,8 +1,15 @@
-# React + Vite
+# Radio Rofia
+Radio Landing page and web app featuring micro-interaction and animation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Technologies
+- React Js
+- TailwindCss
+- Php (not yet implementend)
 
-Currently, two official plugins are available:
+## Features
+- Dark mode
+(More will come soon)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Design 
+The design has done by [figma](https://www.figma.com/file/xZDpyUbaxGDLkKHErLvfoX/Rofia?type=design&node-id=0-1&mode=design&t=tGiscH0UNQRnLfFk-0)
+
