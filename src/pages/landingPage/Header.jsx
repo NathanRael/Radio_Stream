@@ -5,9 +5,16 @@ import "../../animations/Header.css";
 import { useContext, useState } from "react";
 import { useEffect } from "react";
 import AppContext from "../../context/Appcontext";
+import PorfilePopup from "../../components/PorfilePopup";
 const Header = ({ isForLanding = false }) => {
-  const { isNavToggled, setIsNavToggled, darkMode, setDarkMode } =
-    useContext(AppContext);
+  const {
+    isNavToggled,
+    setIsNavToggled,
+    darkMode,
+    setDarkMode,
+    setProfileClicked,
+    profileClicked,
+  } = useContext(AppContext);
   useEffect(() => {
     document.body.style.overflow = isNavToggled ? "hidden" : "auto";
   }, [isNavToggled]);
@@ -25,6 +32,15 @@ const Header = ({ isForLanding = false }) => {
         isForLanding ? "box " : "px-4"
       } fixed flex items-center justify-between  py-4 border-b dark:border-b-white-10 border-b-black-10  top-0  w-full z-50 bg-white shadow-sm dark:bg-black`}
     >
+      <div
+        className={`transition duration-300 z-40 fixed top-[88px] right-4 ${
+          profileClicked
+            ? "translate-x-0 opacity-1"
+            : "translate-x-[10rem] opacity-0"
+        }`}
+      >
+        <PorfilePopup />
+      </div>
       <div className="text-black text-subtitle-3 dark:text-white">
         <a href="#Hero">
           Radio <span className="text-primary">Rofia</span>
@@ -65,7 +81,7 @@ const Header = ({ isForLanding = false }) => {
           />
         </div>
         <div className={!isNavToggled ? "" : ""}>
-          <ProfileImg />
+          <ProfileImg handleClick={() => setProfileClicked((prev) => !prev)} />
         </div>
       </div>
       <div className="visible md:hidden z-30">

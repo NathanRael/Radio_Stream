@@ -26,8 +26,8 @@ const PostList = () => {
               title="Description"
               placeholder="Entrer la desciprtion du requête"
             />
-            <div className="bg-white-10 rounded-lg w-full h-[240px] relative">
-              <i className="bi bi-image text-white-60 absolute text-[128px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></i>
+            <div className="bg-black-10 black:bg-white-10 rounded-lg w-full h-[240px] relative">
+              <i className="bi bi-image text-black-60 dark:text-white-60 absolute text-[128px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></i>
             </div>
             <FileInput/>
             <div className="flex w-full flex-col mt-8">

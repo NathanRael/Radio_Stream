@@ -3,6 +3,7 @@ import { createContext, useState, useEffect } from "react";
 const AppContext = createContext({});
 
 export const AppProvider = ({ children }) => {
+  const [profileClicked, setProfileClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [darkMode,setDarkMode] = useState(false);
   useEffect(() => {
@@ -28,7 +29,7 @@ export const AppProvider = ({ children }) => {
     return () => clearTimeout(Load);
   }, []);
   return (
-    <AppContext.Provider value={{ isLoading, isNavToggled,setIsNavToggled,darkMode,setDarkMode }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ isLoading, isNavToggled,setIsNavToggled,darkMode,setDarkMode, profileClicked, setProfileClicked }}>{children}</AppContext.Provider>
   );
 };
 

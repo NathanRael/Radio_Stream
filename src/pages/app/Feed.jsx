@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import Header from "../landingPage/Header";
+import PorfilePopup from "../../components/PorfilePopup";
+import AppContext from "../../context/Appcontext";
 
 const Feed = ({ children }) => {
   const navigate = useNavigate();
-
   return (
     <section>
+
       <Header />
       <div className="flex mt-24">
         <div className="basis-[284px] relative">
@@ -41,7 +43,6 @@ const Feed = ({ children }) => {
               text="Publications"
               icon="bi bi-lock"
             />
-
           </ul>
         </div>
         <div className=" flex items-center justify-center w-full">
