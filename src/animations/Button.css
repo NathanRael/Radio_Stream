@@ -1,10 +1,9 @@
 
-
 .btn-anim p {
     transition: transform 0.2s ease-in-out;
     /* transition-delay: 0.1s; */
 }
 
-.btn-anim:hover p {
+.btn-anim:hover p, .btn-anim-custom:hover p {
     transform: translateY(-2px);
 }

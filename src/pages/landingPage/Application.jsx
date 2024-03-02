@@ -2,13 +2,14 @@ import { useState } from "react";
 import { ButtonLg } from "../../components/Buttons";
 import ImgT from "../../components/ImgT";
 import '../../animations/Application.css';
+import { useNavigate } from "react-router-dom";
 const Application = () => {
   const [active, setActive] = useState({
     decouvrer: true,
     utiliser: false,
     experimenter: false,
   });
-
+  const navigate = useNavigate();
 
   return (
     <section className=" box mt-[172px] space-y-10 overflow-hidden" id="Application">
@@ -64,7 +65,7 @@ const Application = () => {
         </h3>
       </div>
       <div className="text-center">
-        <ButtonLg text="Acceder à l'application web" color="bg-black-10 dark:bg-white" />
+        <ButtonLg text="Acceder à l'application web" color="bg-black-10 dark:bg-white"  handleClick={() => navigate('/login')}/>
       </div>
     </section>
   );

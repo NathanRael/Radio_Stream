@@ -3,12 +3,12 @@ import '../animations/Button.css';
 export const Button = ({
   text = "button",
   handleClick,
-  color = 'btn-primary',
+  color = 'bg-primary',
 }) => {
   return (
     <button
       onClick={handleClick}
-      className={`${color} px-4 py-2 rounded-full text-small font-FuturaMd text-black btn-anim`}
+      className={`${color} px-4 py-2 rounded-full text-small-1 font-FuturaMd text-black btn-anim `}
     >
       <p>{text}</p>
     </button>
@@ -18,13 +18,14 @@ export const Button = ({
 export const ButtonLg = ({
   text = "button",
   handleClick,
-  color = 'btn-primary',
+  color = 'bg-primary',
+  defaultAnim = true,
 }) => {
 
   return (
     <button
       onClick={handleClick}
-      className={`${color} px-8 py-4 rounded-full text-base  font-FuturaMd text-black btn-anim`}
+      className={`${color} px-8 py-4 rounded-full text-base  font-FuturaMd ${defaultAnim ? 'btn-anim' : 'btn-anim-custom'}`}
     >
       <p>{text}</p>
     </button>
@@ -34,7 +35,7 @@ export const ButtonLg = ({
 export const ButtonIcon = ({
   text = "button",
   icon = "bi bi-arrow-left",
-  color = "btn-primary",
+  color = "bg-primary",
   handleClick,
 }) => {
   return (
@@ -51,7 +52,7 @@ export const ButtonIcon = ({
 export const ButtonIconLg = ({
   text = "button",
   icon = "bi bi-arrow-left",
-  color = "btn-primary",
+  color = "bg-primary",
   handleClick,
 }) => {
   return (
@@ -65,22 +66,33 @@ export const ButtonIconLg = ({
   );
 };
 
-export const Icon = ({ icon = "bi bi-arrow-left", color = "btn-primary", handleClick }) => {
+export const Icon = ({ icon = "bi bi-arrow-left", color = "bg-primary", handleClick }) => {
   return (
     <button
       onClick={handleClick}
-      className={`${color} dark-text-white rounded-full text-base font-robotoMd text-black p-3 flex items-center justify-center w-10 h-10 icon-anim`}
+      className={`${color}  rounded-full text-base font-robotoMd  p-3 flex items-center justify-center w-10 h-10 icon-anim`}
     >
       <i className={`${icon} font-FuturaMd`}></i>
     </button>
   );
 };
 
-export const IconLg = ({ icon = "bi bi-arrow-left", color = "btn-primary", handleClick, iconSize = 'text-icon' }) => {
+export const IconLg = ({ icon = "bi bi-arrow-left", color = "icon-white", handleClick, iconSize = 'text-icon' }) => {
   return (
     <button
       onClick={handleClick}
-      className={`${color} dark:text-white rounded-full text-icon font-FuturaMd text-black p-4 flex items-center justify-center w-11 h-11 cursor-pointer icon-anim`}
+      className={`${color}  rounded-full text-icon font-FuturaMd  p-4 flex items-center justify-center w-11 h-11 cursor-pointer icon-anim`}
+    >
+      <i className={`${icon} ${iconSize}`}></i>
+    </button>
+  );
+};
+export const InputIcon = ({ icon = "bi bi-arrow-left", color = "bg-primary", handleClick, iconSize = 'text-icon' }) => {
+  return (
+    <button
+      onClick={handleClick}
+      className={`${color} dark:text-white rounded-lg text-icon  font-FuturaMd text-black px-4 py-2 h-full flex items-center justify-center cursor-pointer input-file
+      `}
     >
       <i className={`${icon} ${iconSize}`}></i>
     </button>

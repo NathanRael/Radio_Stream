@@ -3,10 +3,11 @@ import {ButtonLg, ButtonIconLg} from "../../components/Buttons";
 import AppContext from "../../context/Appcontext";
 import "../../animations/Hero.css";
 import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 //${isLoading ? '-translate-y-1/2' : 'translate-y-0'}
 const Hero = () => {
   // const {isLoading, isNavToggled} = useContext(AppContext);
-
+  const navigate = useNavigate();
   return (
     <section className={`flex flex-col gap-12 max-md:gap-10 items-center justify-center mt-[120px]  max-w-[866px] mx-auto max-md:px-4 `}>
       <div className="" id="Hero">
@@ -23,7 +24,7 @@ const Hero = () => {
       </div>
       <div className="flex items-center justify-evenly w-full flex-row max-md:flex-col max-md:gap-y-4">
         <ButtonIconLg text="Ecouter la radio" icon="bi bi-boombox"/>
-        <ButtonLg text="Acceder à l'application" color="bg-black-10 dark:bg-white"/>
+        <ButtonLg text="Acceder à l'application" color="btn-primary"  handleClick={() => navigate('/login')} />
       </div>
     </section>
   );

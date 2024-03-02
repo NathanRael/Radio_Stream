@@ -2,6 +2,16 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import LandingPage from "./pages/landingPage/LandingPage";
 import { AppProvider } from "./context/Appcontext";
+import SignUp from "./pages/app/SignUp";
+import SignUp2 from "./pages/app/SignUp2";
+import Login from "./pages/app/Login";
+import Home from "./pages/app/Home";
+import Feed from "./pages/app/Feed";
+import Radio from "./pages/app/Radio";
+import SavedPost from "./pages/app/SavedPost";
+import Request from "./pages/app/Request";
+import RequestList from "./pages/app/RequestList";
+import PostList from "./pages/app/PostList";
 
 const App = () => {
   return (
@@ -10,6 +20,10 @@ const App = () => {
         <AppProvider>
           <Routes>
             <Route path="/" element={<LandingPage />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signup-2" element={<SignUp2 />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/user/*" element={<UserRoute />} />
           </Routes>
         </AppProvider>
       </Router>
@@ -18,3 +32,33 @@ const App = () => {
 };
 
 export default App;
+
+const UserRoute = () => {
+  return (
+    <Feed>
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route
+          path="/radio"
+          element={<Radio/>}
+        />
+        <Route
+          path="/savedPost"
+          element={<SavedPost/>}
+        />
+        <Route
+          path="/request"
+          element={<Request/>}
+        />
+        <Route
+          path="/requestList"
+          element={<RequestList/>}
+        />
+        <Route
+          path="/postList"
+          element={<PostList/>}
+        />
+      </Routes>
+    </Feed>
+  );
+};

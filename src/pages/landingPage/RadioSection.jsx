@@ -1,6 +1,5 @@
-
 import RadioPlayer from "../../components/RadioPlayer";
-const Radio = () => {
+const RadioSection = () => {
   return (
     <div
       className="flex items-center justify-between mt-[172px] box max-md:flex-col max-lg:gap-10"
@@ -15,9 +14,9 @@ const Radio = () => {
         </p>
       </div>
 
-      <RadioPlayer/>
+      <RadioPlayer />
     </div>
   );
 };
 
-export default Radio;
+export default RadioSection;

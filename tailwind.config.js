@@ -32,9 +32,9 @@ export default {
       },
       colors:{
         'primary' : '#1DB954',
-        'white' : '#E6E6E6',
+        'white' : '#FFFFFF',
         'black' : '#121212',
-        'light' : '#FFFFFF',
+        'light' : '#E6E6E6',
         'success' : '#1DB954',
         'danger' : '#DD5959',
         'primary-60' : '#1db95499',
@@ -46,8 +46,10 @@ export default {
         'black-60' : '#12121299',
         'black-40' : '#12121266',
         'black-10' : '#0e0a171a',
+        'danger-60' : '#dd595999',
         'danger-10' : '#dd59591a',
       }
     },
+    //E6E6E6 : white
     plugins: [],
   }

@@ -6,7 +6,7 @@ export const AppProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [darkMode,setDarkMode] = useState(false);
   useEffect(() => {
-    setDarkMode(localStorage.darkMode);
+    setDarkMode(localStorage.darkMode ||false);
   }, []);
   const Load = () => {
     setIsLoading(false);
@@ -21,6 +21,7 @@ export const AppProvider = ({ children }) => {
         document.body.classList.remove("dark:bg-black");
       }
   },[darkMode])
+
   useEffect(() => { 
     setTimeout(Load, 2000);
 

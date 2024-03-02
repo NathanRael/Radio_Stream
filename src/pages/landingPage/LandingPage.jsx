@@ -1,12 +1,12 @@
 import Header from "./Header";
 import Hero from "./Hero";
 import Historique from "./Historique";
-import Radio from "./Radio";
 import Application from "./Application";
 import Footer from "./Footer";
 import Loader from "../../components/Loader";
 import AppContext from "../../context/Appcontext";
 import { useContext } from "react";
+import RadioSection from "./RadioSection";
 const LandingPage = () => {
   const { isLoading, isNavToggled } = useContext(AppContext);
   return (
@@ -15,7 +15,7 @@ const LandingPage = () => {
         <Loader />
       ) : (
         <>
-          <Header />
+          <Header isForLanding={true}/>
           <section
             className={`transition-transform duration-500 ease-out ${
               isNavToggled ? "scale-[0.6]" : ""
@@ -23,7 +23,7 @@ const LandingPage = () => {
           >
             <Hero />
             <Historique />
-            <Radio />
+            <RadioSection />
             <Application />
             <Footer />
           </section>

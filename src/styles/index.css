@@ -10,9 +10,19 @@
 }
 
 
-*:not(li > a){
+*:not(li > a, button > *){
     transition: color 0.4s ease-in-out;
 }
+
+::-webkit-scrollbar{
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb{
+    @apply bg-primary rounded-lg
+}
+
+
 
 
 @font-face {
@@ -42,20 +52,37 @@
         @apply text-lead text-black hover:text-primary cursor-pointer transition duration-300 dark:text-white
     }
 
-    
     .btn-primary{
-        @apply bg-primary
+        @apply text-black bg-primary-10 dark:bg-white
     }
 
     .btn-danger{
-        @apply bg-danger
+        @apply bg-danger text-white dark:bg-danger-10 dark:text-danger
+    }
+    .btn-success{
+        @apply bg-primary-60 dark:bg-primary-40 text-white
+    }
+
+    .icon-white{
+        @apply dark:text-white text-black
+    }
+    .badge-black{
+        @apply  bg-black-10 text-black-60 dark:bg-white-40 dark:text-white-60 
+    }
+
+    .badge{
+        @apply text-small-2 font-FuturaThin p-2  rounded-full
+    }
+
+    .badge-primary{
+        @apply  bg-primary-40 dark:bg-primary-40 text-white
     }
 
     .input{
-        @apply px-6 py-3 text-base text-white-60 rounded-md border-white-10 bg-white-10 placeholder:text-white-60 outline-none  focus:ring-primary focus:ring-2
+        @apply px-6 py-3 text-base text-black-60 dark:text-white-60 rounded-md border-light dark:border-white-10 bg-black-10 dark:bg-white-10 placeholder:text-black-60 dark:placeholder:text-white-60 outline-none  focus:ring-primary focus:ring-2
     }
     .inputLg{
-        @apply px-8 py-4 text-base text-white-60 rounded-md border-white-10 bg-white-10 placeholder:text-white-60 outline-none  focus:ring-primary focus:ring-2
+        @apply px-8 py-4 text-base text-black-60 dark:text-white-60  rounded-md border-light dark:border-white-10 bg-black-10 dark:bg-white-10 placeholder:text-black-60 dark:placeholder:text-white-60 outline-none  focus:ring-primary focus:ring-2
     }
 
     .profile-container{
@@ -75,9 +102,6 @@
         @apply px-16 max-md:px-4
     }
 
-    /* .loader{
-        @apply before:-z-10 before:-translate-y-1/2 before:-translate-x-1/2 before:absolute before:top-1/2 before:left-1/2 before:inset-1 before:w-[100vw] before:h-[100vh] before:bg-primary
-    } */
     .loader{
         @apply  before:bg-primary
     }
@@ -95,12 +119,16 @@
     }
 
     .btn-anim{
-        @apply transition duration-300 ease-out hover:-translate-y-2 hover:bg-primary hover:text-white   relative
+        @apply transition duration-300 ease-out hover:-translate-y-2 hover:text-white hover:bg-primary    relative
+    }
+    .btn-anim-custom{
+        @apply transition duration-300 ease-out hover:-translate-y-2 hover:text-white hover:bg-danger relative
     }
 
     .card-anim{
         @apply  transition duration-300 ease-out hover:dark:bg-primary  hover:bg-primary-40 hover:-translate-y-2  hover:shadow-lg  
     }
+
 
     .play-anim{
         @apply before:bg-primary-60
@@ -109,4 +137,20 @@
        @apply max-md:opacity-0
     }
 
+    .input-lg{
+        @apply text-white-60 px-8 py-4 rounded-lg bg-white-10 border-white-10 outline-none w-full  focus:ring-1 focus:ring-primary
+    }
+
+
+
+    /* .card-gradient{
+        @apply  before:bg-gradient-to-b before:from-white-10  dark:before:from-black-40 before:from-10% dark:before:to-black-60 before:to-white-40 before:to-40% dark:before:to-60% 
+    } */
+    .card-gradient{
+        @apply  before:bg-gradient-to-b before:from-black-40 before:from-10% before:to-black-60  before:to-40% 
+    }
+
+    .line{
+        @apply  border-t-0 border-b-black-40 dark:border-b-white-10
+    }
 }
