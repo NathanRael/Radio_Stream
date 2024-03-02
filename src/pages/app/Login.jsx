@@ -7,7 +7,7 @@ const Login = () => {
   const navigate = useNavigate();
   return (
     <section className="flex items-center justify-center flex-col gap-8">
-      <h1 className="text-subtitle-1 text-center text-light w-full mt-10">
+      <h1 className="text-subtitle-1 text-center text-black dark:text-light w-full mt-10">
         Bienvenue sur <span className="text-primary">radio rofia</span>{" "}
       </h1>
       <div className="flex items-center justify-between  w-[334px] flex-col gap-10">
@@ -20,7 +20,7 @@ const Login = () => {
           />
         </div>
         <div className="flex flex-col gap-6 w-full ">
-          <p className="text-small text-white">
+          <p className="text-small text-black dark:text-white">
             Pas de compte ?{" "}
             <Link to="/signup" className="text-primary">
               S'inscrire

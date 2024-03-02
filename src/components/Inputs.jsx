@@ -112,7 +112,7 @@ export const FileInput = () => {
           className="text-white dark:text-black  w-[0.1px] -z-10 h-[0.1px] input-file"
           accept=".png,.jpeg, .jpg"
         />
-        <label htmlFor="" className=" text-white-40">
+        <label htmlFor="" className=" text-black-60 dark:text-white-40">
           Ajouter un photo
         </label>
       </div>

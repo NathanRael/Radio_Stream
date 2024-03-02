@@ -10,7 +10,7 @@ const SignUp2 = () => {
       <div className="absolute left-4 top-4">
         <IconLg icon="bi bi-arrow-left" color="bg-dark" handleClick={() => navigate('/signup')} />
       </div>
-      <h1 className="text-subtitle-1 text-center text-light w-full mt-10">
+      <h1 className="text-subtitle-1 text-center text-black dark:text-light w-full mt-10">
         Connectez vous dans le monde de la
         <span className="text-primary"> radio</span>{" "}
       </h1>
@@ -26,7 +26,7 @@ const SignUp2 = () => {
         <div className="flex justify-between gap-6 w-full">
           <ButtonLg
             text="Passer"
-            color="bg-white-10 text-white"
+            color="bg-black-10 dark:bg-white-10 text-black dark:text-white"
             handleClick={() => navigate("/login")}
           />
           <ButtonLg text="S'inscrire" handleClick={() => navigate("/login")} />
