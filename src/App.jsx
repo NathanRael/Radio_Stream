@@ -14,6 +14,7 @@ import Request from "./pages/app/Request";
 import RequestList from "./pages/app/RequestList";
 import PostList from "./pages/app/PostList";
 import PorfilePopup from "./components/PorfilePopup";
+import Profile from "./pages/app/Profile";
 
 const App = () => {
   return (
@@ -45,6 +46,7 @@ const UserRoute = () => {
         <Route path="/request" element={<Request />} />
         <Route path="/requestList" element={<RequestList />} />
         <Route path="/postList" element={<PostList />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Feed>
   );

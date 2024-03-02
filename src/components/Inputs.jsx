@@ -1,9 +1,9 @@
 import { InputIcon } from "./Buttons";
 
 export const InputLg = ({
-  type,
-  title,
-  placeholder,
+  type = "",
+  title = "",
+  placeholder = "",
   errorMsg = "",
   name = "",
   isValid = false,
@@ -34,15 +34,15 @@ export const InputLg = ({
   );
 };
 export const Input = ({
-  type,
-  title,
-  placeholder,
+  type = "",
+  title = "",
+  placeholder = "",
   errorMsg = "",
   name = "",
   isValid = false,
   handleChange,
   inputRef,
-  value,
+  value ,
 }) => {
   return (
     <div className="flex  flex-col gap-2 w-[320px] md:w-[380px]">
@@ -67,9 +67,9 @@ export const Input = ({
   );
 };
 export const Textarea = ({
-  type,
-  title,
-  placeholder,
+  type = "",
+  title = "",
+  placeholder = "",
   errorMsg = "",
   name = "",
   isValid = false,

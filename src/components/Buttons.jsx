@@ -4,11 +4,12 @@ export const Button = ({
   text = "button",
   handleClick,
   color = 'bg-primary',
+  defaultAnim = true,
 }) => {
   return (
     <button
       onClick={handleClick}
-      className={`${color} px-4 py-2 rounded-full text-small-1 font-FuturaMd text-black btn-anim `}
+      className={`${color} px-4 py-2 rounded-full text-small-1 font-FuturaMd  ${defaultAnim ? 'btn-anim' : 'btn-anim-custom'} `}
     >
       <p>{text}</p>
     </button>

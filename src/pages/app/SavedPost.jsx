@@ -1,4 +1,4 @@
-import { ButtonLg } from "../../components/Buttons";
+import { Button } from "../../components/Buttons";
 import PostCard from "../../components/PostCard";
 
 const SavedPost = () => {
@@ -8,7 +8,7 @@ const SavedPost = () => {
         <h1 className="text-subtitle-2 text-black dark:text-white">
           Sauvegardes
         </h1>
-        <ButtonLg
+        <Button
           text="Tout supprimer"
           color="btn-danger"
           defaultAnim={false}
