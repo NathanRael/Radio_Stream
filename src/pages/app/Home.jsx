@@ -2,18 +2,29 @@ import { useContext, useEffect, useState } from "react";
 import { ButtonLg } from "../../components/Buttons";
 import PostCard from "../../components/PostCard";
 import AppContext from "../../context/Appcontext";
+import UseIntersection from "../../hook/UseIntersection";
 
 const Home = () => {
-  const {inView} = useContext(AppContext);
+  const { inView } = useContext(AppContext);
+  const [containerRef, isVisible] = UseIntersection({
+    root: null,
+    rootMargin: "0px",
+    threshold: 1.0,
+  });
 
   return (
-    <section className={`app-box ${inView.home ? '' : 'page-anim'} `}>
-      <h1 className="text-black max-lg:text-center dark:text-white text-subtitle-2 mb-8">
+    <section className={`app-box ${inView.home ? "" : "page-anim"} `}>
+      <h1
+        ref={containerRef}
+        className="text-black max-lg:text-center dark:text-white text-subtitle-2 mb-8"
+      >
         Publication Récentes
       </h1>
       <div className="space-y-20">
         <div className="flex gap-6 flex-wrap items-center justify-center">
-          <PostCard />
+          <div ref={containerRef} className="">
+            <PostCard />
+          </div>
           <PostCard />
           <PostCard />
         </div>

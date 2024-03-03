@@ -10,6 +10,8 @@ export const AppProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(false);
   const [isNavToggled, setIsNavToggled] = useState(false);
   const [activeNav, setActiveNav] = useState("home");
+  const splitedPath = location.pathname.split("/");
+  const currentDir = splitedPath[splitedPath.length - 1];
   const [inView, setInView] = useState({
     home: false,
     radio: false,
@@ -44,8 +46,7 @@ export const AppProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    const splitedPath = location.pathname.split("/");
-    const currentDir = splitedPath[splitedPath.length - 1];
+
     setIsNavToggled(false);
     setActiveNav(currentDir);
     setInView({
@@ -76,6 +77,7 @@ export const AppProvider = ({ children }) => {
         setProfileClicked,
         activeNav,
         inView,
+        currentDir,
       }}
     >
       {children}

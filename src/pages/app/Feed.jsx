@@ -1,15 +1,45 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import Header from "../landingPage/Header";
 import AppContext from "../../context/Appcontext";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NAVLINK } from "../../constants/constant";
+import { IconLg } from "../../components/Buttons";
 
 const Feed = ({ children }) => {
   const navigate = useNavigate();
   const { isNavToggled, activeNav } = useContext(AppContext);
+  const [isButtonVisible, setIsButtonVisible] = useState(false);
+
+  const handleVisible = (e) => {
+    setIsButtonVisible(window.scrollY >= 120 ? true : false);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleVisible);
+    return () => {
+      window.removeEventListener("scroll", handleVisible);
+    };
+  }, []);
+
   return (
     <section>
-      <Header />
+      <Header isTitleVisible={window.scrollY >= 120}/>
+      <div
+        className={`transition duration-300 ${
+          isButtonVisible ? "" : "opacity-0"
+        } fixed right-10 bottom-10 z-50`}
+      >
+        <IconLg
+          icon="bi bi-arrow-up"
+          color="btn-success"
+          handleClick={() => {
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }}
+        />
+      </div>
       <div className={` flex mt-24`}>
         <div className="max-md:basis-0 basis-[284px] relative">
           <ul
@@ -25,10 +55,9 @@ const Feed = ({ children }) => {
                 handleClick={() => navigate(nav.location)}
                 text={nav.text}
                 icon={nav.icon}
-                active={activeNav === nav.location.split('/')[2]}
+                active={activeNav === nav.location.split("/")[2]}
               />
             ))}
-           
           </ul>
         </div>
         <div

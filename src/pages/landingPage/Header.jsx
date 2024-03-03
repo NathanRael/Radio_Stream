@@ -6,7 +6,9 @@ import { useContext, useState } from "react";
 import { useEffect } from "react";
 import AppContext from "../../context/Appcontext";
 import PorfilePopup from "../../components/PorfilePopup";
-const Header = ({ isForLanding = false }) => {
+import { useLocation } from "react-router-dom";
+const Header = ({ isForLanding = false, isTitleVisible = false }) => {
+  const location = useLocation();
   const {
     isNavToggled,
     setIsNavToggled,
@@ -14,7 +16,9 @@ const Header = ({ isForLanding = false }) => {
     setDarkMode,
     setProfileClicked,
     profileClicked,
+    currentDir,
   } = useContext(AppContext);
+
   useEffect(() => {
     document.body.style.overflow = isNavToggled ? "hidden" : "auto";
   }, [isNavToggled]);
@@ -41,9 +45,26 @@ const Header = ({ isForLanding = false }) => {
       >
         <PorfilePopup />
       </div>
-      <div className={`transition-opacity duration-500 text-black text-subtitle-3 dark:text-white ${isNavToggled ? 'opacity-0' : 'opacity-1'} `}>
-        <a href="#Hero">
+      <div
+        className={`transition-opacity duration-500 text-black text-subtitle-3 dark:text-white ${
+          isNavToggled ? "opacity-0" : "opacity-1"
+        } `}
+      >
+        <a
+          href="#Hero"
+          className={` transition duration-150 ${
+            isTitleVisible ? "absolute opacity-0 -translate-x-[10rem] " : "absolute "
+          }`}
+        >
           Radio <span className="text-primary">Rofia</span>
+        </a>
+        <a
+          href="#Hero"
+          className={`text-lead transition duration-150 ${
+            !isTitleVisible ? " opacity-0 " : ""
+          }`}
+        >
+          {currentDir[0].toUpperCase() + currentDir.slice(1)}
         </a>
       </div>
       {isForLanding && (
