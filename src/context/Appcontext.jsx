@@ -12,15 +12,7 @@ export const AppProvider = ({ children }) => {
   const [activeNav, setActiveNav] = useState("home");
   const splitedPath = location.pathname.split("/");
   const currentDir = splitedPath[splitedPath.length - 1];
-  const [inView, setInView] = useState({
-    home: false,
-    radio: false,
-    request: false,
-    savedPost: false,
-    requestList: false,
-    postList: false,
-    profile: false,
-  });
+  const [inView, setInView] = useState({});
 
   useEffect(() => {
     setDarkMode(localStorage.darkMode || false);
@@ -48,9 +40,9 @@ export const AppProvider = ({ children }) => {
   }, [isLoading]);
 
   useEffect(() => {
-
     setIsNavToggled(false);
     setActiveNav(currentDir);
+
     setInView({
       home: currentDir === "home" ? true : false,
       radio: currentDir === "radio" ? true : false,
@@ -63,7 +55,8 @@ export const AppProvider = ({ children }) => {
       signup2: currentDir === "signup-2" ? true : false,
       login: currentDir === "login" ? true : false,
       landingPage: currentDir === "/" ? true : false,
-      
+      editPost: currentDir === "edit" ? true : false,
+      editRequest: currentDir === "edit" ? true : false,
     });
 
     // console.log(currentDir);

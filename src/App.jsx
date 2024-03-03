@@ -3,18 +3,22 @@ import { useContext, useEffect, useRef, useState } from "react";
 import LandingPage from "./pages/landingPage/LandingPage";
 import { AppProvider } from "./context/Appcontext";
 import AppContext from "./context/Appcontext";
-import SignUp from "./pages/app/SignUp";
-import SignUp2 from "./pages/app/SignUp2";
-import Login from "./pages/app/Login";
+import SignUp from "./pages/_auth/from/SignUp";
+import SignUp2 from "./pages/_auth/from/SignUp2";
+import Login from "./pages/_auth/from/Login";
 import Home from "./pages/app/Home";
-import Feed from "./pages/app/Feed";
 import Radio from "./pages/app/Radio";
 import SavedPost from "./pages/app/SavedPost";
 import Request from "./pages/app/Request";
 import RequestList from "./pages/app/RequestList";
 import PostList from "./pages/app/PostList";
-import PorfilePopup from "./components/PorfilePopup";
+import EditPost from "./pages/app/EditPost";
 import Profile from "./pages/app/Profile";
+import AppLayout from "./pages/app/AppLayout";
+import NoPage from "./pages/NoPage";
+import AuthLayout from "./pages/_auth/AuthLayout";
+import EditRequest from "./pages/app/EditRequest";
+import AdminLayout from "./pages/app/AdminLayout";
 
 const App = () => {
   return (
@@ -22,11 +26,31 @@ const App = () => {
       <Router>
         <AppProvider>
           <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/signup-2" element={<SignUp2 />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/user/*" element={<UserRoute />} />
+            <Route index path="/" element={<LandingPage />} />
+
+            <Route element={<AuthLayout />}>
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/signup-2" element={<SignUp2 />} />
+              <Route path="/login" element={<Login />} />
+            </Route>
+
+            <Route element={<AppLayout />}>
+              {/* Public route */}
+              <Route path="user/home" element={<Home />} />
+              <Route path="user/radio" element={<Radio />} />
+              <Route path="user/savedPost" element={<SavedPost />} />
+              <Route path="user/request" element={<Request />} />
+              <Route path="user/request/edit" element={<EditRequest />} />
+
+              {/* admin route */}
+              <Route element={<AdminLayout />}>
+                <Route path="user/requestList" element={<RequestList />} />
+                <Route path="user/postList" element={<PostList />} />
+                <Route path="user/postList/edit" element={<EditPost />} />
+                <Route path="user/profile" element={<Profile />} />
+              </Route>
+            </Route>
+            <Route path="*" element={<NoPage />} />
           </Routes>
         </AppProvider>
       </Router>
@@ -35,19 +59,3 @@ const App = () => {
 };
 
 export default App;
-
-const UserRoute = () => {
-  return (
-    <Feed>
-      <Routes>
-        <Route  path="/home" element={<Home />} />
-        <Route path="/radio" element={<Radio />} />
-        <Route path="/savedPost" element={<SavedPost />} />
-        <Route path="/request" element={<Request />} />
-        <Route path="/requestList" element={<RequestList />} />
-        <Route path="/postList" element={<PostList />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
-    </Feed>
-  );
-};

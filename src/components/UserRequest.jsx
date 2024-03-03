@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import Badge from "./Badge";
 import { ButtonIcon, Icon } from "./Buttons";
 
 export const UserRequest = () => {
+  const navigate = useNavigate();
   return (
     <section className="p-6 flex items-center flex-col justify-center gap-6 rounded-xl dark:border bg-light border-0 dark:bg-black dark:border-white-10 max-w-[464px]">
       <div className="flex items-center max-md:flex-col max-md:gap-4 justify-between w-full">
@@ -23,9 +25,18 @@ export const UserRequest = () => {
         fugit ab!
       </div>
       <div className="line w-full"></div>
-      <div className="flex flex-col w-fu">
-        {/* <Icon icon="bi bi-trash" color="btn-danger" /> */}
-        <ButtonIcon icon="bi bi-trash" text="Supprimer" color="btn-danger btn-anim-custom" />
+      <div className="flex max-md:flex-col justify-evenly w-full max-md:gap-4">
+        <ButtonIcon
+          icon="bi bi-pencil"
+          text="Editer"
+          color="btn-primary"
+          handleClick={() => navigate("edit")}
+        />
+        <ButtonIcon
+          icon="bi bi-trash"
+          text="Supprimer"
+          color="btn-danger btn-anim-custom"
+        />
       </div>
     </section>
   );

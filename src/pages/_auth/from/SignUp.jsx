@@ -1,14 +1,14 @@
-import { InputLg } from "../../components/Inputs";
-import { ButtonLg } from "../../components/Buttons";
+import { InputLg } from "../../../components/Inputs";
+import { ButtonLg } from "../../../components/Buttons";
 import { Link, useNavigate } from "react-router-dom";
-import StepGrow from "../../components/StepGrow";
+import StepGrow from "../../../components/StepGrow";
 import { useContext } from "react";
-import AppContext from "../../context/Appcontext";
+import AppContext from "../../../context/Appcontext";
 const SignUp = () => {
   const navigate = useNavigate();
-  const {inView} = useContext(AppContext);
+  const { inView } = useContext(AppContext);
   return (
-    <section className={`form-box ${inView.signup ? '' : 'page-anim-right'}`}>
+    <section className={`form-box ${inView.signup ? "" : "page-anim-right"}`}>
       <h1 className="text-subtitle-1 max-md:text-subtitle-3 text-center text-black dark:text-light w-full mt-10">
         Connectez vous dans le monde de la{" "}
         <span className="text-primary">radio</span>{" "}

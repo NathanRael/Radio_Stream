@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Header from "../landingPage/Header";
 import AppContext from "../../context/Appcontext";
 import { useContext, useEffect, useState } from "react";
@@ -6,7 +6,7 @@ import { NAVLINK } from "../../constants/constant";
 import { IconLg } from "../../components/Buttons";
 import Footer from "../landingPage/Footer";
 
-const Feed = ({ children }) => {
+const AppLayout = ({ children }) => {
   const navigate = useNavigate();
   const { isNavToggled, activeNav } = useContext(AppContext);
   const [isButtonVisible, setIsButtonVisible] = useState(false);
@@ -24,7 +24,7 @@ const Feed = ({ children }) => {
 
   return (
     <section>
-      <Header isTitleVisible={window.scrollY >= 120}/>
+      <Header isTitleVisible={window.scrollY >= 120} />
       <div
         className={`transition duration-300 ${
           isButtonVisible ? "" : "opacity-0"
@@ -66,7 +66,7 @@ const Feed = ({ children }) => {
             isNavToggled ? "scale-[0.98]" : ""
           } transition-transform duration-300 flex items-center justify-center w-full`}
         >
-          {children}
+          <Outlet/>
         </div>
       </div>
       {/* <Footer/> */}
@@ -74,7 +74,7 @@ const Feed = ({ children }) => {
   );
 };
 
-export default Feed;
+export default AppLayout;
 
 const NavLink = ({ active, text, icon = "", handleClick }) => {
   return (

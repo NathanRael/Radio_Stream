@@ -1,14 +1,14 @@
-import { InputLg } from "../../components/Inputs";
-import { ButtonLg } from "../../components/Buttons";
+import { InputLg } from "../../../components/Inputs";
+import { ButtonLg } from "../../../components/Buttons";
 import { Link, useNavigate } from "react-router-dom";
-import AppContext from "../../context/Appcontext";
+import AppContext from "../../../context/Appcontext";
 import { useContext } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
-  const {inView} = useContext(AppContext);
+  const { inView } = useContext(AppContext);
   return (
-    <section className={`form-box ${inView.login ? '' : 'page-anim-right'}`}>
+    <section className={`form-box ${inView.login ? "" : "page-anim-right"}`}>
       <h1 className="text-subtitle-1 max-md:text-subtitle-3 text-center text-black dark:text-light w-full mt-10">
         Bienvenue sur <span className="text-primary">radio rofia</span>{" "}
       </h1>

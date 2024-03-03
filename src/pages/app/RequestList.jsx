@@ -1,11 +1,10 @@
-import { useContext } from "react";
 import PostedRequest from "../../components/PostedRequest";
-import AppContext from "../../context/Appcontext";
+import useApp from "../../hook/useApp";
 
 const RequestList = () => {
-  const {inView} = useContext(AppContext);
+  const { inView } = useApp();
   return (
-    <section className={`app-box ${inView.requestList ? '' : 'page-anim'} `}>
+    <section className={`app-box ${inView.requestList ? "" : "page-anim"} `}>
       <h1 className="max-xl:text-center text-subtitle-2 text-black dark:text-white mb-8">
         Requêtes Utilisateurs
       </h1>

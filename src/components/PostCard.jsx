@@ -4,10 +4,12 @@ import PostImage from "../assets/images/profile.png";
 import "../animations/PostCard.css";
 import { useState } from "react";
 import { ABOUT_TEXT } from "../constants/constant";
+import { useNavigate } from "react-router-dom";
 
 const PostCard = ({title,desc,postDate, icon  = "bi bi-bookmark", iconColor = "bg-transparent text-white"}) => {
   const [showMore,setShowMore] = useState(false);
   const [hover,setHover] = useState(false);
+  const navigate = useNavigate();
   const maxLen = 320;
   return (
     <div className=" relative overflow-hidden px-3 py-6 rounded-xl border border-black-10 dark:border-white-10 w-[332px] card-gradient min-h-[360px]" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
@@ -25,7 +27,8 @@ const PostCard = ({title,desc,postDate, icon  = "bi bi-bookmark", iconColor = "b
           </p>
           <div className="flex items-center justify-between ">
             <Button text={showMore ? 'Reduire' : 'Afficher plus'} color="bg-white" handleClick={() => setShowMore((prev) => !prev)}/>
-            <IconLg icon={icon} color={iconColor}/>
+            <IconLg handleClick={() => navigate('/user/postList/edit')} icon="bi bi-pencil" color="text-primary"/> 
+            <IconLg icon={icon} color={iconColor}/> 
           </div>
         </div>
       </div>

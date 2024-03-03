@@ -1,11 +1,10 @@
-import { useContext, useEffect, useState } from "react";
 import { ButtonLg } from "../../components/Buttons";
 import PostCard from "../../components/PostCard";
-import AppContext from "../../context/Appcontext";
 import UseIntersection from "../../hook/UseIntersection";
+import useApp from "../../hook/useApp";
 
 const Home = () => {
-  const { inView } = useContext(AppContext);
+  const { inView } = useApp();
   const [containerRef, isVisible] = UseIntersection({
     root: null,
     rootMargin: "0px",

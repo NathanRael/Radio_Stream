@@ -1,28 +1,25 @@
-import { Button } from "../../components/Buttons";
+import { useNavigate } from "react-router-dom";
+import { Button, IconLg } from "../../components/Buttons";
 import { FileInput, Input, Textarea } from "../../components/Inputs";
-import PostCard from "../../components/PostCard";
 import useApp from "../../hook/useApp";
 
-const PostList = () => {
+const EditPost = () => {
   const { inView } = useApp();
+  const navigate = useNavigate();
   return (
-    <section className={`app-box ${inView.postList ? "" : "page-anim"} `}>
+    <section className={`app-box ${inView.editPost ? "" : "page-anim"} `}>
       <div className="flex items-start max-lg:flex-col-reverse max-lg:items-center max-lg:gap-10 justify-between">
-        <div className="basis-1/2">
-          <h1 className="text-subtitle-2 text-black dark:text-white mb-8">
-            Liste des publications
-          </h1>
-          <div className="flex flex-col items-start justify-center gap-8">
-            <PostCard icon="bi bi-bookmark-dash" iconColor="text-danger" />
-            <PostCard icon="bi bi-bookmark-dash" iconColor="text-danger" />
-            <PostCard icon="bi bi-bookmark-dash" iconColor="text-danger" />
-          </div>
-        </div>
-        <div className="line lg:hidden"></div>
         <div className="  basis-1/2">
-          <h1 className="text-subtitle-2 text-black dark:text-white mb-8">
-            Nouvelle publications
-          </h1>
+          <div className="w-full  flex items-center gap-2 mb-8">
+            <IconLg
+              icon="bi bi-arrow-left"
+              color="text-black dark:text-white dark:bg-black"
+              handleClick={() => navigate(-1)}
+            />
+            <h1 className="text-subtitle-2 text-black dark:text-white">
+              Modifier une publication
+            </h1>
+          </div>
           <div className="flex flex-col items-start justify-center gap-8 w-fit">
             <Input title="Titre" placeholder="Entrer le titre du requête " />
             <Textarea
@@ -34,7 +31,7 @@ const PostList = () => {
             </div>
             <FileInput />
             <div className="flex w-full flex-col mt-8">
-              <Button text="Publier" />
+              <Button text="Modifier" />
             </div>
           </div>
         </div>
@@ -43,4 +40,4 @@ const PostList = () => {
   );
 };
 
-export default PostList;
+export default EditPost;

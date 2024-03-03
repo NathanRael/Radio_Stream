@@ -1,17 +1,21 @@
-import { FileInput, InputLg } from "../../components/Inputs";
-import { ButtonLg, IconLg } from "../../components/Buttons";
+import { FileInput, InputLg } from "../../../components/Inputs";
+import { ButtonLg, IconLg } from "../../../components/Buttons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import StepGrow from "../../components/StepGrow";
-import ProfileImg from "../../components/ProfileImg";
-import AppContext from "../../context/Appcontext";
+import StepGrow from "../../../components/StepGrow";
+import ProfileImg from "../../../components/ProfileImg";
+import AppContext from "../../../context/Appcontext";
 import { useContext } from "react";
 const SignUp2 = () => {
   const navigate = useNavigate();
-  const {inView} = useContext(AppContext);
+  const { inView } = useContext(AppContext);
   return (
-    <section className={`form-box ${inView.signup2 ? '' : 'page-anim-left'}`}>
+    <section className={`form-box ${inView.signup2 ? "" : "page-anim-left"}`}>
       <div className="absolute left-4 top-4">
-        <IconLg icon="bi bi-arrow-left" color="text-black dark:text-white" handleClick={() => navigate('/signup')} />
+        <IconLg
+          icon="bi bi-arrow-left"
+          color="text-black dark:text-white"
+          handleClick={() => navigate("/signup")}
+        />
       </div>
       <h1 className="text-subtitle-1 max-md:text-subtitle-3 text-center text-black dark:text-light w-full mt-20">
         Connectez vous dans le monde de la

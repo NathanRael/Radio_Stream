@@ -53,7 +53,7 @@
     }
 
     .btn-primary{
-        @apply text-black bg-primary-10 dark:bg-white
+        @apply text-black bg-primary dark:bg-white-60 
     }
 
     .btn-danger{
