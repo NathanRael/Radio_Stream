@@ -60,11 +60,11 @@ const Header = ({ isForLanding = false, isTitleVisible = false }) => {
         </a>
         <a
           href="#Hero"
-          className={`text-lead transition duration-150 ${
+          className={` transition duration-150 ${
             !isTitleVisible ? " opacity-0 " : ""
           }`}
         >
-          {currentDir[0].toUpperCase() + currentDir.slice(1)}
+          {currentDir[0]?.toUpperCase() + currentDir?.slice(1)}
         </a>
       </div>
       {isForLanding && (
