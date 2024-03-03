@@ -17,6 +17,7 @@ const Header = ({ isForLanding = false, isTitleVisible = false }) => {
     setProfileClicked,
     profileClicked,
     currentDir,
+    isLoading,
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -34,7 +35,7 @@ const Header = ({ isForLanding = false, isTitleVisible = false }) => {
     <header
       className={` ${
         isForLanding ? "box " : "px-4"
-      } fixed flex items-center justify-between  py-4 border-b dark:border-b-white-10 border-b-black-10  top-0  w-full z-50 bg-white shadow-sm dark:bg-black`}
+      } ${isLoading ? 'hidden' : ''} fixed flex items-center justify-between  py-4 border-b dark:border-b-white-10 border-b-black-10  top-0  w-full z-50 bg-white shadow-sm dark:bg-black`}
     >
       <div
         className={`transition duration-300 z-40 fixed top-[88px] right-4 ${

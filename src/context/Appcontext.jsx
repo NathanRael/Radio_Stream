@@ -28,7 +28,6 @@ export const AppProvider = ({ children }) => {
   const Load = () => {
     setIsLoading(false);
   };
-
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
@@ -41,9 +40,12 @@ export const AppProvider = ({ children }) => {
 
   useEffect(() => {
     setTimeout(Load, 2000);
-
     return () => clearTimeout(Load);
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isLoading ? "hidden" : "auto";
+  }, [isLoading]);
 
   useEffect(() => {
 
@@ -60,6 +62,8 @@ export const AppProvider = ({ children }) => {
       signup: currentDir === "signup" ? true : false,
       signup2: currentDir === "signup-2" ? true : false,
       login: currentDir === "login" ? true : false,
+      landingPage: currentDir === "/" ? true : false,
+      
     });
 
     // console.log(currentDir);
@@ -78,6 +82,7 @@ export const AppProvider = ({ children }) => {
         activeNav,
         inView,
         currentDir,
+        isLoading,
       }}
     >
       {children}

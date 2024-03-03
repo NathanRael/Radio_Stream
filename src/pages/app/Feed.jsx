@@ -4,6 +4,7 @@ import AppContext from "../../context/Appcontext";
 import { useContext, useEffect, useState } from "react";
 import { NAVLINK } from "../../constants/constant";
 import { IconLg } from "../../components/Buttons";
+import Footer from "../landingPage/Footer";
 
 const Feed = ({ children }) => {
   const navigate = useNavigate();
@@ -68,6 +69,7 @@ const Feed = ({ children }) => {
           {children}
         </div>
       </div>
+      {/* <Footer/> */}
     </section>
   );
 };
