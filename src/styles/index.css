@@ -99,7 +99,11 @@
     }
 
     .box{
-        @apply px-16 max-md:px-4
+        @apply px-16 max-md:px-4  transition duration-500 ease-out
+    }
+
+    .form-box{
+        @apply  flex items-center justify-center flex-col gap-8 px-16 max-md:px-4  transition duration-300 ease-out 
     }
 
     .loader{
@@ -142,12 +146,12 @@
     }
 
 
-
-    /* .card-gradient{
-        @apply  before:bg-gradient-to-b before:from-white-10  dark:before:from-black-40 before:from-10% dark:before:to-black-60 before:to-white-40 before:to-40% dark:before:to-60% 
-    } */
     .card-gradient{
-        @apply  before:bg-gradient-to-b before:from-black-40 before:from-10% before:to-black-60  before:to-40% 
+        @apply  before:bg-gradient-to-b before:from-black-10 before:from-10% before:to-black-40  before:to-40% 
+    }
+
+    .post-card-trans{
+        @apply transition duration-300 ease-out 
     }
 
     .line{
@@ -156,5 +160,20 @@
 
     .popup-link{
         @apply  text-base w-full text-black px-4 py-2 rounded-lg dark:text-white hover:bg-black-10 dark:hover:bg-white-10
+    }
+
+    .page-anim{
+        @apply opacity-0 -translate-y-[3rem] 
+    }
+
+    .page-anim-left{
+        @apply opacity-0 -translate-x-[3rem] 
+    }
+    .page-anim-right{
+        @apply opacity-0 translate-x-[3rem] 
+    }
+
+    .app-box{
+        @apply transition duration-500 ease-out w-full px-4 pb-8 
     }
 }

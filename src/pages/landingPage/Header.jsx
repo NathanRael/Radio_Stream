@@ -41,7 +41,7 @@ const Header = ({ isForLanding = false }) => {
       >
         <PorfilePopup />
       </div>
-      <div className="text-black text-subtitle-3 dark:text-white">
+      <div className={`transition-opacity duration-500 text-black text-subtitle-3 dark:text-white ${isNavToggled ? 'opacity-0' : 'opacity-1'} `}>
         <a href="#Hero">
           Radio <span className="text-primary">Rofia</span>
         </a>
@@ -87,7 +87,7 @@ const Header = ({ isForLanding = false }) => {
       <div className="visible md:hidden z-30">
         <IconLg
           icon={`bi bi-${isNavToggled ? "x-lg" : "list"}`}
-          color="bg-white dark:bg-black"
+          color="dark:text-white bg-white dark:bg-black"
           handleClick={() => setIsNavToggled((prev) => !prev)}
         />
       </div>

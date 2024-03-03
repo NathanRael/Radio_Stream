@@ -1,15 +1,18 @@
-import '../animations/Button.css';
+import { Link } from "react-router-dom";
+import "../animations/Button.css";
 
 export const Button = ({
   text = "button",
   handleClick,
-  color = 'bg-primary',
+  color = "bg-primary",
   defaultAnim = true,
 }) => {
   return (
     <button
       onClick={handleClick}
-      className={`${color} px-4 py-2 rounded-full text-small-1 font-FuturaMd  ${defaultAnim ? 'btn-anim' : 'btn-anim-custom'} `}
+      className={`${color} px-4 py-2 rounded-full text-small-1 font-FuturaMd  ${
+        defaultAnim ? "btn-anim" : "btn-anim-custom"
+      } `}
     >
       <p>{text}</p>
     </button>
@@ -19,14 +22,15 @@ export const Button = ({
 export const ButtonLg = ({
   text = "button",
   handleClick,
-  color = 'bg-primary',
+  color = "bg-primary",
   defaultAnim = true,
 }) => {
-
   return (
     <button
       onClick={handleClick}
-      className={`${color} px-8 py-4 rounded-full text-base  font-FuturaMd ${defaultAnim ? 'btn-anim' : 'btn-anim-custom'}`}
+      className={`${color} px-8 py-4 rounded-full text-base  font-FuturaMd ${
+        defaultAnim ? "btn-anim" : "btn-anim-custom"
+      }`}
     >
       <p>{text}</p>
     </button>
@@ -42,7 +46,7 @@ export const ButtonIcon = ({
   return (
     <button
       onClick={handleClick}
-      className={`${color} px-4 py-3 rounded-full text-base  text-black flex items-center justify-center gap-x-3 btn-anim`}
+      className={`${color} px-4 py-3 rounded-full text-base  flex items-center justify-center gap-x-3 btn-anim`}
     >
       <i className={`${icon} text-small font-FuturaMd`}></i>
       <p>{text}</p>
@@ -55,19 +59,37 @@ export const ButtonIconLg = ({
   icon = "bi bi-arrow-left",
   color = "bg-primary",
   handleClick,
+  link = null,
 }) => {
   return (
-    <button
-      onClick={handleClick}
-      className={`${color} px-8 py-4 rounded-full text-base font-FuturaMd text-black flex items-center justify-center gap-x-4 btn-anim`}
-    >
-      <i className={`${icon} text-[20px]`}></i>
-      <p >{text}</p>
-    </button>
+    <>{
+      !link ? (
+        <button
+        onClick={handleClick}
+        className={`${color} px-8 py-4 rounded-full text-base font-FuturaMd text-black flex items-center justify-center gap-x-4 btn-anim`}
+      >
+        <i className={`${icon} text-[20px]`}></i>
+        <p>{text}</p>
+      </button>
+      ) : (
+        <a href={link}
+        onClick={handleClick}
+        className={`${color} px-8 py-4 rounded-full text-base font-FuturaMd text-black flex items-center justify-center gap-x-4 btn-anim`}
+      >
+        <i className={`${icon} text-[20px]`}></i>
+        <p>{text}</p>
+      </a>
+      )
+    }
+    </>
   );
 };
 
-export const Icon = ({ icon = "bi bi-arrow-left", color = "bg-primary", handleClick }) => {
+export const Icon = ({
+  icon = "bi bi-arrow-left",
+  color = "bg-primary",
+  handleClick,
+}) => {
   return (
     <button
       onClick={handleClick}
@@ -78,7 +100,12 @@ export const Icon = ({ icon = "bi bi-arrow-left", color = "bg-primary", handleCl
   );
 };
 
-export const IconLg = ({ icon = "bi bi-arrow-left", color = "icon-white", handleClick, iconSize = 'text-icon' }) => {
+export const IconLg = ({
+  icon = "bi bi-arrow-left",
+  color = "icon-white",
+  handleClick,
+  iconSize = "text-icon",
+}) => {
   return (
     <button
       onClick={handleClick}
@@ -88,7 +115,12 @@ export const IconLg = ({ icon = "bi bi-arrow-left", color = "icon-white", handle
     </button>
   );
 };
-export const InputIcon = ({ icon = "bi bi-arrow-left", color = "bg-primary", handleClick, iconSize = 'text-icon' }) => {
+export const InputIcon = ({
+  icon = "bi bi-arrow-left",
+  color = "bg-primary",
+  handleClick,
+  iconSize = "text-icon",
+}) => {
   return (
     <button
       onClick={handleClick}

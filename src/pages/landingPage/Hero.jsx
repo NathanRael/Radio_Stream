@@ -1,5 +1,5 @@
 import soundWave from "../../assets/images/soundWave.svg";
-import {ButtonLg, ButtonIconLg} from "../../components/Buttons";
+import { ButtonLg, ButtonIconLg } from "../../components/Buttons";
 import AppContext from "../../context/Appcontext";
 import "../../animations/Hero.css";
 import { useContext, useEffect } from "react";
@@ -9,7 +9,9 @@ const Hero = () => {
   // const {isLoading, isNavToggled} = useContext(AppContext);
   const navigate = useNavigate();
   return (
-    <section className={`flex flex-col gap-12 max-md:gap-10 items-center justify-center mt-[120px]  max-w-[866px] mx-auto max-md:px-4 `}>
+    <section
+      className={`flex flex-col gap-12 max-md:gap-10 items-center justify-center mt-[120px]  max-w-[866px] mx-auto max-md:px-4 `}
+    >
       <div className="" id="Hero">
         <img src={soundWave} alt="" />
       </div>
@@ -23,8 +25,16 @@ const Hero = () => {
         </p>
       </div>
       <div className="flex items-center justify-evenly w-full flex-row max-md:flex-col max-md:gap-y-4">
-        <ButtonIconLg text="Ecouter la radio" icon="bi bi-boombox"/>
-        <ButtonLg text="Acceder à l'application" color="btn-primary"  handleClick={() => navigate('/login')} />
+        <ButtonIconLg
+          text="Ecouter la radio"
+          icon="bi bi-boombox"
+          link="#Radio"
+        />
+        <ButtonLg
+          text="Acceder à l'application"
+          color="bg-black-10 dark:bg-white"
+          handleClick={() => navigate("/login")}
+        />
       </div>
     </section>
   );

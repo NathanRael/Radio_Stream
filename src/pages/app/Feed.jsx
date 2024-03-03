@@ -1,51 +1,41 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Header from "../landingPage/Header";
-import PorfilePopup from "../../components/PorfilePopup";
 import AppContext from "../../context/Appcontext";
+import { useContext, useEffect } from "react";
+import { NAVLINK } from "../../constants/constant";
 
 const Feed = ({ children }) => {
   const navigate = useNavigate();
+  const { isNavToggled, activeNav } = useContext(AppContext);
   return (
     <section>
-
       <Header />
-      <div className="flex mt-24">
-        <div className="basis-[284px] relative">
-          <ul className="fixed left-0 px-4 top-0 pt-24 text-white flex flex-col gap-6 items-center justify-start w-[220px]  border-e border-e-black-10 dark:border-e-white-10 h-screen">
-            <NavLink
-              handleClick={() => navigate("/user/home")}
-              text="Accueil"
-              // active={true}
-              icon="bi bi-house"
-            />
-            <NavLink
-              handleClick={() => navigate("/user/radio")}
-              text="Radio"
-              icon="bi bi-boombox"
-            />
-            <NavLink
-              handleClick={() => navigate("/user/request")}
-              text="Requêtes"
-              icon="bi bi-list-task"
-            />
-            <NavLink
-              handleClick={() => navigate("/user/savedPost")}
-              text="Sauvegardes"
-              icon="bi bi-bookmark"
-            />
-            <NavLink
-              handleClick={() => navigate("/user/requestList")}
-              text="Liste requêtes"
-              icon="bi bi-lock"
-            />
-            <NavLink
-              handleClick={() => navigate("/user/postList")}
-              text="Publications"
-              icon="bi bi-lock"
-            />
+      <div className={` flex mt-24`}>
+        <div className="max-md:basis-0 basis-[284px] relative">
+          <ul
+            className={`${
+              isNavToggled
+                ? "max-md:opacity-1 max-md:h-screen"
+                : "max-md:-translate-x-[20rem] max-md:opacity-0"
+            } transition duration-300   bg-white dark:bg-black z-20 fixed left-0 px-4 top-0 pt-24 text-white flex flex-col gap-6 items-center justify-start w-[220px]  border-e border-e-black-10 dark:border-e-white-10 h-screen`}
+          >
+            {NAVLINK.map((nav) => (
+              <NavLink
+                key={nav.text}
+                handleClick={() => navigate(nav.location)}
+                text={nav.text}
+                icon={nav.icon}
+                active={activeNav === nav.location.split('/')[2]}
+              />
+            ))}
+           
           </ul>
         </div>
-        <div className=" flex items-center justify-center w-full">
+        <div
+          className={`${
+            isNavToggled ? "scale-[0.98]" : ""
+          } transition-transform duration-300 flex items-center justify-center w-full`}
+        >
           {children}
         </div>
       </div>
@@ -55,7 +45,7 @@ const Feed = ({ children }) => {
 
 export default Feed;
 
-const NavLink = ({ active = false, text, icon = "", handleClick }) => {
+const NavLink = ({ active, text, icon = "", handleClick }) => {
   return (
     <li
       className={` cursor-pointer w-full  flex gap-2 text-base font-FuturaMd items-center justify-start px-6 py-3 text-black dark:text-white hover:bg-black-10 dark:hover:bg-white-10 rounded-xl ${

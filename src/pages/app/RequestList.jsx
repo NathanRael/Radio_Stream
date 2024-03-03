@@ -1,12 +1,15 @@
+import { useContext } from "react";
 import PostedRequest from "../../components/PostedRequest";
+import AppContext from "../../context/Appcontext";
 
 const RequestList = () => {
+  const {inView} = useContext(AppContext);
   return (
-    <section className="px-4 w-full mb-8">
-      <h1 className="text-subtitle-2 text-black dark:text-white mb-8">
+    <section className={`app-box ${inView.requestList ? '' : 'page-anim'} `}>
+      <h1 className="max-xl:text-center text-subtitle-2 text-black dark:text-white mb-8">
         Requêtes Utilisateurs
       </h1>
-      <section className=" grid grid-cols-2  place-content-between gap-y-6 w-full">
+      <section className=" grid xl:grid-cols-2  xl:place-content-between gap-y-6 w-full  place-items-center">
         <PostedRequest />
         <PostedRequest />
         <PostedRequest />

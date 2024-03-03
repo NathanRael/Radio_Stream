@@ -28,15 +28,11 @@
 }
 
 @keyframes right {
-    0%,60%{
+    0%{
         opacity: 0.5;
     }
 
-    /* 70%{
-        opacity: 0.8;
-    } */
-
-    80%{
+    50%,100%{
         opacity: 0;
         transform: translateX(100rem);
        

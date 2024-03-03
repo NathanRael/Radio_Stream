@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import LandingPage from "./pages/landingPage/LandingPage";
 import { AppProvider } from "./context/Appcontext";
 import AppContext from "./context/Appcontext";
@@ -40,7 +40,7 @@ const UserRoute = () => {
   return (
     <Feed>
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route  path="/home" element={<Home />} />
         <Route path="/radio" element={<Radio />} />
         <Route path="/savedPost" element={<SavedPost />} />
         <Route path="/request" element={<Request />} />
