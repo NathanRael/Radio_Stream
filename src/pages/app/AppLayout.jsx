@@ -7,7 +7,7 @@ import { IconLg } from "../../components/Buttons";
 import useAuth from "../../hook/useAuth";
 
 const AppLayout = () => {
-  const isLoggedIn = true;
+  const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
   const { isNavToggled, activeNav } = useContext(AppContext);
   const [isButtonVisible, setIsButtonVisible] = useState(false);

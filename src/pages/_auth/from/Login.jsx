@@ -4,12 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import AppContext from "../../../context/Appcontext";
 import { useContext, useEffect, useRef, useState } from "react";
 import MessagePopup from "../../../components/MessagePopup";
+import useAuth from "../../../hook/useAuth";
 import axios from "axios";
-import useSignIn from "react-auth-kit/hooks/useSignIn";
+axios.defaults.withCredentials = true;
 
 const Login = () => {
-  const signIn = useSignIn();
   const navigate = useNavigate();
+  const { storeSession } = useAuth();
   const { inView } = useContext(AppContext);
   const inputRef = useRef(null);
   const [error, setError] = useState(false);
@@ -36,51 +37,22 @@ const Login = () => {
     if (error) {
       return console.log("Verifier vos champs");
     }
-
-    try {
-      const response = await axios.post(
-        "http://localhost/Rofia/api/login.php/",
-        {
-          email,
-          password,
-        }
-      );
-      console.log(response?.data);
-      signIn({
-        auth: {
-          token: response.data.session.id,
-          type: "Bearer",
-        },
-        userState: response.data.session,
+    axios
+      .post("http://localhost/Rofia/api/login.php/", {
+        email,
+        password,
+      })
+      .then((response) => {
+        console.log(response);
+        setSuccessMsg(response?.data.success);
+        storeSession(response?.data?.session);
+        console.log(response?.data.success);
+      })
+      .catch((e) => {
+        setErrMsg(e.response?.data?.error);
+        console.log(e.response?.data);
+        inputRef.current.focus();
       });
-      setSuccessMsg(response?.data?.success);
-    } catch (e) {
-      setErrMsg(e.response?.data?.error);
-      inputRef.current.focus();
-    }
-    // axios
-    //   .post("http://localhost/Rofia/api/login.php/", {
-    //     email,
-    //     password,
-    //   })
-    //   .then((response) => {
-    //     if (response.status != 200) throw response?.data?.error;
-    //     console.log(response);
-    //     signIn({
-    //       auth: {
-    //         token: "ey....mA",
-    //         type: "Bearer",
-    //       },
-    //       userState: response.data.session,
-    //     });
-
-    //     setSuccessMsg(response?.data?.success);
-    //     console.log(response?.data?.success);
-    //   })
-    //   .catch((e) => {
-    //     setErrMsg(e.response?.data?.error);
-    //     inputRef.current.focus();
-    //   });
   };
 
   useEffect(() => {

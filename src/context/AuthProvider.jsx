@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   const isLoggedIn =
     JSON.parse(sessionStorage.getItem("loggedIn")) === true ? true : false;
 
-  const storeAuth = (value) => {
+  const storeSession = (value) => {
     setAuth(value);
     sessionStorage.setItem("loggedIn", true);
     sessionStorage.setItem("user", JSON.stringify(value));
@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ auth, setAuth, logout, isLoggedIn, storeAuth }}
+      value={{ auth, setAuth, logout, isLoggedIn, storeSession }}
     >
       {children}
     </AuthContext.Provider>
