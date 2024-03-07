@@ -21,41 +21,56 @@ import AdminLayout from "./pages/app/AdminLayout";
 import NotFound from "./pages/_auth/NotFound";
 import Unauthorized from "./pages/_auth/Unauthorized";
 import Forbidden from "./pages/_auth/Forbidden";
+import createStore from "react-auth-kit/createStore";
+import AuthProvider from "react-auth-kit/AuthProvider";
 
 const App = () => {
+  const store = createStore({
+    authName: "_auth",
+    authType: "cookie",
+    cookieDomain: window.location.hostname,
+    cookieSecure: window.location.protocol === "https:",
+  });
+
+  console.log(store);
+
   return (
     <>
-      <AppProvider>
-        <Routes>
-          <Route index path="/" element={<LandingPage />} />
+      <AuthProvider store={store}>
+        <Router>
+          <AppProvider>
+            <Routes>
+              <Route index path="/" element={<LandingPage />} />
 
-          <Route element={<AuthLayout />}>
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/signup-2" element={<SignUp2 />} />
-            <Route path="/login" element={<Login />} />
-          </Route>
+              <Route element={<AuthLayout />}>
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/signup-2" element={<SignUp2 />} />
+                <Route path="/login" element={<Login />} />
+              </Route>
 
-          <Route element={<AppLayout />}>
-            {/* Public route */}
-            <Route path="user/home" element={<Home />} />
-            <Route path="user/radio" element={<Radio />} />
-            <Route path="user/savedPost" element={<SavedPost />} />
-            <Route path="user/request" element={<Request />} />
-            <Route path="user/request/edit" element={<EditRequest />} />
+              <Route element={<AppLayout />}>
+                {/* Public route */}
+                <Route path="user/home" element={<Home />} />
+                <Route path="user/radio" element={<Radio />} />
+                <Route path="user/savedPost" element={<SavedPost />} />
+                <Route path="user/request" element={<Request />} />
+                <Route path="user/request/edit" element={<EditRequest />} />
 
-            {/* admin route */}
-            <Route element={<AdminLayout />}>
-              <Route path="user/requestList" element={<RequestList />} />
-              <Route path="user/postList" element={<PostList />} />
-              <Route path="user/postList/edit" element={<EditPost />} />
-              <Route path="user/profile" element={<Profile />} />
-            </Route>
-          </Route>
-          <Route path="*" element={<NotFound />} />
-          <Route path="/forbidden" element={<Forbidden />} />
-          <Route path="/unauthorized" element={<Unauthorized />} />
-        </Routes>
-      </AppProvider>
+                {/* admin route */}
+                <Route element={<AdminLayout />}>
+                  <Route path="user/requestList" element={<RequestList />} />
+                  <Route path="user/postList" element={<PostList />} />
+                  <Route path="user/postList/edit" element={<EditPost />} />
+                  <Route path="user/profile" element={<Profile />} />
+                </Route>
+              </Route>
+              <Route path="*" element={<NotFound />} />
+              <Route path="/forbidden" element={<Forbidden />} />
+              <Route path="/unauthorized" element={<Unauthorized />} />
+            </Routes>
+          </AppProvider>
+        </Router>
+      </AuthProvider>
     </>
   );
 };
