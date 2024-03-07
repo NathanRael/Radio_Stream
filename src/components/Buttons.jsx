@@ -6,9 +6,11 @@ export const Button = ({
   handleClick,
   color = "bg-primary",
   defaultAnim = true,
+  disabled = false,
 }) => {
   return (
     <button
+    disabled={disabled}
       onClick={handleClick}
       className={`${color} px-4 py-2 rounded-full text-small-1 font-FuturaMd  ${
         defaultAnim ? "btn-anim" : "btn-anim-custom"
@@ -24,9 +26,11 @@ export const ButtonLg = ({
   handleClick,
   color = "bg-primary",
   defaultAnim = true,
+  disabled = false,
 }) => {
   return (
     <button
+      disabled={disabled}
       onClick={handleClick}
       className={`${color} px-8 py-4 rounded-full text-base  font-FuturaMd ${
         defaultAnim ? "btn-anim" : "btn-anim-custom"
@@ -42,9 +46,11 @@ export const ButtonIcon = ({
   icon = "bi bi-arrow-left",
   color = "bg-primary",
   handleClick,
+  disabled = false,
 }) => {
   return (
     <button
+    disabled={disabled}
       onClick={handleClick}
       className={`${color} px-4 py-3 rounded-full text-base  flex items-center justify-center gap-x-3 btn-anim`}
     >
@@ -60,11 +66,13 @@ export const ButtonIconLg = ({
   color = "bg-primary",
   handleClick,
   link = null,
+  disabled = false,
 }) => {
   return (
     <>{
       !link ? (
         <button
+        disabled={disabled}
         onClick={handleClick}
         className={`${color} px-8 py-4 rounded-full text-base font-FuturaMd text-black flex items-center justify-center gap-x-4 btn-anim`}
       >
@@ -89,9 +97,11 @@ export const Icon = ({
   icon = "bi bi-arrow-left",
   color = "bg-primary",
   handleClick,
+  disabled = false,
 }) => {
   return (
     <button
+    disabled={disabled}
       onClick={handleClick}
       className={`${color}  rounded-full text-base font-robotoMd  p-3 flex items-center justify-center w-10 h-10 icon-anim`}
     >
@@ -101,6 +111,7 @@ export const Icon = ({
 };
 
 export const IconLg = ({
+  disabled = false,
   icon = "bi bi-arrow-left",
   color = "icon-white",
   handleClick,
@@ -108,6 +119,7 @@ export const IconLg = ({
 }) => {
   return (
     <button
+    disabled={disabled}
       onClick={handleClick}
       className={`${color}  rounded-full text-icon font-FuturaMd  p-4 flex items-center justify-center w-11 h-11 cursor-pointer icon-anim`}
     >
@@ -120,9 +132,11 @@ export const InputIcon = ({
   color = "bg-primary",
   handleClick,
   iconSize = "text-icon",
+  disabled = false,
 }) => {
   return (
     <button
+    disabled={disabled}
       onClick={handleClick}
       className={`${color} dark:text-white rounded-lg text-icon  font-FuturaMd text-black px-4 py-2 h-full flex items-center justify-center cursor-pointer input-file
       `}

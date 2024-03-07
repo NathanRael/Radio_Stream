@@ -9,8 +9,8 @@ const EditPost = () => {
   return (
     <section className={`app-box ${inView.editPost ? "" : "page-anim"} `}>
       <div className="flex items-start max-lg:flex-col-reverse max-lg:items-center max-lg:gap-10 justify-between">
-        <div className="  basis-1/2">
-          <div className="w-full  flex items-center gap-2 mb-8">
+        <div className="w-full flex flex-col items-center">
+          <div className="w-full  flex items-center justify-center gap-2 mb-8">
             <IconLg
               icon="bi bi-arrow-left"
               color="text-black dark:text-white dark:bg-black"

@@ -3,7 +3,7 @@ import { Button, Icon, IconLg } from "./Buttons";
 import PostImage from "../assets/images/profile.png";
 import "../animations/PostCard.css";
 import { useState } from "react";
-import { ABOUT_TEXT } from "../constants/constant";
+import { ABOUT_TEXT } from "../constants/index";
 import { useNavigate } from "react-router-dom";
 
 const PostCard = ({title,desc,postDate, icon  = "bi bi-bookmark", iconColor = "bg-transparent text-white"}) => {

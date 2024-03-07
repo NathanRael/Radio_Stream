@@ -1,14 +1,11 @@
 import { IconLg } from "../../components/Buttons";
 import ProfileImg from "../../components/ProfileImg";
-import soundWaveIcon from "../../assets/images/soundWave.svg";
 import "../../animations/Header.css";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useEffect } from "react";
 import AppContext from "../../context/Appcontext";
 import PorfilePopup from "../../components/PorfilePopup";
-import { useLocation } from "react-router-dom";
 const Header = ({ isForLanding = false, isTitleVisible = false }) => {
-  const location = useLocation();
   const {
     isNavToggled,
     setIsNavToggled,
@@ -29,7 +26,7 @@ const Header = ({ isForLanding = false, isTitleVisible = false }) => {
   };
 
   useEffect(() => {
-    localStorage.darkMode = darkMode;
+    localStorage.setItem("darkMode",darkMode);
   }, [darkMode]);
   return (
     <header

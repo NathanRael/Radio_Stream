@@ -1,8 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom";
+import useAuth from "../../hook/useAuth";
 
 const AuthLayout = () => {
-  const isAuth = false;
-  return <>{isAuth ? <Navigate to="/user/home" /> : <Outlet />}</>;
+  const { isLoggedIn } = useAuth();
+
+  return <>{isLoggedIn ? <Navigate to="/user/home" /> : <Outlet />}</>;
 };
 
 export default AuthLayout;

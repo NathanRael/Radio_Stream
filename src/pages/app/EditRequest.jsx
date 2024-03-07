@@ -10,8 +10,8 @@ const EditRequest = () => {
     <section className={`app-box ${inView.editRequest ? "" : "page-anim"} `}>
       <div className="flex items-start justify-between max-xl:gap-10 max-xl:flex-col-reverse  max-xl:items-center flex-wrap">
         <div className="xl:hidden line"></div>
-        <div className="  basis-1/2">
-          <div className="w-full  flex items-center gap-2 mb-8">
+        <div className="flex flex-col items-center justify-center w-full">
+          <div className="w-full  flex items-center justify-center gap-2 mb-8">
             <IconLg
               icon="bi bi-arrow-left"
               color="text-black dark:text-white dark:bg-black"

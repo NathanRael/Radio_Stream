@@ -7,26 +7,28 @@ export const AppProvider = ({ children }) => {
   const location = useLocation();
   const [profileClicked, setProfileClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    JSON.parse(localStorage.getItem("darkMode")) || false
+  );
   const [isNavToggled, setIsNavToggled] = useState(false);
   const [activeNav, setActiveNav] = useState("home");
   const splitedPath = location.pathname.split("/");
   const currentDir = splitedPath[splitedPath.length - 1];
   const [inView, setInView] = useState({});
 
-  useEffect(() => {
-    setDarkMode(localStorage.darkMode || false);
-  }, []);
   const Load = () => {
     setIsLoading(false);
   };
+
   useEffect(() => {
+    localStorage.setItem("darkMode", darkMode);
+    console.log(darkMode);
     if (darkMode) {
       document.documentElement.classList.add("dark");
-      document.body.classList.add("dark:bg-black");
+      // document.body.classList.add("dark:bg-black");
     } else {
       document.documentElement.classList.remove("dark");
-      document.body.classList.remove("dark:bg-black");
+      // document.body.classList.remove("dark:bg-black");
     }
   }, [darkMode]);
 
@@ -75,7 +77,6 @@ export const AppProvider = ({ children }) => {
         activeNav,
         inView,
         currentDir,
-        isLoading,
       }}
     >
       {children}

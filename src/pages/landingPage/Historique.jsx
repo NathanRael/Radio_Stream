@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ButtonLg } from "../../components/Buttons";
 import ImgT from "../../components/ImgT";
-import {ABOUT_TEXT}  from "../../constants/constant";
+import {ABOUT_TEXT}  from "../../constants/index";
 import "../../animations/Historique.css";
 const Historique = () => {
   const [showMore,setShowMore] = useState(false);

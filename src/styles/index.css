@@ -22,6 +22,15 @@
     @apply bg-primary rounded-lg
 }
 
+#musicRange::-webkit-slider-thumb{
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: aliceblue;
+    /* border: solid 8px; */
+}
+
 
 
 
@@ -123,7 +132,7 @@
     }
 
     .btn-anim{
-        @apply transition duration-300 ease-out hover:-translate-y-2 hover:text-white hover:bg-primary    relative
+        @apply transition duration-300 ease-out hover:-translate-y-2 disabled:bg-black-40 dark:disabled:bg-white-40 hover:text-white hover:bg-primary    relative
     }
     .btn-anim-custom{
         @apply transition duration-300 ease-out hover:-translate-y-2 hover:text-white hover:bg-danger relative
