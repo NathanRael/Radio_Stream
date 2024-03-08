@@ -22,7 +22,6 @@ export const AppProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("darkMode", darkMode);
-    console.log(darkMode);
     if (darkMode) {
       document.documentElement.classList.add("dark");
       // document.body.classList.add("dark:bg-black");

@@ -10,7 +10,7 @@ axios.defaults.withCredentials = true;
 
 const Login = () => {
   const navigate = useNavigate();
-  const { storeSession } = useAuth();
+  const { storeAuth } = useAuth();
   const { inView } = useContext(AppContext);
   const inputRef = useRef(null);
   const [error, setError] = useState(false);
@@ -45,7 +45,7 @@ const Login = () => {
       .then((response) => {
         console.log(response);
         setSuccessMsg(response?.data.success);
-        storeSession(response?.data?.session);
+        storeAuth(response?.data?.session);
         console.log(response?.data.success);
       })
       .catch((e) => {
