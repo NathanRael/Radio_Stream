@@ -1,8 +1,6 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useContext, useEffect, useRef, useState } from "react";
-import LandingPage from "./pages/landingPage/LandingPage";
+import {  Routes, Route } from "react-router-dom";
+import { Suspense, lazy } from "react";
 import { AppProvider } from "./context/Appcontext";
-import AppContext from "./context/Appcontext";
 import SignUp from "./pages/_auth/from/SignUp";
 import SignUp2 from "./pages/_auth/from/SignUp2";
 import Login from "./pages/_auth/from/Login";
@@ -21,13 +19,18 @@ import AdminLayout from "./pages/app/AdminLayout";
 import NotFound from "./pages/_auth/NotFound";
 import Unauthorized from "./pages/_auth/Unauthorized";
 import Forbidden from "./pages/_auth/Forbidden";
+const LazyLandingPage = lazy(() => import ('./pages/landingPage/LandingPage.jsx'));
 
 const App = () => {
   return (
     <>
       <AppProvider>
         <Routes>
-          <Route index path="/" element={<LandingPage />} />
+          <Route index path="/" element={
+            <Suspense fallback={<p className="text-white">Loading ...</p>}>
+              <LazyLandingPage/>
+            </Suspense>
+          } />
 
           <Route element={<AuthLayout />}>
             <Route path="/signup" element={<SignUp />} />

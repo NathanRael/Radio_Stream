@@ -29,7 +29,6 @@ export const AuthProvider = ({ children }) => {
       if (res.status === 200) {
         setIsLoggedIn(res.data.user);
       }
-      console.log(res);
     });
   };
 

@@ -24,10 +24,8 @@ export const AppProvider = ({ children }) => {
     localStorage.setItem("darkMode", darkMode);
     if (darkMode) {
       document.documentElement.classList.add("dark");
-      // document.body.classList.add("dark:bg-black");
     } else {
       document.documentElement.classList.remove("dark");
-      // document.body.classList.remove("dark:bg-black");
     }
   }, [darkMode]);
 

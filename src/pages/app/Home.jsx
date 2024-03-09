@@ -1,4 +1,5 @@
-import { ButtonLg } from "../../components/Buttons";
+import { ButtonIconLg, ButtonLg } from "../../components/Buttons";
+import LoadingIcon from "../../components/LoadingIcon";
 import PostCard from "../../components/PostCard";
 import UseIntersection from "../../hook/UseIntersection";
 import useApp from "../../hook/useApp";
@@ -36,7 +37,8 @@ const Home = () => {
           <PostCard />
         </div>
         <div className="w-full mx-auto flex justify-center">
-          <ButtonLg text="Voir Plus" />
+          {/* <ButtonLg text="Voir Plus" /> */}
+          <LoadingIcon/>
         </div>
       </div>
     </section>

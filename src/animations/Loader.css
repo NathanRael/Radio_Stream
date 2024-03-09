@@ -23,6 +23,26 @@
     animation: 2s infinite ease-in-out load alternate ;
 }
 
+.radio-loader > div{
+    animation: 1s infinite ease-in-out radio-load ;
+    height: 30px;
+}
+
+.radio-loader > div:nth-child(1){
+    animation-delay: -0.2s;
+}
+.radio-loader  div:nth-child(2){
+    animation-delay: 0.1s;
+}
+.radio-loader > div:nth-child(3){
+    animation-delay: 0.2s;
+}
+.radio-loader > div:nth-child(4){
+    animation-delay: 0.3s;
+}
+
+
+
 @keyframes load {
     from{
         width: 0%;
@@ -32,3 +52,19 @@
         width: 100%;
     }
 }
+
+@keyframes radio-load {
+    /* 20%{
+        transform: scaleY(1);
+    } */
+    50%{
+        transform: scaleY(0.4);
+    }
+/* 
+    90%{
+        transform: scaleY(0.6);
+    } */
+
+}
+
+
