@@ -1,10 +1,11 @@
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import Header from "../landingPage/Header";
-import AppContext from "../../context/Appcontext";
+import AppContext from "../../context/GlobalContext";
 import { useContext, useEffect, useState } from "react";
 import { NAVLINK } from "../../constants/index";
 import { IconLg } from "../../components/Buttons";
 import useAuth from "../../hook/useAuth";
+import { AppProvider } from "../../context/AppProvider";
 
 const AppLayout = () => {
   const { isLoggedIn } = useAuth();
@@ -17,6 +18,7 @@ const AppLayout = () => {
   };
 
   useEffect(() => {
+    console.log(isLoggedIn);
     window.addEventListener("scroll", handleVisible);
     return () => {
       window.removeEventListener("scroll", handleVisible);
@@ -24,7 +26,7 @@ const AppLayout = () => {
   }, []);
 
   return (
-    <>
+    <AppProvider>
       {!isLoggedIn ? (
         <Navigate to="/login" />
       ) : (
@@ -77,7 +79,7 @@ const AppLayout = () => {
           {/* <Footer/> */}
         </section>
       )}
-    </>
+    </AppProvider>
   );
 };
 

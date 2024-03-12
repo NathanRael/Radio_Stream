@@ -1,8 +1,8 @@
 import PostedRequest from "../../components/PostedRequest";
-import useApp from "../../hook/useApp";
+import useGlobalContext from "../../hook/useGlobalContext";
 
 const RequestList = () => {
-  const { inView } = useApp();
+  const { inView } = useGlobalContext();
   return (
     <section className={`app-box ${inView.requestList ? "" : "page-anim"} `}>
       <h1 className="max-xl:text-center text-subtitle-2 text-black dark:text-white mb-8">

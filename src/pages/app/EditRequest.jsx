@@ -1,10 +1,10 @@
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button, IconLg } from "../../components/Buttons";
 import { Input, Textarea } from "../../components/Inputs";
-import useApp from "../../hook/useApp";
+import useGlobalContext from "../../hook/useGlobalContext";
 
 const EditRequest = () => {
-  const { inView } = useApp();
+  const { inView } = useGlobalContext();
   const navigate = useNavigate();
   return (
     <section className={`app-box ${inView.editRequest ? "" : "page-anim"} `}>

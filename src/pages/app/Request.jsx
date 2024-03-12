@@ -1,10 +1,10 @@
 import { Button } from "../../components/Buttons";
 import { Input, Textarea } from "../../components/Inputs";
 import { UserRequest } from "../../components/UserRequest";
-import useApp from "../../hook/useApp";
+import useGlobalContext from "../../hook/useGlobalContext";
 
 const Request = () => {
-  const { inView } = useApp();
+  const { inView } = useGlobalContext();
   return (
     <section className={`app-box ${inView.request ? "" : "page-anim"} `}>
       <div className="flex items-start justify-between max-xl:gap-10 max-xl:flex-col-reverse  max-xl:items-center flex-wrap">

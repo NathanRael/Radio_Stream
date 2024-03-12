@@ -1,34 +1,111 @@
-import Badge from "../components/Badge";
+import Badge from "./Badge";
 import { Button, Icon, IconLg } from "./Buttons";
 import PostImage from "../assets/images/profile.png";
 import "../animations/PostCard.css";
-import { useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { ABOUT_TEXT } from "../constants/index";
 import { useNavigate } from "react-router-dom";
 
-const PostCard = ({title,desc,postDate, icon  = "bi bi-bookmark", iconColor = "bg-transparent text-white"}) => {
-  const [showMore,setShowMore] = useState(false);
-  const [hover,setHover] = useState(false);
+const PostCard = ({
+  id,
+  title,
+  desc,
+  date,
+  icon = "bi bi-bookmark",
+  iconColor = "bg-transparent text-white",
+  isAdmin = false,
+  handleDelete,
+}) => {
+  const [showMore, setShowMore] = useState(false);
+  const [hover, setHover] = useState(false);
   const navigate = useNavigate();
   const maxLen = 320;
+  const getDateDiff = useCallback(
+    (postedPost, today) => {
+      const dateDiff =
+        (today.getTime() - postedPost.getTime()) / (1000 * 365 * 24 * 3600);
+
+      let year = dateDiff,
+        month = 0,
+        days = 0,
+        hours = 0,
+        min = 0;
+      if (Math.floor(year) > 0) return Math.floor(year) + " ans";
+      month = useMemo(() => year * 12, [year]);
+      if (Math.floor(month) > 0) return Math.floor(month) + " mois";
+      days = useMemo(() => month * 30.5, [month]);
+      if (Math.floor(days) > 0) return Math.floor(days) + " jours";
+      hours = useMemo(() => days * 24, [days]);
+      if (Math.floor(hours) > 0) return Math.floor(hours) + " heures";
+      min = useMemo(() => hours * 60, [hours]);
+      if (Math.floor(min) > 0) return Math.floor(min) + " minutes";
+      return min * 60 + " sec";
+    },
+    [date, new Date().getMinutes()]
+  );
   return (
-    <div className=" relative overflow-hidden px-3 py-6 rounded-xl border border-black-10 dark:border-white-10 w-[332px] card-gradient min-h-[360px]" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-        <img src={PostImage} className={`${hover ? 'scale-[1.1]':''}  transition duration-300 ease-out absolute  top-0 left-0  -z-10 object-cover h-full `} alt="" />
-        <div className={`post-card-trans ${hover ? 'opacity-0 -translate-y-[10rem]' : ''} flex flex-col items-center gap-6 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}>
-            <div className="text-subtitle-2 text-primary">Color party</div>
-            <Badge text="Il y a 2 heure " color="bg-white-40 text-white " />
+    <div
+      className=" relative overflow-hidden px-3 py-6 rounded-xl border border-black-10 dark:border-white-10 w-[332px] card-gradient min-h-[360px]"
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
+      <img
+        src={PostImage}
+        className={`${
+          hover ? "scale-[1.1]" : ""
+        }  transition duration-300 ease-out absolute  top-0 left-0  -z-10 object-cover h-full `}
+        alt=""
+      />
+      <div
+        className={`w-full post-card-trans ${
+          hover ? "opacity-0 -translate-y-[10rem]" : ""
+        } flex flex-col items-center gap-6 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}
+      >
+        <div className="text-subtitle-2 text-primary w-full text-center">
+          {title}
         </div>
-      <div className={`bg-black-60 p-4 rounded-xl post-card-trans delay-150 flex items-start justify-between flex-col min-h-[320px] gap-10 ${!hover ? 'opacity-0 translate-y-[10rem]' : ''}`}>
-        <Badge text="Il y a 2 heure " color="bg-white-40 text-white " />
-        <div className="w-full space-y-6">
-          <p className="text-base text-white">Color Party</p>
+        <Badge
+          text={"Il y a " + getDateDiff(new Date(date), new Date())}
+          color="bg-white-40 text-white "
+        />
+      </div>
+      <div
+        className={`bg-black-60 p-4 rounded-xl post-card-trans delay-150 flex items-start justify-between flex-col min-h-[320px] gap-10 ${
+          !hover ? "opacity-0 translate-y-[10rem]" : ""
+        }`}
+      >
+        <Badge
+          text={"Il y a " + getDateDiff(new Date(date), new Date())}
+          color="bg-white-40 text-white "
+        />
+        <div className="w-full space-y-6 ">
+          <p className="text-base text-white">{title}</p>
           <p className=" text-small-1 font-FuturaThin text-white-60 ">
-            { showMore ? ABOUT_TEXT : ABOUT_TEXT.slice(0,maxLen) + ' ...' }
+            {showMore ? desc : desc?.slice(0, maxLen) + " ..."}
           </p>
-          <div className="flex items-center justify-between ">
-            <Button text={showMore ? 'Reduire' : 'Afficher plus'} color="bg-white" handleClick={() => setShowMore((prev) => !prev)}/>
-            <IconLg handleClick={() => navigate('/user/postList/edit')} icon="bi bi-pencil" color="text-primary"/> 
-            <IconLg icon={icon} color={iconColor}/> 
+          <div className="flex items-center justify-between">
+            {desc.length >= maxLen && (
+              <Button
+                text={showMore ? "Reduire" : "Afficher plus"}
+                color="bg-white"
+                handleClick={() => setShowMore((prev) => !prev)}
+              />
+            )}
+            {isAdmin && (
+              <>
+                <IconLg
+                  handleClick={() => navigate(`/user/postList/${id}/edit`)}
+                  icon="bi bi-pencil"
+                  color="text-primary"
+                />
+                <IconLg
+                  handleClick={() => handleDelete}
+                  icon="bi bi-trash"
+                  color="text-danger"
+                />
+              </>
+            )}
+            <IconLg icon={icon} color={iconColor} />
           </div>
         </div>
       </div>
@@ -37,3 +114,4 @@ const PostCard = ({title,desc,postDate, icon  = "bi bi-bookmark", iconColor = "b
 };
 
 export default PostCard;
+

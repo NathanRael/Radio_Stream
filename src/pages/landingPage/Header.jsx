@@ -3,7 +3,7 @@ import ProfileImg from "../../components/ProfileImg";
 import "../../animations/Header.css";
 import { useContext } from "react";
 import { useEffect } from "react";
-import AppContext from "../../context/Appcontext";
+import AppContext from "../../context/GlobalContext";
 import PorfilePopup from "../../components/PorfilePopup";
 const Header = ({ isForLanding = false, isTitleVisible = false }) => {
   const {
@@ -26,13 +26,13 @@ const Header = ({ isForLanding = false, isTitleVisible = false }) => {
   };
 
   useEffect(() => {
-    localStorage.setItem("darkMode",darkMode);
+    localStorage.setItem("darkMode", darkMode);
   }, [darkMode]);
   return (
     <header
-      className={` ${
-        isForLanding ? "box " : "px-4"
-      } ${isLoading && isForLanding ? 'hidden' : ''} fixed flex items-center justify-between  py-4 border-b dark:border-b-white-10 border-b-black-10  top-0  w-full z-50 bg-white shadow-sm dark:bg-black`}
+      className={` ${isForLanding ? "box " : "px-4"} ${
+        isLoading && isForLanding ? "hidden" : ""
+      } fixed flex items-center justify-between  py-4 border-b dark:border-b-white-10 border-b-black-10  top-0  w-full z-50 bg-white shadow-sm dark:bg-black`}
     >
       <div
         className={`transition duration-300 z-40 fixed top-[88px] right-4 ${
@@ -51,7 +51,9 @@ const Header = ({ isForLanding = false, isTitleVisible = false }) => {
         <a
           href="#Hero"
           className={` transition duration-150 ${
-            isTitleVisible ? "absolute opacity-0 -translate-x-[10rem] " : "absolute "
+            isTitleVisible
+              ? "absolute opacity-0 -translate-x-[10rem] "
+              : "absolute "
           }`}
         >
           Radio <span className="text-primary">Rofia</span>

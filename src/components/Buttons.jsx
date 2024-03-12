@@ -12,8 +12,7 @@ export const Button = ({
     <button
     disabled={disabled}
       onClick={handleClick}
-      className={`${color} px-4 py-2 rounded-full text-small-1 font-FuturaMd  ${
-        defaultAnim ? "btn-anim" : "btn-anim-custom"
+      className={`${color} px-4 py-2 rounded-full text-small-1 font-FuturaMd  ${ defaultAnim ? "btn-anim" : "btn-anim-custom"
       } `}
     >
       <p>{text}</p>

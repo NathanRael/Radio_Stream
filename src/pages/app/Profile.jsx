@@ -2,12 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { Button, IconLg } from "../../components/Buttons";
 import { FileInput, Input } from "../../components/Inputs";
 import ProfileImg from "../../components/ProfileImg";
-import useApp from "../../hook/useApp";
+import useGlobalContext from "../../hook/useGlobalContext";
 
 const Profile = () => {
   const navigate = useNavigate();
-  const { inView } = useApp();
-  
+  const { inView } = useGlobalContext();
+
   return (
     <section className={`app-box ${inView.profile ? "" : "page-anim"} `}>
       <div className="flex items-center justify-between w-full mb-8">

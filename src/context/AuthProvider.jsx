@@ -1,12 +1,15 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 axios.defaults.withCredentials = true;
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  const [auth, setAuth] = useState({});
+  const location = useLocation();
+  const [auth, setAuth] = useState(
+    JSON.parse(sessionStorage.getItem("user")) || {}
+  );
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const logout = () => {
@@ -24,7 +27,7 @@ export const AuthProvider = ({ children }) => {
     sessionStorage.setItem("user", JSON.stringify(data));
   };
 
-  const checkIsLoggedIn = async () => {
+  const checkIsLoggedIn = () => {
     axios.get("http://localhost/Rofia/api/login.php/").then((res) => {
       if (res.status === 200) {
         setIsLoggedIn(res.data.user);
@@ -34,11 +37,11 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     checkIsLoggedIn();
-  }, [auth]);
+  }, [location.pathname]);
 
   return (
     <AuthContext.Provider
-      value={{ auth, setAuth, logout, isLoggedIn, storeAuth }}
+      value={{ auth, setAuth, logout, isLoggedIn, storeAuth, setIsLoggedIn }}
     >
       {children}
     </AuthContext.Provider>

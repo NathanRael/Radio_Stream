@@ -3,13 +3,12 @@ import Hero from "./Hero";
 import Historique from "./Historique";
 import Application from "./Application";
 import Footer from "./Footer";
-import Loader from "../../components/Loader";
-import AppContext from "../../context/Appcontext";
-import { Suspense, useContext, useEffect } from "react";
+import AppContext from "../../context/GlobalContext";
+import { useContext } from "react";
 import RadioSection from "./RadioSection";
 
 const LandingPage = () => {
-  const { isLoading,isNavToggled } = useContext(AppContext);
+  const { isLoading, isNavToggled } = useContext(AppContext);
 
   return (
     <>

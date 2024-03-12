@@ -2,8 +2,7 @@ import { InputLg } from "../../../components/Inputs";
 import { ButtonLg } from "../../../components/Buttons";
 import { Link, useNavigate } from "react-router-dom";
 import StepGrow from "../../../components/StepGrow";
-import { useContext, useState, useEffect, useRef } from "react";
-import AppContext from "../../../context/Appcontext";
+import {  useState, useEffect, useRef } from "react";
 import {
   EMAIL_REGEX,
   PASSWORD_REGEX,
@@ -11,10 +10,11 @@ import {
 } from "../../../constants/index";
 import axios from "axios";
 import MessagePopup from "../../../components/MessagePopup";
+import useGlobalContext from "../../../hook/useGlobalContext";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const { inView } = useContext(AppContext);
+  const { inView } = useGlobalContext();
   const userRef = useRef(null);
   const [error, setError] = useState(false);
   const [errMsg, setErrMsg] = useState("");

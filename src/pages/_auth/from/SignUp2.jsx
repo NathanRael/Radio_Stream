@@ -1,13 +1,12 @@
-import { FileInput, InputLg } from "../../../components/Inputs";
+import { FileInput } from "../../../components/Inputs";
 import { ButtonLg, IconLg } from "../../../components/Buttons";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import StepGrow from "../../../components/StepGrow";
 import ProfileImg from "../../../components/ProfileImg";
-import AppContext from "../../../context/Appcontext";
-import { useContext } from "react";
+import useGlobalContext from "../../../hook/useGlobalContext";
 const SignUp2 = () => {
   const navigate = useNavigate();
-  const { inView } = useContext(AppContext);
+  const { inView } = useGlobalContext();
   return (
     <section className={`form-box ${inView.signup2 ? "" : "page-anim-left"}`}>
       <div className="absolute left-4 top-4">

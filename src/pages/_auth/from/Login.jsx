@@ -1,17 +1,17 @@
 import { InputLg } from "../../../components/Inputs";
 import { ButtonLg } from "../../../components/Buttons";
 import { Link, useNavigate } from "react-router-dom";
-import AppContext from "../../../context/Appcontext";
 import { useContext, useEffect, useRef, useState } from "react";
 import MessagePopup from "../../../components/MessagePopup";
 import useAuth from "../../../hook/useAuth";
 import axios from "axios";
+import useGlobalContext from "../../../hook/useGlobalContext";
 axios.defaults.withCredentials = true;
 
 const Login = () => {
   const navigate = useNavigate();
-  const { storeAuth } = useAuth();
-  const { inView } = useContext(AppContext);
+  const { storeAuth, setIsLoggedIn } = useAuth();
+  const { inView } = useGlobalContext();
   const inputRef = useRef(null);
   const [error, setError] = useState(false);
   const [errMsg, setErrMsg] = useState("");
@@ -47,6 +47,7 @@ const Login = () => {
         setSuccessMsg(response?.data.success);
         storeAuth(response?.data?.session);
         console.log(response?.data.success);
+        navigate('/user/home');
       })
       .catch((e) => {
         setErrMsg(e.response?.data?.error);

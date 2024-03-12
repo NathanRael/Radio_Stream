@@ -1,9 +1,9 @@
 import { createContext, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-const AppContext = createContext({});
+const GlobalContext = createContext({});
 
-export const AppProvider = ({ children }) => {
+export const GloBalProvider = ({ children }) => {
   const location = useLocation();
   const [profileClicked, setProfileClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -62,7 +62,7 @@ export const AppProvider = ({ children }) => {
   }, [location.pathname]);
 
   return (
-    <AppContext.Provider
+    <GlobalContext.Provider
       value={{
         isLoading,
         isNavToggled,
@@ -77,8 +77,8 @@ export const AppProvider = ({ children }) => {
       }}
     >
       {children}
-    </AppContext.Provider>
+    </GlobalContext.Provider>
   );
 };
 
-export default AppContext;
+export default GlobalContext;

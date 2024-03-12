@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
 import RadioPlayer from "../../components/RadioPlayer";
-import AppContext from "../../context/Appcontext";
-import useApp from "../../hook/useApp";
-
+import AppContext from "../../context/GlobalContext";
+import useGlobalContext from "../../hook/useGlobalContext";
 
 const Radio = () => {
-  const { inView } = useApp();
+  const { inView } = useGlobalContext();
   return (
     <section className={`app-box ${inView.radio ? "" : "page-anim"} `}>
       <h1 className="max-lg:text-center text-subtitle-2 dark:text-white mb-8  text-black">
