@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 axios.defaults.withCredentials = true;
 const AuthContext = createContext({});
@@ -7,6 +7,8 @@ const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [successMsg, setSuccessMsg] = useState("");
+  const [errMsg, setErrMsg] = useState("");
   const [auth, setAuth] = useState(
     JSON.parse(sessionStorage.getItem("user")) || {}
   );
@@ -21,27 +23,78 @@ export const AuthProvider = ({ children }) => {
     navigate("/login");
   };
 
+  const resetMessage = () => {
+    setTimeout(() => {
+      setSuccessMsg("");
+      setErrMsg("");
+    }, 2000);
+  };
+
+  const login = (data) => {
+    const { email, password } = data;
+    axios
+      .post("http://localhost/Rofia/api/login.php/", {
+        email,
+        password,
+      })
+      .then((response) => {
+        console.log(response);
+        setSuccessMsg(response?.data.success);
+        storeAuth(response?.data?.session);
+        setIsLoggedIn(response?.data?.session);
+        console.log(response?.data.success);
+        navigate("/user/home");
+      })
+      .catch((e) => {
+        setErrMsg(e.response?.data?.error);
+        console.log(e.response?.data);
+        inputRef.current.focus();
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setErrMsg("");
+          setSuccessMsg("");
+        }, 2000);
+      });
+  };
+
   const storeAuth = (data) => {
     setAuth(data);
-    console.log(data);
     sessionStorage.setItem("user", JSON.stringify(data));
   };
 
-  const checkIsLoggedIn = () => {
-    axios.get("http://localhost/Rofia/api/login.php/").then((res) => {
-      if (res.status === 200) {
-        setIsLoggedIn(res.data.user);
-      }
+  const checkIsLoggedIn = useCallback(async () => {
+    const res = await axios.get("http://localhost/Rofia/api/login.php/", {
+      withCredentials: true,
     });
-  };
+
+    if (res.status === 200) {
+      console.log(res.data.user);
+      setIsLoggedIn(res.data.user);
+    }
+  }, [isLoggedIn]);
 
   useEffect(() => {
+    console.log("Auth");
     checkIsLoggedIn();
-  }, [location.pathname]);
+  }, []);
 
   return (
     <AuthContext.Provider
-      value={{ auth, setAuth, logout, isLoggedIn, storeAuth, setIsLoggedIn }}
+      value={{
+        auth,
+        setAuth,
+        logout,
+        isLoggedIn,
+        storeAuth,
+        successMsg,
+        errMsg,
+        setErrMsg,
+        setSuccessMsg,
+        login,
+        checkIsLoggedIn,
+        resetMessage,
+      }}
     >
       {children}
     </AuthContext.Provider>

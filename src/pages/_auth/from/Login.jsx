@@ -10,13 +10,10 @@ axios.defaults.withCredentials = true;
 
 const Login = () => {
   const navigate = useNavigate();
-  const { storeAuth, setIsLoggedIn } = useAuth();
   const { inView } = useGlobalContext();
+  const {successMsg, errMsg, setErrMsg, setSuccessMsg, login} = useAuth();
   const inputRef = useRef(null);
   const [error, setError] = useState(false);
-  const [errMsg, setErrMsg] = useState("");
-  const [successMsg, setSuccessMsg] = useState("");
-  const [disabled, setDisabled] = useState(true);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -37,23 +34,8 @@ const Login = () => {
     if (error) {
       return console.log("Verifier vos champs");
     }
-    axios
-      .post("http://localhost/Rofia/api/login.php/", {
-        email,
-        password,
-      })
-      .then((response) => {
-        console.log(response);
-        setSuccessMsg(response?.data.success);
-        storeAuth(response?.data?.session);
-        console.log(response?.data.success);
-        navigate('/user/home');
-      })
-      .catch((e) => {
-        setErrMsg(e.response?.data?.error);
-        console.log(e.response?.data);
-        inputRef.current.focus();
-      });
+    login(formData);
+    
   };
 
   useEffect(() => {

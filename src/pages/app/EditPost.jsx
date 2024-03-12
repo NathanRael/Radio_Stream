@@ -3,13 +3,19 @@ import { Button, IconLg } from "../../components/Buttons";
 import { FileInput, Input, Textarea } from "../../components/Inputs";
 import useGlobalContext from "../../hook/useGlobalContext";
 import { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import { baseUrl } from "../../constants";
+import MessagePopup from "../../components/MessagePopup";
+import Load from "../../components/Load";
+import useAuth from "../../hook/useAuth";
 
 const EditPost = () => {
   const { inView } = useGlobalContext();
   const { id } = useParams();
+  const { setErrMsg, setSuccessMsg, resetMessage } = useAuth();
   const navigate = useNavigate();
   const inputRef = useRef(null);
-  const [postData, setPostData] = useState([]);
+  const [isLoading, setIsloading] = useState(true);
   const [formData, setFormData] = useState({
     title: "",
     desc: "",
@@ -31,7 +37,7 @@ const EditPost = () => {
     const { title, desc, imageUrl } = formData;
     if (title !== "" && desc !== "") {
       axios
-        .post(`${baseUrl}/event.php`, {
+        .patch(`${baseUrl}/event.php/${id}`, {
           title,
           desc,
           imageUrl,
@@ -39,12 +45,16 @@ const EditPost = () => {
         .then((res) => {
           if (res.status === 200) {
             console.log(res.data.success);
-            setSuccessMsg(res.data.success);
+            setSuccessMsg("Event updated successfully");
             setFormData({
               title: "",
               desc: "",
               imageUrl: null,
             });
+            setTimeout(() => {
+              navigate(-1);
+              setSuccessMsg('');
+            }, 2000);
           }
         })
         .catch((e) => {
@@ -54,11 +64,30 @@ const EditPost = () => {
     }
   };
 
-  useEffect(() => {
+  const getPost = async (id) => {
+    setIsloading(true);
+    const res = await axios.get(`${baseUrl}/event.php/${id}`);
+    if (res.status === 200) {
+      setFormData({
+        title: res.data.data.title,
+        desc: res.data.data.desc,
+        imageUrl: null,
+      });
+    } else {
+      setErrMsg(res.data.data.error);
+    }
+    setIsloading(false);
+    resetMessage();
+  };
 
-  }, [])
+  useEffect(() => {
+    inputRef.current.focus();
+    getPost(id);
+  }, []);
   return (
     <section className={`app-box ${inView.editPost ? "" : "page-anim"} `}>
+      <Load isLoading={isLoading} />
+
       <div className="flex items-start max-lg:flex-col-reverse max-lg:items-center max-lg:gap-10 justify-between">
         <div className="w-full flex flex-col items-center">
           <div className="w-full  flex items-center justify-center gap-2 mb-8">
@@ -71,8 +100,12 @@ const EditPost = () => {
               Modifier une publication
             </h1>
           </div>
-          <form className="flex flex-col items-start justify-center gap-8 w-fit" onSubmit={handleSubmitPost}>
+          <form
+            className="flex flex-col items-start justify-center gap-8 w-fit"
+            onSubmit={handleSubmitPost}
+          >
             <Input
+              inputRef={inputRef}
               title="Titre"
               placeholder="Entrer le titre du requête "
               name="title"

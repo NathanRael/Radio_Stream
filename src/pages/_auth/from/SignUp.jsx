@@ -101,7 +101,6 @@ const SignUp = () => {
     setSuccessMsg("");
   }, [formData]);
 
-  const t = true;
 
   return (
     <section className={`form-box ${inView.signup ? "" : "page-anim-right"}`}>

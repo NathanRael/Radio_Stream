@@ -3,14 +3,15 @@ import LoadingIcon from "../../components/LoadingIcon";
 import PostCard from "../../components/PostCard";
 import UseIntersection from "../../hook/UseIntersection";
 import useGlobalContext from "../../hook/useGlobalContext";
-import { POST, baseUrl } from "../../constants";
+import { baseUrl } from "../../constants";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "../../hook/useAuth";
+axios.defaults.withCredentials = true;
 
 const Home = () => {
   const { inView } = useGlobalContext();
-  const { auth } = useAuth();
+  const { auth, setSuccessMsg, setErrMsg, resetMessage } = useAuth();
 
   const [postData, setPostData] = useState([]);
   const [containerRef, isVisible] = UseIntersection({
@@ -19,7 +20,29 @@ const Home = () => {
     threshold: 1.0,
   });
 
+  const savePost = (id) => {
+    axios
+      .post(`${baseUrl}/savedEvent.php/${id}`, {
+        userId: auth.id,
+      })
+      .then((e) => {
+        if (e.status === 200) {
+          setSuccessMsg(e.data.success);
+        }
+      })
+      .catch((e) => {
+        setErrMsg(e.response.data.error);
+      })
+      .finally(() => {
+        resetMessage();
+      });
+  };
+
   useEffect(() => {
+    getAllPost();
+  }, []);
+
+  const getAllPost = () => {
     axios
       .get(`${baseUrl}/event.php`)
       .then((res) => {
@@ -27,7 +50,7 @@ const Home = () => {
         setPostData(res?.data?.data);
       })
       .catch((e) => console.log(e));
-  }, []);
+  };
 
   return (
     <section className={`app-box ${inView.home ? "" : "page-anim"} `}>
@@ -44,6 +67,7 @@ const Home = () => {
               key={post.id}
               {...post}
               isAdmin={auth.roles === "admin"}
+              handleSavePost={savePost}
             />
           ))}
         </div>
@@ -57,8 +81,7 @@ const Home = () => {
             />
           ))}
         </div>
-        <div className="w-full mx-auto flex justify-center">
-          {/* <ButtonLg text="Voir Plus" /> */}
+        <div className="w-full mx-auto">
           <LoadingIcon />
         </div>
       </div>

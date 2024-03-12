@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { GloBalProvider } from "./context/GlobalContext.jsx";
 import SignUp from "./pages/_auth/from/SignUp";
 import SignUp2 from "./pages/_auth/from/SignUp2";
@@ -20,6 +20,7 @@ import NotFound from "./pages/_auth/NotFound";
 import Unauthorized from "./pages/_auth/Unauthorized";
 import Forbidden from "./pages/_auth/Forbidden";
 import Loader from "./components/Loader.jsx";
+import useAuth from "./hook/useAuth.jsx";
 
 const LandingPage = lazy(() => import("./pages/landingPage/LandingPage.jsx"));
 

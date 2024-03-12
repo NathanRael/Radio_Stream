@@ -97,8 +97,7 @@ const PostList = () => {
               <PostCard
                 key={post.id}
                 {...post}
-                icon="bi bi-bookmark-dash"
-                iconColor="text-danger"
+                isAdmin
               />
             ))}
           </div>

@@ -6,9 +6,10 @@ import { NAVLINK } from "../../constants/index";
 import { IconLg } from "../../components/Buttons";
 import useAuth from "../../hook/useAuth";
 import { AppProvider } from "../../context/AppProvider";
+import MessagePopup from "../../components/MessagePopup";
 
 const AppLayout = () => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, successMsg, errMsg } = useAuth();
   const navigate = useNavigate();
   const { isNavToggled, activeNav } = useContext(AppContext);
   const [isButtonVisible, setIsButtonVisible] = useState(false);
@@ -18,7 +19,6 @@ const AppLayout = () => {
   };
 
   useEffect(() => {
-    console.log(isLoggedIn);
     window.addEventListener("scroll", handleVisible);
     return () => {
       window.removeEventListener("scroll", handleVisible);
@@ -27,11 +27,29 @@ const AppLayout = () => {
 
   return (
     <AppProvider>
-      {!isLoggedIn ? (
+      {!sessionStorage.user ? (
         <Navigate to="/login" />
       ) : (
         <section>
+          
           <Header isTitleVisible={window.scrollY >= 120} />
+          <MessagePopup
+            message={successMsg}
+            className={` ${
+              successMsg
+                ? "translate-x-0 opacity-1"
+                : "translate-x-[10rem] opacity-0"
+            }  fixed top-10 right-10 transition delay-30 z-50`}
+          />
+          <MessagePopup
+            error
+            message={errMsg}
+            className={`${
+              errMsg
+                ? "translate-x-0 opacity-1"
+                : "translate-x-[10rem] opacity-0"
+            } fixed top-10 right-10 transition delay-30 z-50`}
+          />
           <div
             className={`transition duration-300 ${
               isButtonVisible ? "" : "opacity-0"

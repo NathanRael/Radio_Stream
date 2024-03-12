@@ -15,6 +15,8 @@ const PostCard = ({
   iconColor = "bg-transparent text-white",
   isAdmin = false,
   handleDelete,
+  handleSavePost,
+  isSaved = false,
 }) => {
   const [showMore, setShowMore] = useState(false);
   const [hover, setHover] = useState(false);
@@ -99,13 +101,17 @@ const PostCard = ({
                   color="text-primary"
                 />
                 <IconLg
-                  handleClick={() => handleDelete}
+                  handleClick={() => handleDelete(id)}
                   icon="bi bi-trash"
                   color="text-danger"
                 />
               </>
             )}
-            <IconLg icon={icon} color={iconColor} />
+            <IconLg
+              handleClick={() => handleSavePost(id)}
+              icon={`${isSaved ? "bi bi-bookmark-dash" : "bi bi-bookmark"}`}
+              color={`${isSaved ? "text-danger" : "text-white"}`}
+            />
           </div>
         </div>
       </div>
@@ -114,4 +120,3 @@ const PostCard = ({
 };
 
 export default PostCard;
-
