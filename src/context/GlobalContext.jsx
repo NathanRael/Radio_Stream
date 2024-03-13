@@ -40,6 +40,7 @@ export const GloBalProvider = ({ children }) => {
 
   useEffect(() => {
     setIsNavToggled(false);
+    setProfileClicked(false);
     setActiveNav(currentDir);
 
     setInView({

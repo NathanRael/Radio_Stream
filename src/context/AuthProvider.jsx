@@ -75,7 +75,6 @@ export const AuthProvider = ({ children }) => {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    console.log("Auth");
     checkIsLoggedIn();
   }, []);
 

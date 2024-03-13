@@ -7,50 +7,25 @@ import { baseUrl } from "../../constants";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "../../hook/useAuth";
+import useAppContext from "../../hook/useAppContext";
 axios.defaults.withCredentials = true;
 
 const Home = () => {
   const { inView } = useGlobalContext();
-  const { auth, setSuccessMsg, setErrMsg, resetMessage } = useAuth();
+  const { auth } = useAuth();
+  const { savePost, getSavedPost, postData, savedPost, getAllPost } =
+    useAppContext();
 
-  const [postData, setPostData] = useState([]);
   const [containerRef, isVisible] = UseIntersection({
     root: null,
     rootMargin: "0px",
     threshold: 1.0,
   });
 
-  const savePost = (id) => {
-    axios
-      .post(`${baseUrl}/savedEvent.php/${id}`, {
-        userId: auth.id,
-      })
-      .then((e) => {
-        if (e.status === 200) {
-          setSuccessMsg(e.data.success);
-        }
-      })
-      .catch((e) => {
-        setErrMsg(e.response.data.error);
-      })
-      .finally(() => {
-        resetMessage();
-      });
-  };
-
   useEffect(() => {
     getAllPost();
+    getSavedPost();
   }, []);
-
-  const getAllPost = () => {
-    axios
-      .get(`${baseUrl}/event.php`)
-      .then((res) => {
-        if (res.status !== 200) return console.log(res.data.error);
-        setPostData(res?.data?.data);
-      })
-      .catch((e) => console.log(e));
-  };
 
   return (
     <section className={`app-box ${inView.home ? "" : "page-anim"} `}>
@@ -68,16 +43,19 @@ const Home = () => {
               {...post}
               isAdmin={auth.roles === "admin"}
               handleSavePost={savePost}
+              saveClicked={savedPost.some((v) => v.postId === post.id)}
             />
           ))}
         </div>
         <div className="line"></div>
-        <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-6 place-items-center ">
+        <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-6 place-items-center xl:place-items-start">
           {postData.map((post) => (
             <PostCard
               key={post.id}
               {...post}
               isAdmin={auth.roles === "admin"}
+              handleSavePost={savePost}
+              saveClicked={savedPost.some((v) => v.postId === post.id)}
             />
           ))}
         </div>

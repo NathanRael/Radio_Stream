@@ -3,10 +3,12 @@ import PostedRequest from "../../components/PostedRequest";
 import { baseUrl } from "../../constants";
 import useGlobalContext from "../../hook/useGlobalContext";
 import { useEffect, useState } from "react";
+import useAuth from "../../hook/useAuth";
 
 const RequestList = () => {
   const { inView } = useGlobalContext();
   const [reqData, setReqData] = useState([]);
+  const {resetMessage, setErrMsg, setSuccessMsg} = useAuth();
   const getReqData = () => {
     axios
       .get(`${baseUrl}/userRequest.php/`)

@@ -19,5 +19,5 @@ export const getDateDiff =
       if (Math.floor(hours) > 0) return Math.floor(hours) + " heures";
       min = useMemo(() => hours * 60, [hours]);
       if (Math.floor(min) > 0) return Math.floor(min) + " minutes";
-      return min * 60 + " sec";
+      return Math.floor(min * 60) + " sec";
     }

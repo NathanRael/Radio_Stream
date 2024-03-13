@@ -1,13 +1,83 @@
 import { createContext, useEffect, useState } from "react";
-import { POST } from "../constants/index.js";
+import { POST, baseUrl } from "../constants/index.js";
+import axios from "axios";
+import useAuth from "../hook/useAuth.jsx";
 const AppContext = createContext({});
 
 export const AppProvider = ({ children }) => {
+  const [postData, setPostData] = useState([]);
+  const [savedPost, setSavedPost] = useState([]);
+  const { auth, setSuccessMsg, setErrMsg, resetMessage } = useAuth();
 
+  const savePost = (id) => {
+    axios
+      .post(`${baseUrl}/savedEvent.php/${id}`, {
+        userId: auth.id,
+      })
+      .then((e) => {
+        if (e.status === 200) {
+          setSuccessMsg(e.data.success);
+        }
+      })
+      .catch((e) => {
+        setErrMsg(e.response.data.error);
+      })
+      .finally(() => {
+        resetMessage();
+      });
+  };
 
+  const getSavedPost = () => {
+    axios
+      .get(`${baseUrl}/savedEvent.php/${auth.id}`)
+      .then((res) => {
+        if (res.status !== 200) return console.log(res.data.error);
+        setSavedPost(res?.data?.data);
+      })
+      .catch((e) => console.log(e.response.data.error));
+  };
 
+  const removeSavedPost = (id) => {
+    axios
+      .delete(`${baseUrl}/savedEvent.php/${id}`)
+      .then((res) => {
+        if (res.status === 200) {
+          setSavedPost(savedPost.filter((post) => post.id !== id));
+          setSuccessMsg("Saved event removed");
+        }
+      })
+      .catch((e) => {
+        setErrMsg(e.response.data.error);
+      })
+      .finally(() => {
+        resetMessage();
+      });
+  };
+
+  const getAllPost = () => {
+    axios
+      .get(`${baseUrl}/event.php`)
+      .then((res) => {
+        if (res.status !== 200) return console.log(res.data.error);
+        setPostData(res?.data?.data);
+      })
+      .catch((e) => console.log(e));
+  };
   return (
-    <AppContext.Provider value={{  }}>{children}</AppContext.Provider>
+    <AppContext.Provider
+      value={{
+        savePost,
+        removeSavedPost,
+        savedPost,
+        setSavedPost,
+        postData,
+        setPostData,
+        getSavedPost,
+        getAllPost,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
   );
 };
 

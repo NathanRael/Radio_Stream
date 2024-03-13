@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { ABOUT_TEXT } from "../constants/index";
 import { useNavigate } from "react-router-dom";
 import { getDateDiff } from "../functions";
+import { color } from "framer-motion";
 
 const PostCard = ({
   id,
@@ -18,14 +19,16 @@ const PostCard = ({
   handleDelete,
   handleSavePost,
   isSaved = false,
+  saveClicked = false,
 }) => {
   const [showMore, setShowMore] = useState(false);
   const [hover, setHover] = useState(false);
   const navigate = useNavigate();
+  const [saveIconUpdate, setSaveIconUpdate] = useState(saveClicked);
   const maxLen = 320;
   return (
     <div
-      className=" relative overflow-hidden px-3 py-6 rounded-xl border border-black-10 dark:border-white-10 w-[332px] card-gradient min-h-[360px]"
+      className=" relative overflow-hidden px-3 py-6 rounded-xl border border-black-10 dark:border-white-10 w-[324px] card-gradient min-h-[460px]"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
@@ -41,7 +44,7 @@ const PostCard = ({
           hover ? "opacity-0 -translate-y-[10rem]" : ""
         } flex flex-col items-center gap-6 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}
       >
-        <div className="text-subtitle-2 text-primary w-full text-center">
+        <div className="text-subtitle-3 text-primary w-full text-center">
           {title}
         </div>
         <Badge
@@ -61,7 +64,7 @@ const PostCard = ({
         <div className="w-full space-y-6 ">
           <p className="text-base text-white">{title}</p>
           <p className=" text-small-1 font-FuturaThin text-white-60 ">
-            {showMore ? desc : desc?.slice(0, maxLen) + " ..."}
+            {showMore ? desc : desc.length >= maxLen ? desc?.slice(0, maxLen) + "..." : desc}
           </p>
           <div className="flex items-center justify-between">
             {desc.length >= maxLen && (
@@ -85,11 +88,28 @@ const PostCard = ({
                 />
               </>
             )}
-            <IconLg
-              handleClick={() => handleSavePost(id)}
-              icon={`${isSaved ? "bi bi-bookmark-dash" : "bi bi-bookmark"}`}
-              color={`${isSaved ? "text-danger" : "text-white"}`}
-            />
+            {isSaved ? (
+              <IconLg
+                handleClick={() => handleSavePost(id)}
+                icon="bi bi-bookmark-dash"
+                color="text-danger"
+              />
+            ) : (
+              <IconLg
+                handleClick={() => {
+                  saveClicked ? "" : handleSavePost(id);
+                  setSaveIconUpdate(true);
+                }}
+                icon={
+                  saveClicked || saveIconUpdate
+                    ? "bi bi-bookmark-fill"
+                    : "bi bi-bookmark"
+                }
+                color={
+                  saveClicked || saveIconUpdate ? "text-primary" : "text-white"
+                }
+              />
+            )}
           </div>
         </div>
       </div>

@@ -6,18 +6,30 @@ import { baseUrl } from "../../constants";
 import useGlobalContext from "../../hook/useGlobalContext";
 import { useEffect, useRef, useState } from "react";
 import MessagePopup from "../../components/MessagePopup";
+import useAuth from "../../hook/useAuth";
+import useAppContext from "../../hook/useAppContext";
 
 const PostList = () => {
   const { inView } = useGlobalContext();
+  const { auth } = useAuth();
   const inputRef = useRef(null);
-  const [postData, setPostData] = useState([]);
+  const {
+    savePost,
+    getSavedPost,
+    removeSavedPost,
+    postData,
+    savedPost,
+    getAllPost,
+    setSuccessMsg,
+    setErrMsg,
+  } = useAppContext();
+
   const [formData, setFormData] = useState({
     title: "",
     desc: "",
     imageUrl: null,
   });
-  const [errMsg, setErrMsg] = useState("");
-  const [successMsg, setSuccessMsg] = useState("");
+
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -42,7 +54,7 @@ const PostList = () => {
         .then((res) => {
           if (res.status === 200) {
             console.log(res.data.success);
-            setSuccessMsg(res.data.success)
+            setSuccessMsg(res.data.success);
             setFormData({
               title: "",
               desc: "",
@@ -52,19 +64,13 @@ const PostList = () => {
         })
         .catch((e) => {
           console.log(e.response.data.error);
-          setErrMsg(e.response.data.error)
+          setErrMsg(e.response.data.error);
         });
     }
   };
 
   useEffect(() => {
-    axios
-      .get(`${baseUrl}/event.php`)
-      .then((res) => {
-        if (res.status !== 200) return console.log(res.data.error);
-        setPostData(res?.data?.data);
-      })
-      .catch((e) => console.log(e));
+    getAllPost();
   }, []);
   useEffect(() => {
     inputRef.current.focus();
@@ -72,21 +78,6 @@ const PostList = () => {
 
   return (
     <section className={`app-box ${inView.postList ? "" : "page-anim"} `}>
-      <MessagePopup
-        message={successMsg}
-        className={` ${
-          successMsg
-            ? "translate-x-0 opacity-1"
-            : "translate-x-[10rem] opacity-0"
-        }  fixed top-10 right-10 transition delay-30 z-50`}
-      />
-      <MessagePopup
-        error
-        message={errMsg}
-        className={`${
-          errMsg ? "translate-x-0 opacity-1" : "translate-x-[10rem] opacity-0"
-        } fixed top-10 right-10 transition delay-30 z-50`}
-      />
       <div className="flex items-start max-lg:flex-col-reverse max-lg:items-center max-lg:gap-10 justify-between">
         <div className="basis-1/2">
           <h1 className="text-subtitle-2 text-black dark:text-white mb-8">
@@ -97,7 +88,9 @@ const PostList = () => {
               <PostCard
                 key={post.id}
                 {...post}
-                isAdmin
+                isAdmin={auth.roles === "admin"}
+                handleSavePost={savePost}
+                saveClicked={savedPost.some((v) => v.postId === post.id)}
               />
             ))}
           </div>

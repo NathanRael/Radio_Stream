@@ -3,8 +3,9 @@ import ProfileImg from "../../components/ProfileImg";
 import "../../animations/Header.css";
 import { useContext } from "react";
 import { useEffect } from "react";
-import AppContext from "../../context/GlobalContext";
 import PorfilePopup from "../../components/PorfilePopup";
+import GlobalContext from "../../context/GlobalContext";
+import useGlobalContext from "../../hook/useGlobalContext";
 const Header = ({ isForLanding = false, isTitleVisible = false }) => {
   const {
     isNavToggled,
@@ -15,7 +16,7 @@ const Header = ({ isForLanding = false, isTitleVisible = false }) => {
     profileClicked,
     currentDir,
     isLoading,
-  } = useContext(AppContext);
+  } = useGlobalContext();
 
   useEffect(() => {
     document.body.style.overflow = isNavToggled ? "hidden" : "auto";
@@ -38,7 +39,7 @@ const Header = ({ isForLanding = false, isTitleVisible = false }) => {
         className={`transition duration-300 z-40 fixed top-[88px] right-4 ${
           profileClicked
             ? "translate-x-0 opacity-1"
-            : "translate-x-[10rem] opacity-0"
+            : "translate-x-[20rem] opacity-0"
         }`}
       >
         <PorfilePopup />
