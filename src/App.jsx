@@ -20,7 +20,6 @@ import NotFound from "./pages/_auth/NotFound";
 import Unauthorized from "./pages/_auth/Unauthorized";
 import Forbidden from "./pages/_auth/Forbidden";
 import Loader from "./components/Loader.jsx";
-import useAuth from "./hook/useAuth.jsx";
 
 const LandingPage = lazy(() => import("./pages/landingPage/LandingPage.jsx"));
 

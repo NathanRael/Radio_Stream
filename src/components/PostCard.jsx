@@ -5,6 +5,7 @@ import "../animations/PostCard.css";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ABOUT_TEXT } from "../constants/index";
 import { useNavigate } from "react-router-dom";
+import { getDateDiff } from "../functions";
 
 const PostCard = ({
   id,
@@ -22,29 +23,6 @@ const PostCard = ({
   const [hover, setHover] = useState(false);
   const navigate = useNavigate();
   const maxLen = 320;
-  const getDateDiff = useCallback(
-    (postedPost, today) => {
-      const dateDiff =
-        (today.getTime() - postedPost.getTime()) / (1000 * 365 * 24 * 3600);
-
-      let year = dateDiff,
-        month = 0,
-        days = 0,
-        hours = 0,
-        min = 0;
-      if (Math.floor(year) > 0) return Math.floor(year) + " ans";
-      month = useMemo(() => year * 12, [year]);
-      if (Math.floor(month) > 0) return Math.floor(month) + " mois";
-      days = useMemo(() => month * 30.5, [month]);
-      if (Math.floor(days) > 0) return Math.floor(days) + " jours";
-      hours = useMemo(() => days * 24, [days]);
-      if (Math.floor(hours) > 0) return Math.floor(hours) + " heures";
-      min = useMemo(() => hours * 60, [hours]);
-      if (Math.floor(min) > 0) return Math.floor(min) + " minutes";
-      return min * 60 + " sec";
-    },
-    [date, new Date().getMinutes()]
-  );
   return (
     <div
       className=" relative overflow-hidden px-3 py-6 rounded-xl border border-black-10 dark:border-white-10 w-[332px] card-gradient min-h-[360px]"

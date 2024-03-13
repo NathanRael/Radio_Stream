@@ -109,7 +109,10 @@ const Header = ({ isForLanding = false, isTitleVisible = false }) => {
         <IconLg
           icon={`bi bi-${isNavToggled ? "x-lg" : "list"}`}
           color="dark:text-white bg-white dark:bg-black"
-          handleClick={() => setIsNavToggled((prev) => !prev)}
+          handleClick={() => {
+            setIsNavToggled((prev) => !prev);
+            setProfileClicked(false);
+          }}
         />
       </div>
     </header>
