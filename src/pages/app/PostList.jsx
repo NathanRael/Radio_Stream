@@ -15,21 +15,20 @@ const PostList = () => {
   const inputRef = useRef(null);
   const {
     savePost,
-    getSavedPost,
-    removeSavedPost,
+    removePost,
     postData,
     savedPost,
     getAllPost,
     setSuccessMsg,
     setErrMsg,
   } = useAppContext();
+  const {resetMessage} = useAuth();
 
   const [formData, setFormData] = useState({
     title: "",
     desc: "",
     imageUrl: null,
   });
-
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -41,8 +40,7 @@ const PostList = () => {
     });
   };
 
-  const handleSubmitPost = (e) => {
-    e.preventDefault();
+  const newPost = () => {
     const { title, desc, imageUrl } = formData;
     if (title !== "" && desc !== "") {
       axios
@@ -54,6 +52,7 @@ const PostList = () => {
         .then((res) => {
           if (res.status === 200) {
             console.log(res.data.success);
+            getAllPost();
             setSuccessMsg(res.data.success);
             setFormData({
               title: "",
@@ -65,8 +64,15 @@ const PostList = () => {
         .catch((e) => {
           console.log(e.response.data.error);
           setErrMsg(e.response.data.error);
+        })
+        .finally(() => {
+          resetMessage();
         });
     }
+  };
+
+  const handleSubmitPost = () => {
+    newPost();
   };
 
   useEffect(() => {
@@ -84,15 +90,22 @@ const PostList = () => {
             Liste des publications
           </h1>
           <div className="flex flex-col items-start justify-center gap-8">
-            {postData.map((post) => (
-              <PostCard
-                key={post.id}
-                {...post}
-                isAdmin={auth.roles === "admin"}
-                handleSavePost={savePost}
-                saveClicked={savedPost.some((v) => v.postId === post.id)}
-              />
-            ))}
+            {postData.length > 0 ? (
+              postData.map((post) => (
+                <PostCard
+                  key={post.id}
+                  {...post}
+                  isAdmin={auth.roles === "admin"}
+                  handleSavePost={savePost}
+                  saveClicked={savedPost.some((v) => v.postId === post.id)}
+                  handleDelete={removePost}
+                />
+              ))
+            ) : (
+              <p className="text-subtitle-3 text-black dark:text-white">
+                Aucune Publication
+              </p>
+            )}
           </div>
         </div>
         <div className="line lg:hidden"></div>
@@ -102,7 +115,7 @@ const PostList = () => {
           </h1>
           <form
             className="flex flex-col items-start justify-center gap-8 w-fit"
-            onSubmit={handleSubmitPost}
+            onSubmit={(e) => e.preventDefault()}
           >
             <Input
               value={formData.title}
@@ -127,6 +140,7 @@ const PostList = () => {
               <Button
                 disabled={formData.title === "" || formData.desc === ""}
                 text="Publier"
+                handleClick={handleSubmitPost}
               />
             </div>
           </form>

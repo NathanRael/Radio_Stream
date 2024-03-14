@@ -9,8 +9,9 @@ import useAppContext from "../../hook/useAppContext";
 
 const SavedPost = () => {
   const { inView } = useGlobalContext();
-  const { auth, setSuccessMsg, setErrMsg, resetMessage } = useAuth();
-  const { getSavedPost, removeSavedPost, savedPost } = useAppContext();
+  const { auth } = useAuth();
+  const { getSavedPost, removeSavedPost, removeAllSavedPost, savedPost } =
+    useAppContext();
 
   useEffect(() => {
     getSavedPost();
@@ -22,7 +23,12 @@ const SavedPost = () => {
         <h1 className="text-subtitle-2 text-black dark:text-white">
           Sauvegardes
         </h1>
-        <Button text="Tout supprimer" color="btn-danger" defaultAnim={false} />
+        <Button
+          text="Tout supprimer"
+          color="btn-danger"
+          defaultAnim={false}
+          handleClick={removeAllSavedPost}
+        />
       </div>
       <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8 place-items-center">
         {savedPost.length > 0 ? (

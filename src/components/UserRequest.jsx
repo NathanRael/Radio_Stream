@@ -14,7 +14,10 @@ export const UserRequest = ({ id, title, desc, date, state, handleDelete }) => {
         </div>
         <div className="basis-1/2 flex  items-center justify-between w-full">
           <Badge text={dateDiff} />
-          <Badge text={state} color="btn-success" />
+          <Badge
+            text={state}
+            color={state === "rejetée" ? "btn-danger" : "btn-success"}
+          />
         </div>
       </div>
       <div className="line w-full"></div>

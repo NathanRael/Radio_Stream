@@ -47,7 +47,7 @@ const Request = () => {
               desc: "",
               imageUrl: null,
             });
-            setReqData(res?.data?.data);
+            getReqData();
           }
         })
         .catch((e) => {
@@ -96,7 +96,7 @@ const Request = () => {
             Liste des requêtes
           </h1>
           <div className="flex flex-col items-center xl:items-start justify-center gap-8">
-            {reqData.length > 0 ? (
+            {reqData?.length > 0 ? (
               reqData.map((req) => (
                 <UserRequest
                   key={req.id}
@@ -105,7 +105,9 @@ const Request = () => {
                 />
               ))
             ) : (
-              <p className="text-subtitle-3 text-black dark:text-white">Pas de requête</p>
+              <p className="text-subtitle-3 text-black dark:text-white">
+                Pas de requête
+              </p>
             )}
           </div>
         </div>

@@ -13,8 +13,14 @@ axios.defaults.withCredentials = true;
 const Home = () => {
   const { inView } = useGlobalContext();
   const { auth } = useAuth();
-  const { savePost, getSavedPost, postData, savedPost, getAllPost } =
-    useAppContext();
+  const {
+    savePost,
+    getSavedPost,
+    postData,
+    savedPost,
+    getAllPost,
+    removePost,
+  } = useAppContext();
 
   const [containerRef, isVisible] = UseIntersection({
     root: null,
@@ -37,13 +43,14 @@ const Home = () => {
       </h1>
       <div className="space-y-20">
         <div className="flex gap-6 flex-wrap items-center justify-center">
-          {postData.map((post) => (
+          {postData.slice(0,3).map((post) => (
             <PostCard
               key={post.id}
               {...post}
               isAdmin={auth.roles === "admin"}
               handleSavePost={savePost}
               saveClicked={savedPost.some((v) => v.postId === post.id)}
+              handleDelete={removePost}
             />
           ))}
         </div>
@@ -56,6 +63,7 @@ const Home = () => {
               isAdmin={auth.roles === "admin"}
               handleSavePost={savePost}
               saveClicked={savedPost.some((v) => v.postId === post.id)}
+              handleDelete={removePost}
             />
           ))}
         </div>

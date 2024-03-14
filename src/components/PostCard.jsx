@@ -28,7 +28,7 @@ const PostCard = ({
   const maxLen = 320;
   return (
     <div
-      className=" relative overflow-hidden px-3 py-6 rounded-xl border border-black-10 dark:border-white-10 w-[324px] card-gradient min-h-[460px]"
+      className=" relative overflow-hidden p-3 rounded-xl border border-black-10 dark:border-white-10 w-[324px] card-gradient min-h-[360px]"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >

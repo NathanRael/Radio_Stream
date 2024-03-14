@@ -69,7 +69,7 @@ const EditPost = () => {
     const res = await axios.get(`${baseUrl}/event.php/${id}`);
     if (res.status === 200) {
       setFormData({
-        title: res.data.data.title,
+        title: res.data?.data?.title,
         desc: res.data.data.desc,
         imageUrl: null,
       });

@@ -54,6 +54,39 @@ export const AppProvider = ({ children }) => {
       });
   };
 
+  const removePost = (id) => {
+    axios
+      .delete(`${baseUrl}/event.php/${id}`)
+      .then((res) => {
+        if (res.status === 200) {
+          getAllPost();
+          setSuccessMsg("Event removed");
+        }
+      })
+      .catch((e) => {
+        setErrMsg(e.response.data.error);
+      })
+      .finally(() => {
+        resetMessage();
+      });
+  };
+  const removeAllSavedPost = () => {
+    axios
+      .delete(`${baseUrl}/savedEvent.php`)
+      .then((res) => {
+        if (res.status === 200) {
+          setSavedPost([]);
+          setSuccessMsg("All Saved event removed");
+        }
+      })
+      .catch((e) => {
+        setErrMsg(e.response.data.error);
+      })
+      .finally(() => {
+        resetMessage();
+      });
+  };
+
   const getAllPost = () => {
     axios
       .get(`${baseUrl}/event.php`)
@@ -68,12 +101,14 @@ export const AppProvider = ({ children }) => {
       value={{
         savePost,
         removeSavedPost,
+        removeAllSavedPost,
         savedPost,
         setSavedPost,
         postData,
         setPostData,
         getSavedPost,
         getAllPost,
+        removePost,
       }}
     >
       {children}
