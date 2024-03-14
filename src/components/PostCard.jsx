@@ -20,7 +20,9 @@ const PostCard = ({
   handleSavePost,
   isSaved = false,
   saveClicked = false,
+  imageUrl,
 }) => {
+  const imageDir = "http://localhost/Rofia/images/";
   const [showMore, setShowMore] = useState(false);
   const [hover, setHover] = useState(false);
   const navigate = useNavigate();
@@ -33,7 +35,7 @@ const PostCard = ({
       onMouseLeave={() => setHover(false)}
     >
       <img
-        src={PostImage}
+        src={imageUrl !== null ? imageDir + imageUrl : PostImage}
         className={`${
           hover ? "scale-[1.1]" : ""
         }  transition duration-300 ease-out absolute  top-0 left-0  -z-10 object-cover h-full `}
@@ -64,7 +66,11 @@ const PostCard = ({
         <div className="w-full space-y-6 ">
           <p className="text-base text-white">{title}</p>
           <p className=" text-small-1 font-FuturaThin text-white-60 ">
-            {showMore ? desc : desc.length >= maxLen ? desc?.slice(0, maxLen) + "..." : desc}
+            {showMore
+              ? desc
+              : desc.length >= maxLen
+              ? desc?.slice(0, maxLen) + "..."
+              : desc}
           </p>
           <div className="flex items-center justify-between">
             {desc.length >= maxLen && (

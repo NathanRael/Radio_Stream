@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "../../hook/useAuth";
 import useAppContext from "../../hook/useAppContext";
+import { FileInput } from "../../components/Inputs";
 axios.defaults.withCredentials = true;
 
 const Home = () => {
@@ -43,7 +44,7 @@ const Home = () => {
       </h1>
       <div className="space-y-20">
         <div className="flex gap-6 flex-wrap items-center justify-center">
-          {postData.slice(0,3).map((post) => (
+          {postData?.slice(0, 3).map((post) => (
             <PostCard
               key={post.id}
               {...post}
@@ -56,7 +57,7 @@ const Home = () => {
         </div>
         <div className="line"></div>
         <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-6 place-items-center xl:place-items-start">
-          {postData.map((post) => (
+          {postData?.map((post) => (
             <PostCard
               key={post.id}
               {...post}

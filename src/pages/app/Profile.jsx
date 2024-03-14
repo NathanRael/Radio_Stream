@@ -15,42 +15,54 @@ const Profile = () => {
   const userRef = useRef(null);
   const [error, setError] = useState(false);
   const { setSuccessMsg, setErrMsg, resetMessage } = useAuth("");
+  const [imagePath, setImagePath] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     oldPassword: "",
     newPassword: "",
+    imageUrl: "",
 
     validName: false,
     validEmail: false,
     validOldPassword: false,
     validNewPassword: false,
+    validImageUrl: false,
   });
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+  const handleInputChange = (e) => {
+    const { name, value, type, checked, files } = e.target;
     setFormData((prevForm) => {
       return {
         ...prevForm,
-        [name]: type === "checkox" ? checked : value,
+        [name]: type === "file" ? files[0] : value,
       };
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { name, email, oldPassword, newPassword } = formData;
+    const { name, email, oldPassword, newPassword, imageUrl } = formData;
     if (error) {
       return console.log("Verifier vos champs");
     }
 
     axios
-      .patch(`http://localhost/Rofia/api/user.php/${auth.id}`, {
-        name,
-        email,
-        oldPassword,
-        newPassword,
-      })
+      .patch(
+        `http://localhost/Rofia/api/user.php/${auth.id}`,
+        {
+          name,
+          email,
+          oldPassword,
+          newPassword,
+          imageUrl,
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((response) => {
         if (response.status === 200) {
           console.log(response.data);
@@ -58,7 +70,7 @@ const Profile = () => {
         }
       })
       .catch((e) => {
-        setErrMsg(e.response?.data?.error); 
+        setErrMsg(e.response?.data?.error);
         console.log(e.response);
       })
       .finally(() => {
@@ -110,7 +122,7 @@ const Profile = () => {
     );
     setErrMsg("");
     setSuccessMsg("");
-  }, [formData]);
+  }, [formData, imagePath]);
   return (
     <section className={`app-box ${inView.profile ? "" : "page-anim"} `}>
       <div className="flex items-center justify-between w-full mb-8">
@@ -134,16 +146,20 @@ const Profile = () => {
         className="w-fit mx-auto flex items-center justify-center flex-col gap-10"
         onSubmit={(e) => e.preventDefault()}
       >
-        <div className="flex flex-col items-center space-y-6">
-          <ProfileImg size="176" />
-          <FileInput />
+        <div className="flex flex-col items-center space-y-6 ">
+          <ProfileImg size="size-[176px]" image={imagePath} />
+          <FileInput
+            name="imageUrl"
+            setImagePath={setImagePath}
+            handleChange={handleInputChange}
+          />
           <Input
             name="name"
             inputRef={userRef}
             placeholder="Entrer votre nom"
             title="Nom"
             value={formData.name}
-            handleChange={handleChange}
+            handleChange={handleInputChange}
             isValid={formData.validName}
             errorMsg="Le champ nom doit cotenir au moins 4 charchtères"
           />
@@ -152,7 +168,7 @@ const Profile = () => {
             placeholder="Entrer votre Email"
             title="Email"
             value={formData.email}
-            handleChange={handleChange}
+            handleChange={handleInputChange}
             isValid={formData.validEmail}
             errorMsg="Email incorrect"
           />
@@ -162,7 +178,7 @@ const Profile = () => {
             name="oldPassword"
             placeholder="Entrer votre ancien mot de passe"
             value={formData.oldPassword}
-            handleChange={handleChange}
+            handleChange={handleInputChange}
             isValid={formData.validOldPassword}
             errorMsg="Le mot de passe doit avoir au moins 8 charachtères"
           />
@@ -172,7 +188,7 @@ const Profile = () => {
             name="newPassword"
             placeholder="Entrer votre nouveau mot de passe"
             value={formData.newPassword}
-            handleChange={handleChange}
+            handleChange={handleInputChange}
             isValid={formData.validNewPassword}
             errorMsg="Le mot de passe doit avoir au moins 8 charachtères"
           />

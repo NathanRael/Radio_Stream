@@ -1,9 +1,14 @@
-import profileImage from  "../assets/images/profile.png"
+import profileImage from "../assets/images/profile.png";
 
-const ProfileImg = ({image = profileImage, handleClick, size = "44"}) => {
+const ProfileImg = ({ image, handleClick, size = "size-[44px]" }) => {
   return (
-    <img src={profileImage} className="rounded-full cursor-pointer" width={size} height={size} alt=""  onClick={handleClick}/>
-  )
-}
+    <img
+      src={image || profileImage}
+      className={`cursor-pointer rounded-full object-cover ${size}`}
+      alt=""
+      onClick={handleClick}
+    />
+  );
+};
 
-export default ProfileImg
+export default ProfileImg;

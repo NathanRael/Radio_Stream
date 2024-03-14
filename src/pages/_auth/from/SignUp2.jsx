@@ -4,9 +4,11 @@ import { useNavigate } from "react-router-dom";
 import StepGrow from "../../../components/StepGrow";
 import ProfileImg from "../../../components/ProfileImg";
 import useGlobalContext from "../../../hook/useGlobalContext";
+import { useState } from "react";
 const SignUp2 = () => {
   const navigate = useNavigate();
   const { inView } = useGlobalContext();
+  const [fileImagePath, setFileImagePath] = useState("");
   return (
     <section className={`form-box ${inView.signup2 ? "" : "page-anim-left"}`}>
       <div className="absolute left-4 top-4">
@@ -26,8 +28,8 @@ const SignUp2 = () => {
           <StepGrow disabled={!inView.signup2} text="Etape 2/2" />
         </div>
         <div className="flex flex-col gap-10 items-center justify-center w-full">
-          <ProfileImg size="128" />
-          <FileInput />
+          <ProfileImg size="size-[172px]" image={fileImagePath} />
+          <FileInput setImagePath={setFileImagePath} />
         </div>
         <div className="flex justify-between gap-6 w-full">
           <ButtonLg

@@ -8,11 +8,13 @@ import { baseUrl } from "../../constants";
 import MessagePopup from "../../components/MessagePopup";
 import Load from "../../components/Load";
 import useAuth from "../../hook/useAuth";
+axios.defaults.withCredentials = true;
 
 const EditPost = () => {
   const { inView } = useGlobalContext();
   const { id } = useParams();
   const { setErrMsg, setSuccessMsg, resetMessage } = useAuth();
+  const [imagePath, setImagePath] = useState("");
   const navigate = useNavigate();
   const inputRef = useRef(null);
   const [isLoading, setIsloading] = useState(true);
@@ -23,25 +25,32 @@ const EditPost = () => {
   });
 
   const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, type, checked, files } = e.target;
     setFormData((prevForm) => {
       return {
         ...prevForm,
-        [name]: type === "checkox" ? checked : value,
+        [name]: type === "file" ? files[0] : value,
       };
     });
   };
 
   const handleSubmitPost = (e) => {
-    e.preventDefault();
     const { title, desc, imageUrl } = formData;
     if (title !== "" && desc !== "") {
       axios
-        .patch(`${baseUrl}/event.php/${id}`, {
-          title,
-          desc,
-          imageUrl,
-        })
+        .patch(
+          `${baseUrl}/event.php/${id}`,
+          {
+            title,
+            desc,
+            imageUrl,
+          },
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
         .then((res) => {
           if (res.status === 200) {
             console.log(res.data.success);
@@ -53,7 +62,7 @@ const EditPost = () => {
             });
             setTimeout(() => {
               navigate(-1);
-              setSuccessMsg('');
+              setSuccessMsg("");
             }, 2000);
           }
         })
@@ -101,8 +110,8 @@ const EditPost = () => {
             </h1>
           </div>
           <form
-            className="flex flex-col items-start justify-center gap-8 w-fit"
-            onSubmit={handleSubmitPost}
+            className="flex flex-col items-start justify-center gap-8 w-[320px]"
+            onSubmit={(e) => e.preventDefault()}
           >
             <Input
               inputRef={inputRef}
@@ -119,14 +128,31 @@ const EditPost = () => {
               value={formData.desc}
               handleChange={handleInputChange}
             />
-            <div className="bg-black-10 dark:bg-white-10 rounded-lg w-full h-[240px] relative">
-              <i className="bi bi-image text-black-60 dark:text-white-60 absolute text-[128px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></i>
-            </div>
-            <FileInput />
+            {imagePath ? (
+              <img
+                src={imagePath}
+                alt=""
+                className=" w-full h-[240px] rounded-lg object-cover"
+              />
+            ) : (
+              <div className="bg-black-10 dark:bg-white-10 rounded-lg w-full h-[240px] relative">
+                <i className="bi bi-image text-black-60 dark:text-white-60 absolute text-[128px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></i>
+              </div>
+            )}
+            <FileInput
+              name="imageUrl"
+              setImagePath={setImagePath}
+              handleChange={handleInputChange}
+            />
             <div className="flex w-full flex-col mt-8">
               <Button
+                handleClick={handleSubmitPost}
                 text="Modifier"
-                disabled={formData.title === "" || formData.desc === ""}
+                disabled={
+                  formData.title === "" ||
+                  formData.desc === "" ||
+                  formData.imageUrl === null
+                }
               />
             </div>
           </form>

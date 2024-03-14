@@ -11,7 +11,7 @@ import useAppContext from "../../hook/useAppContext";
 
 const PostList = () => {
   const { inView } = useGlobalContext();
-  const { auth } = useAuth();
+  const [imagePath, setImagePath] = useState("");
   const inputRef = useRef(null);
   const {
     savePost,
@@ -22,20 +22,20 @@ const PostList = () => {
     setSuccessMsg,
     setErrMsg,
   } = useAppContext();
-  const {resetMessage} = useAuth();
+  const { resetMessage, auth } = useAuth();
 
   const [formData, setFormData] = useState({
     title: "",
     desc: "",
-    imageUrl: null,
+    imageUrl: "",
   });
 
   const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, type, checked, files } = e.target;
     setFormData((prevForm) => {
       return {
         ...prevForm,
-        [name]: type === "checkox" ? checked : value,
+        [name]: type === "file" ? files[0] : value,
       };
     });
   };
@@ -44,11 +44,19 @@ const PostList = () => {
     const { title, desc, imageUrl } = formData;
     if (title !== "" && desc !== "") {
       axios
-        .post(`${baseUrl}/event.php`, {
-          title,
-          desc,
-          imageUrl,
-        })
+        .post(
+          `${baseUrl}/event.php`,
+          {
+            title,
+            desc,
+            imageUrl,
+          },
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
         .then((res) => {
           if (res.status === 200) {
             console.log(res.data.success);
@@ -62,8 +70,8 @@ const PostList = () => {
           }
         })
         .catch((e) => {
-          console.log(e.response.data.error);
-          setErrMsg(e.response.data.error);
+          console.log(e.response?.data?.error);
+          setErrMsg(e.response?.data?.error);
         })
         .finally(() => {
           resetMessage();
@@ -114,7 +122,7 @@ const PostList = () => {
             Nouvelle publications
           </h1>
           <form
-            className="flex flex-col items-start justify-center gap-8 w-fit"
+            className="flex flex-col items-start justify-center gap-8 w-[320px]"
             onSubmit={(e) => e.preventDefault()}
           >
             <Input
@@ -132,13 +140,29 @@ const PostList = () => {
               title="Description"
               placeholder="Entrer la desciprtion du requête"
             />
-            <div className="bg-black-10 dark:bg-white-10 rounded-lg w-full h-[240px] relative">
-              <i className="bi bi-image text-black-60 dark:text-white-60 absolute text-[128px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></i>
-            </div>
-            <FileInput />
+            {imagePath ? (
+              <img
+                src={imagePath}
+                alt=""
+                className=" w-full h-[240px] rounded-lg object-cover"
+              />
+            ) : (
+              <div className="bg-black-10 dark:bg-white-10 rounded-lg w-full h-[240px] relative">
+                <i className="bi bi-image text-black-60 dark:text-white-60 absolute text-[128px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></i>
+              </div>
+            )}
+            <FileInput
+              name="imageUrl"
+              setImagePath={setImagePath}
+              handleChange={handleInputChange}
+            />
             <div className="flex w-full flex-col mt-8">
               <Button
-                disabled={formData.title === "" || formData.desc === ""}
+                disabled={
+                  formData.title === "" ||
+                  formData.desc === "" ||
+                  imagePath === ""
+                }
                 text="Publier"
                 handleClick={handleSubmitPost}
               />
