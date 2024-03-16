@@ -104,11 +104,16 @@ export const Textarea = ({
   );
 };
 
-export const FileInput = ({ setImagePath, name, handleChange }) => {
-  const [selectedFile, setSelectedFile] = useState({
-    name: "",
-    path: "",
-  });
+export const FileInput = ({
+  setSelectedFile,
+  selectedFile,
+  name,
+  handleChange,
+}) => {
+  // const [selectedFile, setSelectedFile] = useState({
+  //   name: "",
+  //   path: "",
+  // });
   const fileRef = useRef(null);
 
   const handleChangeFile = (e) => {
@@ -123,7 +128,7 @@ export const FileInput = ({ setImagePath, name, handleChange }) => {
           name: e.target.files[0].name,
           path: filePath,
         });
-        setImagePath(filePath);
+        // setImagePath(filePath);
       });
     }
   };
@@ -134,7 +139,7 @@ export const FileInput = ({ setImagePath, name, handleChange }) => {
 
   const removeFiles = () => {
     setSelectedFile(null);
-    setImagePath("");
+    fileRef.current.value = "";
   };
 
   return (
@@ -148,12 +153,12 @@ export const FileInput = ({ setImagePath, name, handleChange }) => {
           accept=".png,.jpeg, .jpg"
           onChange={(e) => {
             handleChangeFile(e);
-            handleChange(e)
+            handleChange(e);
           }}
           name={name}
         />
         <label htmlFor="" className=" text-black-60 dark:text-white-40">
-          {selectedFile?.name || "Ajouter un photo"}
+          {selectedFile?.name?.substr(-20) || "Ajouter un photo"}
         </label>
       </div>
       <Icon

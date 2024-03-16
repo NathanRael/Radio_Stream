@@ -4,7 +4,7 @@ import { FileInput, Input, Textarea } from "../../components/Inputs";
 import useGlobalContext from "../../hook/useGlobalContext";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { baseUrl } from "../../constants";
+import { baseUrl, imageDir } from "../../constants";
 import MessagePopup from "../../components/MessagePopup";
 import Load from "../../components/Load";
 import useAuth from "../../hook/useAuth";
@@ -14,10 +14,13 @@ const EditPost = () => {
   const { inView } = useGlobalContext();
   const { id } = useParams();
   const { setErrMsg, setSuccessMsg, resetMessage } = useAuth();
-  const [imagePath, setImagePath] = useState("");
   const navigate = useNavigate();
   const inputRef = useRef(null);
   const [isLoading, setIsloading] = useState(true);
+  const [selectedFile, setSelectedFile] = useState({
+    name: "",
+    path: "",
+  });
   const [formData, setFormData] = useState({
     title: "",
     desc: "",
@@ -34,36 +37,36 @@ const EditPost = () => {
     });
   };
 
+  const resetInput = () => {
+    setFormData({
+      title: "",
+      desc: "",
+      imageUrl: null,
+    });
+    setSelectedFile({
+      name: "",
+      path: "",
+    });
+  };
+
   const handleSubmitPost = (e) => {
     const { title, desc, imageUrl } = formData;
     if (title !== "" && desc !== "") {
       axios
-        .patch(
-          `${baseUrl}/event.php/${id}`,
-          {
-            title,
-            desc,
-            imageUrl,
-          },
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        )
+        .putForm(`${baseUrl}/event.php/${id}`, {
+          title,
+          desc,
+          imageUrl,
+        })
         .then((res) => {
           if (res.status === 200) {
             console.log(res.data.success);
             setSuccessMsg("Event updated successfully");
-            setFormData({
-              title: "",
-              desc: "",
-              imageUrl: null,
-            });
-            setTimeout(() => {
-              navigate(-1);
-              setSuccessMsg("");
-            }, 2000);
+            resetInput();
+            // setTimeout(() => {
+            //   navigate(-1);
+            //   setSuccessMsg("");
+            // }, 2000);
           }
         })
         .catch((e) => {
@@ -80,7 +83,11 @@ const EditPost = () => {
       setFormData({
         title: res.data?.data?.title,
         desc: res.data.data.desc,
-        imageUrl: null,
+        imageUrl: res.data?.data?.imageUrl,
+      });
+      setSelectedFile({
+        path: imageDir + res.data?.data?.imageUrl,
+        name: res.data?.data?.imageUrl,
       });
     } else {
       setErrMsg(res.data.data.error);
@@ -110,7 +117,7 @@ const EditPost = () => {
             </h1>
           </div>
           <form
-            className="flex flex-col items-start justify-center gap-8 w-[320px]"
+            className="flex flex-col items-start justify-center gap-8 w-min"
             onSubmit={(e) => e.preventDefault()}
           >
             <Input
@@ -128,20 +135,21 @@ const EditPost = () => {
               value={formData.desc}
               handleChange={handleInputChange}
             />
-            {imagePath ? (
+            {selectedFile?.path ? (
               <img
-                src={imagePath}
+                src={selectedFile?.path}
                 alt=""
                 className=" w-full h-[240px] rounded-lg object-cover"
               />
             ) : (
-              <div className="bg-black-10 dark:bg-white-10 rounded-lg w-full h-[240px] relative">
+              <div className="bg-black-10 dark:bg-white-10 rounded-lg  w-full flex  h-[240px] relative ">
                 <i className="bi bi-image text-black-60 dark:text-white-60 absolute text-[128px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></i>
               </div>
             )}
             <FileInput
               name="imageUrl"
-              setImagePath={setImagePath}
+              setSelectedFile={setSelectedFile}
+              selectedFile={selectedFile}
               handleChange={handleInputChange}
             />
             <div className="flex w-full flex-col mt-8">

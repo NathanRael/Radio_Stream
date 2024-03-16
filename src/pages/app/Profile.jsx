@@ -14,7 +14,7 @@ const Profile = () => {
   const { auth } = useAuth();
   const userRef = useRef(null);
   const [error, setError] = useState(false);
-  const { setSuccessMsg, setErrMsg, resetMessage } = useAuth("");
+  const { setSuccessMsg, setErrMsg, resetMessage } = useAuth();
   const [imagePath, setImagePath] = useState("");
   const [formData, setFormData] = useState({
     name: "",
@@ -48,21 +48,13 @@ const Profile = () => {
     }
 
     axios
-      .patch(
-        `http://localhost/Rofia/api/user.php/${auth.id}`,
-        {
-          name,
-          email,
-          oldPassword,
-          newPassword,
-          imageUrl,
-        },
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      )
+      .putForm(`http://localhost/Rofia/api/user.php/${auth.id}`, {
+        name,
+        email,
+        oldPassword,
+        newPassword,
+        imageUrl,
+      })
       .then((response) => {
         if (response.status === 200) {
           console.log(response.data);

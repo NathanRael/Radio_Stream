@@ -7,7 +7,7 @@ export const ABOUT_TEXT = `Lorem ipsum dolor sit amet consectetur adipisicing el
 numquam aliquid, provident nobis, corrupti ullam obcaecati adipisci aspernatur eos quod. Eum quis totam obcaecati harum nostrum animi iure, aperiam quam ut saepe culpa rem, ipsam dolore official zaz
 `
 
-
+export const imageDir = "http://localhost/Rofia/images/";
 
 export const HERO_TEXT = "Ecouter la radio de l'université de Fianarantsoa."
 
