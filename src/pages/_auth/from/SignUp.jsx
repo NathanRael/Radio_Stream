@@ -2,7 +2,7 @@ import { InputLg } from "../../../components/Inputs";
 import { ButtonLg } from "../../../components/Buttons";
 import { Link, useNavigate } from "react-router-dom";
 import StepGrow from "../../../components/StepGrow";
-import {  useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   EMAIL_REGEX,
   PASSWORD_REGEX,
@@ -13,6 +13,7 @@ import MessagePopup from "../../../components/MessagePopup";
 import useGlobalContext from "../../../hook/useGlobalContext";
 
 const SignUp = () => {
+  const signUpInfo = JSON.parse(sessionStorage.getItem("signUpInfo")) || null;
   const navigate = useNavigate();
   const { inView } = useGlobalContext();
   const userRef = useRef(null);
@@ -20,10 +21,10 @@ const SignUp = () => {
   const [errMsg, setErrMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    match: "",
+    name: signUpInfo?.name || "",
+    email: signUpInfo?.email || "",
+    password: signUpInfo?.password || "",
+    match: signUpInfo?.match || "",
 
     validName: false,
     validEmail: false,
@@ -57,7 +58,8 @@ const SignUp = () => {
       .then((response) => {
         console.log(response.data.success);
         setSuccessMsg(response.data.success);
-        setTimeout(() => navigate("/login"), 2000);
+        setTimeout(() => navigate("/signup-2"), 2000);
+        localStorage.setItem("signUpInfo", JSON.stringify(formData));
       })
       .catch((e) => {
         setErrMsg(e.response.data.error);
@@ -100,7 +102,6 @@ const SignUp = () => {
     setErrMsg("");
     setSuccessMsg("");
   }, [formData]);
-
 
   return (
     <section className={`form-box ${inView.signup ? "" : "page-anim-right"}`}>

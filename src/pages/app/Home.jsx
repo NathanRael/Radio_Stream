@@ -56,7 +56,7 @@ const Home = () => {
           ))}
         </div>
         <div className="line"></div>
-        <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-6 place-items-center xl:place-items-start">
+        {/* <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-6 place-items-center xl:place-items-start">
           {postData?.map((post) => (
             <PostCard
               key={post.id}
@@ -67,7 +67,7 @@ const Home = () => {
               handleDelete={removePost}
             />
           ))}
-        </div>
+        </div> */}
         <div className="w-full mx-auto">
           <LoadingIcon />
         </div>

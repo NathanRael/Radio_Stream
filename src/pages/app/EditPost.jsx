@@ -63,10 +63,10 @@ const EditPost = () => {
             console.log(res.data.success);
             setSuccessMsg("Event updated successfully");
             resetInput();
-            // setTimeout(() => {
-            //   navigate(-1);
-            //   setSuccessMsg("");
-            // }, 2000);
+            setTimeout(() => {
+              navigate(-1);
+              setSuccessMsg("");
+            }, 2000);
           }
         })
         .catch((e) => {

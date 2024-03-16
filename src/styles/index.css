@@ -183,6 +183,6 @@
     }
 
     .app-box{
-        @apply transition duration-500 ease-out w-full px-4 pb-8 
+        @apply transition duration-500 ease-out w-full px-2  pb-8 
     }
 }
