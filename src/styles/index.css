@@ -41,6 +41,22 @@
 
 @font-face {
     font-family: 'Futura';
+    src: url('../assets/fonts/Roboto-Regular.ttf');
+}
+@font-face {
+    font-family: 'FuturaMd';
+    src: url('../assets/fonts/Roboto-Medium.ttf');
+}
+@font-face {
+    font-family: 'FuturaBold';
+    src: url('../assets/fonts/Roboto-Bold.ttf');
+}
+@font-face {
+    font-family: 'FuturaLight';
+    src: url('../assets/fonts/Roboto-Light.ttf');
+}
+/* @font-face {
+    font-family: 'Futura';
     src: url('../assets/fonts/FuturaPTDemi.otf');
 }
 @font-face {
@@ -54,7 +70,7 @@
 @font-face {
     font-family: 'FuturaLight';
     src: url('../assets/fonts/FuturaPTLight.otf');
-}
+} */
 
 @layer components{
     
@@ -144,7 +160,7 @@
     }
 
     .card-anim{
-        @apply  transition duration-300 ease-out hover:dark:bg-primary  hover:bg-primary-40 hover:-translate-y-2  hover:shadow-lg  
+        @apply  transition duration-300 ease-out hover:-translate-y-2  hover:shadow-lg  
     }
 
 
@@ -189,5 +205,9 @@
 
     .app-box{
         @apply transition duration-500 ease-out w-full px-2  pb-8 
+    }
+
+    .body-trans{
+        @apply transition duration-500
     }
 }

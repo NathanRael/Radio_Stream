@@ -20,3 +20,5 @@ export const getDateDiff = (postedPost, today) => {
     if (Math.floor(min) > 0) return Math.floor(min) + " minutes";
     return Math.floor(min * 60) + " sec";
   }
+
+export const initBody = () => document.body.classList = "bg-white dark:bg-black body-trans";  

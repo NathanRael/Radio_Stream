@@ -49,24 +49,6 @@ const Home = () => {
         Publications
       </h1>
       <div className="space-y-20">
-        {/* <div className=" mx-auto flex gap-6  items-center justify-center w-full md:flex-wrap  max-md:justify-start overflow-x-scroll recentPost  ">
-          {postData?.slice(0, 3).map((post) => (
-            <div className="">
-              <Suspense key={post.id} fallback={<RecentPostLoading />}>
-                <RecentPostCard
-                  className="w-[340px] min-h-[360px]"
-                  key={post.id}
-                  {...post}
-                  isAdmin={auth.roles === "admin"}
-                  handleSavePost={savePost}
-                  saveClicked={savedPost.some((v) => v.postId === post.id)}
-                  handleDelete={removePost}
-                />
-              </Suspense>
-            </div>
-          ))}
-        </div> */}
-        {/* <div className="line"></div> */}
         <div className="flex w-full flex-col items-center justify-center gap-8">
           {postData?.map((post) => (
             <Suspense fallback={<PostCardLoading />}>

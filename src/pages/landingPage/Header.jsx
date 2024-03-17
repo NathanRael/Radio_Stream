@@ -9,7 +9,7 @@ import useGlobalContext from "../../hook/useGlobalContext";
 import useAuth from "../../hook/useAuth";
 import { currentPage, imageDir } from "../../constants";
 import { useNavigate } from "react-router-dom";
-const Header = ({ isForLanding = false, isTitleVisible = false }) => {
+const Header = ({ isForLanding = false, isTitleVisible = false, isHeroVisible = false }) => {
   const {
     isNavToggled,
     setIsNavToggled,
@@ -37,7 +37,7 @@ const Header = ({ isForLanding = false, isTitleVisible = false }) => {
     <header
       className={` ${isForLanding ? "box " : "px-4"} ${
         isLoading && isForLanding ? "hidden" : ""
-      } fixed flex items-center justify-between  py-4 border-b dark:border-b-white-10 border-b-black-10  top-0  w-full z-50 bg-white shadow-sm dark:bg-black`}
+      } fixed flex items-center justify-between  py-4   top-0  w-full z-50 ${isHeroVisible ? "bg-primary" : "border-b dark:border-b-white-10 border-b-black-10 bg-white shadow-sm dark:bg-black" }`}
     >
       <div
         className={`transition duration-300 z-40 fixed top-[88px] right-4 ${
@@ -61,7 +61,7 @@ const Header = ({ isForLanding = false, isTitleVisible = false }) => {
               : "absolute "
           }`}
         >
-          Radio <span className="text-primary">Rofia</span>
+          Radio <span className={isHeroVisible ? "text-black" : "text-primary"}>Rofia</span>
         </a>
         <div
           href="#Hero"
@@ -79,16 +79,16 @@ const Header = ({ isForLanding = false, isTitleVisible = false }) => {
             isNavToggled ? "nav-hidden" : "-top-1/2"
           }`}
         >
-          <li className="navLink max-md:text-subtitle-3">
+          <li className={`${isHeroVisible ? "text-black" : "navLink"} text-lead max-md:text-subtitle-3 font-FuturaMd`}>
             <a href="#Hero">Accueil</a>
           </li>
-          <li className="navLink max-md:text-subtitle-3">
+          <li className={`${isHeroVisible ? "text-black" : "navLink"} text-lead max-md:text-subtitle-3 font-FuturaMd`}>
             <a href="#Historique">Historique</a>
           </li>
-          <li className="navLink max-md:text-subtitle-3">
+          <li className={`${isHeroVisible ? "text-black" : "navLink"} text-lead max-md:text-subtitle-3 font-FuturaMd`}>
             <a href="#Radio">Radio</a>
           </li>
-          <li className="navLink max-md:text-subtitle-3">
+          <li className={`${isHeroVisible ? "text-black" : "navLink"} text-lead max-md:text-subtitle-3 font-FuturaMd`}>
             <a href="#Application">Application</a>
           </li>
         </ul>
@@ -103,7 +103,7 @@ const Header = ({ isForLanding = false, isTitleVisible = false }) => {
         <div className={!isNavToggled ? "" : ""}>
           {/* <i className="bi bi-moon text-[28px]"></i> */}
           <IconLg
-            color="bg-white icon-white dark:bg-black"
+            color={isHeroVisible ? "" : "bg-white icon-white dark:bg-black"}
             icon={!darkMode ? "bi bi-moon" : "bi bi-sun"}
             iconSize="text-[28px]"
             handleClick={toogleDarkMode}
@@ -119,6 +119,7 @@ const Header = ({ isForLanding = false, isTitleVisible = false }) => {
             <Button
               handleClick={() => navigate("/login")}
               text="Se connecter"
+              color={isHeroVisible ? "bg-white" : "bg-primary "}
             />
           )}
         </div>
@@ -126,7 +127,7 @@ const Header = ({ isForLanding = false, isTitleVisible = false }) => {
       <div className="visible md:hidden z-30">
         <IconLg
           icon={`bi bi-${isNavToggled ? "x-lg" : "list"}`}
-          color="dark:text-white bg-white dark:bg-black"
+          color={isHeroVisible ? "text-black" : "dark:text-white bg-white dark:bg-black"}
           handleClick={() => {
             setIsNavToggled((prev) => !prev);
             setProfileClicked(false);

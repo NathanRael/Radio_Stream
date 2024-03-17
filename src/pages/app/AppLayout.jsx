@@ -7,6 +7,7 @@ import { IconLg } from "../../components/Buttons";
 import useAuth from "../../hook/useAuth";
 import { AppProvider } from "../../context/AppProvider";
 import MessagePopup from "../../components/MessagePopup";
+import { initBody } from "../../functions";
 
 const AppLayout = () => {
   const { isLoggedIn, successMsg, errMsg } = useAuth();
@@ -19,6 +20,7 @@ const AppLayout = () => {
   };
 
   useEffect(() => {
+    initBody();
     window.addEventListener("scroll", handleVisible);
     return () => {
       window.removeEventListener("scroll", handleVisible);
