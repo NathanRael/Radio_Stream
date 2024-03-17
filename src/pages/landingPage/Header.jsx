@@ -1,4 +1,4 @@
-import { IconLg } from "../../components/Buttons";
+import { Button, IconLg } from "../../components/Buttons";
 import ProfileImg from "../../components/ProfileImg";
 import "../../animations/Header.css";
 import { useContext } from "react";
@@ -6,6 +6,9 @@ import { useEffect } from "react";
 import PorfilePopup from "../../components/PorfilePopup";
 import GlobalContext from "../../context/GlobalContext";
 import useGlobalContext from "../../hook/useGlobalContext";
+import useAuth from "../../hook/useAuth";
+import { currentPage, imageDir } from "../../constants";
+import { useNavigate } from "react-router-dom";
 const Header = ({ isForLanding = false, isTitleVisible = false }) => {
   const {
     isNavToggled,
@@ -17,7 +20,8 @@ const Header = ({ isForLanding = false, isTitleVisible = false }) => {
     currentDir,
     isLoading,
   } = useGlobalContext();
-
+  const navigate = useNavigate();
+  const { auth } = useAuth();
   useEffect(() => {
     document.body.style.overflow = isNavToggled ? "hidden" : "auto";
   }, [isNavToggled]);
@@ -59,14 +63,15 @@ const Header = ({ isForLanding = false, isTitleVisible = false }) => {
         >
           Radio <span className="text-primary">Rofia</span>
         </a>
-        <a
+        <div
           href="#Hero"
           className={` transition duration-150 ${
             !isTitleVisible ? " opacity-0 " : ""
           }`}
         >
+          <i className={`${currentPage[currentDir]} me-2`}></i>
           {currentDir[0]?.toUpperCase() + currentDir?.slice(1)}
-        </a>
+        </div>
       </div>
       {isForLanding && (
         <ul
@@ -89,7 +94,9 @@ const Header = ({ isForLanding = false, isTitleVisible = false }) => {
         </ul>
       )}
       <div
-        className={` flex items-center justify-between max-w-[128px] gap-6  max-md:fixed left-4 max-md:flex-row-reverse transition-all duration-500 top-4 z-30 ${
+        className={`${
+          auth.name ? "max-w-[128px]" : "max-w-[320px]"
+        }  flex items-center justify-between  gap-6  max-md:fixed left-4 max-md:flex-row-reverse transition-all duration-500 top-4 z-30 ${
           isNavToggled ? "icon-hidden" : "max-md:-top-1/2"
         }`}
       >
@@ -102,8 +109,18 @@ const Header = ({ isForLanding = false, isTitleVisible = false }) => {
             handleClick={toogleDarkMode}
           />
         </div>
-        <div className={!isNavToggled ? "" : ""}>
-          <ProfileImg handleClick={() => setProfileClicked((prev) => !prev)} />
+        <div className={"w-full"}>
+          {auth?.name ? (
+            <ProfileImg
+              image={imageDir + auth.imageUrl}
+              handleClick={() => setProfileClicked((prev) => !prev)}
+            />
+          ) : (
+            <Button
+              handleClick={() => navigate("/login")}
+              text="Se connecter"
+            />
+          )}
         </div>
       </div>
       <div className="visible md:hidden z-30">

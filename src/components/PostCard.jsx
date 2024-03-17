@@ -3,10 +3,8 @@ import { Button, Icon, IconLg } from "./Buttons";
 import PostImage from "../assets/images/profile.png";
 import "../animations/PostCard.css";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { ABOUT_TEXT } from "../constants/index";
 import { useNavigate } from "react-router-dom";
 import { getDateDiff } from "../functions";
-import { color } from "framer-motion";
 import ProfileImg from "../components/ProfileImg";
 
 const PostCard = ({
@@ -82,7 +80,6 @@ const PostCard = ({
       <img
         src={imageUrl !== null ? imageDir + imageUrl : PostImage}
         alt=""
-        srcset=""
         className="rounded-xl object-cover max-h-[620px]"
       />
       <div className="mx-auto flex justify-between w-full">

@@ -48,23 +48,24 @@ const SignUp = () => {
     if (error) {
       return console.log("Verifier vos champs");
     }
-
-    axios
-      .post("http://localhost/Rofia/api/user.php/", {
-        name,
-        email,
-        password,
-      })
-      .then((response) => {
-        console.log(response.data.success);
-        setSuccessMsg(response.data.success);
-        setTimeout(() => navigate("/signup-2"), 2000);
-        localStorage.setItem("signUpInfo", JSON.stringify(formData));
-      })
-      .catch((e) => {
-        setErrMsg(e.response.data.error);
-        console.log(e.response.data.error);
-      });
+    sessionStorage.setItem("signUpInfo", JSON.stringify(formData));
+    navigate("/signup-2");
+    // axios
+    //   .post("http://localhost/Rofia/api/user.php/", {
+    //     name,
+    //     email,
+    //     password,
+    //   })
+    //   .then((response) => {
+    //     console.log(response.data.success);
+    //     setSuccessMsg(response.data.success);
+    //     setTimeout(() => navigate("/signup-2"), 2000);
+    //     localStorage.setItem("signUpInfo", JSON.stringify(formData));
+    //   })
+    //   .catch((e) => {
+    //     setErrMsg(e.response.data.error);
+    //     console.log(e.response.data.error);
+    //   });
   };
 
   useEffect(() => {

@@ -6,6 +6,8 @@ import useGlobalContext from "../../hook/useGlobalContext";
 import axios from "axios";
 import { baseUrl } from "../../constants";
 import useAuth from "../../hook/useAuth";
+import Empty from "../../components/Empty";
+import LoadingIcon from "../../components/LoadingIcon";
 
 const Request = () => {
   const { inView } = useGlobalContext();
@@ -18,6 +20,7 @@ const Request = () => {
     desc: "",
     imageUrl: null,
   });
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -58,6 +61,7 @@ const Request = () => {
   };
 
   const getReqData = () => {
+    setIsLoading(true);
     axios
       .get(`${baseUrl}/userRequest.php/${auth.id}`)
       .then((res) => {
@@ -72,6 +76,7 @@ const Request = () => {
       })
       .finally(() => {
         resetMessage();
+        setIsLoading(false);
       });
   };
 
@@ -93,27 +98,31 @@ const Request = () => {
       <div className="flex items-start justify-between max-xl:gap-10 max-xl:flex-col-reverse  max-xl:items-center flex-wrap">
         <div className="basis-1/2 w-full">
           <h1 className="max-xl:text-center text-subtitle-2 text-black dark:text-white mb-8">
+            <i className="bi bi-list-task me-2"></i>
             Liste des requêtes
           </h1>
-          <div className="flex flex-col items-center xl:items-start justify-center gap-8">
-            {reqData?.length > 0 ? (
-              reqData.map((req) => (
-                <UserRequest
-                  key={req.id}
-                  {...req}
-                  handleDelete={deleteRequest}
-                />
-              ))
-            ) : (
-              <p className="text-subtitle-3 text-black dark:text-white">
-                Pas de requête
-              </p>
-            )}
-          </div>
+          {!isLoading && (
+            <div className="flex flex-col-reverse items-center xl:items-start justify-center gap-8">
+              {reqData?.length > 0 ? (
+                reqData.map((req) => (
+                  <UserRequest
+                    key={req.id}
+                    {...req}
+                    handleDelete={deleteRequest}
+                  />
+                ))
+              ) : (
+                <div className="">
+                  <Empty text="Pas de requete" />
+                </div>
+              )}
+            </div>
+          )}
         </div>
         <div className="xl:hidden line"></div>
         <div className="  basis-1/2">
           <h1 className="max-xl:text-center text-subtitle-2 text-black dark:text-white mb-8">
+            <i className="bi bi-plus-circle me-2"></i>
             Nouvelle requête
           </h1>
           <form

@@ -48,6 +48,7 @@ export default {
         'black-10' : '#0e0a171a',
         'danger-60' : '#dd595999',
         'danger-10' : '#dd59591a',
+        'load' : "#212222",
       }
     },
     //E6E6E6 : white

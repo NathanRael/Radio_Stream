@@ -38,7 +38,6 @@ export const AuthProvider = ({ children }) => {
         password,
       })
       .then((response) => {
-        console.log(response);
         setSuccessMsg(response?.data.success);
         storeAuth(response?.data?.session);
         setIsLoggedIn(response?.data?.session);

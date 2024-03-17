@@ -1,13 +1,15 @@
 import axios from "axios";
 import { Button } from "../../components/Buttons";
 import { FileInput, Input, Textarea } from "../../components/Inputs";
-import PostCard from "../../components/PostCard";
 import { baseUrl } from "../../constants";
 import useGlobalContext from "../../hook/useGlobalContext";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import MessagePopup from "../../components/MessagePopup";
 import useAuth from "../../hook/useAuth";
 import useAppContext from "../../hook/useAppContext";
+import PostCardLoading from "../../animations/PostCardLoading";
+import Empty from "../../components/Empty";
+const PostCard = lazy(() => import("../../components/PostCard"));
 
 const PostList = () => {
   const { inView } = useGlobalContext();
@@ -92,25 +94,26 @@ const PostList = () => {
           <div className="flex flex-col items-start justify-center gap-8">
             {postData.length > 0 ? (
               postData.map((post) => (
-                <PostCard
-                  key={post.id}
-                  {...post}
-                  isAdmin={auth.roles === "admin"}
-                  handleSavePost={savePost}
-                  saveClicked={savedPost.some((v) => v.postId === post.id)}
-                  handleDelete={removePost}
-                />
+                <Suspense fallback={<PostCardLoading />}>
+                  <PostCard
+                    key={post.id}
+                    {...post}
+                    isAdmin={auth.roles === "admin"}
+                    handleSavePost={savePost}
+                    saveClicked={savedPost.some((v) => v.postId === post.id)}
+                    handleDelete={removePost}
+                  />
+                </Suspense>
               ))
             ) : (
-              <p className="text-subtitle-3 text-black dark:text-white">
-                Aucune Publication
-              </p>
+              <Empty text="Aucune publication" />
             )}
           </div>
         </div>
         <div className="line lg:hidden"></div>
         <div className="  basis-1/2">
           <h1 className="text-subtitle-2 text-black dark:text-white mb-8">
+            <i className="bi bi-plus-circle me-2"></i>
             Nouvelle publications
           </h1>
           <form

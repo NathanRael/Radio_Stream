@@ -93,7 +93,7 @@ const EditPost = () => {
       setErrMsg(res.data.data.error);
     }
     setIsloading(false);
-    resetMessage();
+    // resetMessage();
   };
 
   useEffect(() => {
@@ -112,7 +112,7 @@ const EditPost = () => {
               color="text-black dark:text-white dark:bg-black"
               handleClick={() => navigate(-1)}
             />
-            <h1 className="text-subtitle-2 text-black dark:text-white">
+            <h1 className="text-subtitle-2 text-black max-lg:text-center dark:text-white">
               Modifier une publication
             </h1>
           </div>

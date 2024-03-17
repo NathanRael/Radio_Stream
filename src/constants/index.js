@@ -10,11 +10,18 @@ numquam aliquid, provident nobis, corrupti ullam obcaecati adipisci aspernatur e
 export const imageDir = "http://localhost/Rofia/images/";
 
 export const HERO_TEXT = "Ecouter la radio de l'université de Fianarantsoa."
-
+export const currentPage = {
+  "home" : "bi bi-ui-checks-grid",
+  "radio" : "bi bi-boombox",
+  "request" : "bi bi-list-task",
+  "savedPost" : "bi bi-bookmark",
+  "requestList" : "bi bi-lock",
+  "postList" : "bi bi-lock",
+}
 export const NAVLINK = [
     {
         text : 'Accueil',
-        icon : 'bi bi-house',
+        icon : 'bi bi-ui-checks-grid',
         location : '/user/home'
     },
     {

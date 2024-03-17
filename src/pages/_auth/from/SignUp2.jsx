@@ -6,29 +6,41 @@ import ProfileImg from "../../../components/ProfileImg";
 import useGlobalContext from "../../../hook/useGlobalContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import MessagePopup from "../../../components/MessagePopup";
 const SignUp2 = () => {
   const navigate = useNavigate();
   const { inView } = useGlobalContext();
+  const [successMsg, setSuccessMsg] = useState("");
+  const [errMsg, setErrMsg] = useState("");
   const [selectedFile, setSelectedFile] = useState({
     name: "",
     path: "",
   });
+  const [formData, setFormData] = useState({
+    imageUrl: "",
+  });
+  const handleInputChange = (e) => {
+    const { name, value, type, checked, files } = e.target;
+    setFormData((prevForm) => {
+      return {
+        ...prevForm,
+        [name]: type === "file" ? files[0] : value,
+      };
+    });
+  };
 
   const handleSubmit = async (e, noImage = false) => {
     const { name, email, password } = JSON.parse(
       sessionStorage.getItem("signUpInfo")
     );
     e.preventDefault();
-    if (error) {
-      return console.log("Verifier vos champs");
-    }
 
     axios
       .postForm("http://localhost/Rofia/api/user.php/", {
         name,
         email,
         password,
-        imageUrl: noImage ? null : selectedFile.path,
+        imageUrl: noImage ? null : formData.imageUrl,
       })
       .then((response) => {
         console.log(response.data.success);
@@ -42,11 +54,26 @@ const SignUp2 = () => {
       });
   };
   useEffect(() => {
-    // !sessionStorage.getItem("signUpInfo") && navigate("/signup");
+    !sessionStorage.getItem("signUpInfo") && navigate("/signup");
   }, []);
 
   return (
     <section className={`form-box ${inView.signup2 ? "" : "page-anim-left"}`}>
+      <MessagePopup
+        message={successMsg}
+        className={` ${
+          successMsg
+            ? "translate-x-0 opacity-1"
+            : "translate-x-[10rem] opacity-0"
+        }  fixed top-10 right-10 transition delay-30 z-50`}
+      />
+      <MessagePopup
+        error
+        message={errMsg}
+        className={`${
+          errMsg ? "translate-x-0 opacity-1" : "translate-x-[10rem] opacity-0"
+        } fixed top-10 right-10 transition delay-30 z-50`}
+      />
       <div className="absolute left-4 top-4">
         <IconLg
           icon="bi bi-arrow-left"
@@ -62,14 +89,18 @@ const SignUp2 = () => {
           <StepGrow full={inView.signup2} text="Etape 1/2" />
           <StepGrow disabled={!inView.signup2} text="Etape 2/2" />
         </div>
-        <div className="flex flex-col gap-10 items-center justify-center w-full">
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="flex flex-col gap-10 items-center justify-center w-full"
+        >
           <ProfileImg size="size-[172px]" image={selectedFile?.path} />
           <FileInput
             name="imageUrl"
             selectedFile={selectedFile}
             setSelectedFile={setSelectedFile}
+            handleChange={handleInputChange}
           />
-        </div>
+        </form>
         <div className="flex justify-between gap-6 w-full">
           <ButtonLg
             text="Passer"

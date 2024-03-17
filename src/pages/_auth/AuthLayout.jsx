@@ -3,11 +3,11 @@ import useAuth from "../../hook/useAuth";
 import { useEffect } from "react";
 
 const AuthLayout = () => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, auth } = useAuth();
   useEffect(() => {
     console.log('Login')
   }, [])
-  return <>{isLoggedIn ? <Navigate to="/user/home" /> : <Outlet />}</>;
+  return <>{auth.user ? <Navigate to="/user/home" /> : <Outlet />}</>;
 };
 
 export default AuthLayout;

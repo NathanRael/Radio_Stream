@@ -31,7 +31,6 @@ const AppLayout = () => {
         <Navigate to="/login" />
       ) : (
         <section>
-          
           <Header isTitleVisible={window.scrollY >= 120} />
           <MessagePopup
             message={successMsg}

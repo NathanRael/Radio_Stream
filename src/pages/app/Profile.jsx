@@ -5,7 +5,13 @@ import ProfileImg from "../../components/ProfileImg";
 import useGlobalContext from "../../hook/useGlobalContext";
 import useAuth from "../../hook/useAuth";
 import { useEffect, useRef, useState } from "react";
-import { EMAIL_REGEX, PASSWORD_REGEX, PSEUDO_REGEX } from "../../constants";
+import {
+  EMAIL_REGEX,
+  PASSWORD_REGEX,
+  PSEUDO_REGEX,
+  baseUrl,
+  imageDir,
+} from "../../constants";
 import axios from "axios";
 
 const Profile = () => {
@@ -15,7 +21,10 @@ const Profile = () => {
   const userRef = useRef(null);
   const [error, setError] = useState(false);
   const { setSuccessMsg, setErrMsg, resetMessage } = useAuth();
-  const [imagePath, setImagePath] = useState("");
+  const [selectedFile, setSelectedFile] = useState({
+    name: "",
+    path: "",
+  });
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -48,7 +57,7 @@ const Profile = () => {
     }
 
     axios
-      .putForm(`http://localhost/Rofia/api/user.php/${auth.id}`, {
+      .putForm(`${baseUrl}/user.php/${auth.id}`, {
         name,
         email,
         oldPassword,
@@ -59,6 +68,26 @@ const Profile = () => {
         if (response.status === 200) {
           console.log(response.data);
           setSuccessMsg(response.data.success);
+          sessionStorage.setItem("user", JSON.stringify(response.data));
+        }
+      })
+      .catch((e) => {
+        setErrMsg(e.response?.data?.error);
+        console.log(e.response);
+      })
+      .finally(() => {
+        resetMessage();
+      });
+  };
+
+  const handleDeleteAccount = () => {
+    axios
+      .delete(`${baseUrl}/user.php/${auth.id}`)
+      .then((response) => {
+        if (response.status === 200) {
+          setSuccessMsg(response.data.success);
+          sessionStorage.clear();
+          navigate("/login");
         }
       })
       .catch((e) => {
@@ -77,6 +106,7 @@ const Profile = () => {
       name: auth?.name,
       email: auth?.email,
     }));
+    setSelectedFile((prev) => ({ ...prev, path: imageDir + auth?.imageUrl }));
   }, []);
 
   useEffect(() => {
@@ -114,7 +144,7 @@ const Profile = () => {
     );
     setErrMsg("");
     setSuccessMsg("");
-  }, [formData, imagePath]);
+  }, [formData, selectedFile]);
   return (
     <section className={`app-box ${inView.profile ? "" : "page-anim"} `}>
       <div className="flex items-center justify-between w-full mb-8">
@@ -129,6 +159,7 @@ const Profile = () => {
           </h1>
         </div>
         <Button
+          handleClick={handleDeleteAccount}
           defaultAnim={false}
           color="btn-danger"
           text="Supprimer le compte"
@@ -139,10 +170,11 @@ const Profile = () => {
         onSubmit={(e) => e.preventDefault()}
       >
         <div className="flex flex-col items-center space-y-6 ">
-          <ProfileImg size="size-[176px]" image={imagePath} />
+          <ProfileImg size="size-[176px]" image={selectedFile?.path} />
           <FileInput
             name="imageUrl"
-            setImagePath={setImagePath}
+            selectedFile={selectedFile}
+            setSelectedFile={setSelectedFile}
             handleChange={handleInputChange}
           />
           <Input

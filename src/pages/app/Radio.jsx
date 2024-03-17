@@ -8,6 +8,7 @@ const Radio = () => {
   return (
     <section className={`app-box ${inView.radio ? "" : "page-anim"} `}>
       <h1 className="max-lg:text-center text-subtitle-2 dark:text-white mb-8  text-black">
+        <i className="bi bi-boombox me-2"></i>
         Radio
       </h1>
       <div className="mx-auto max-w-[334px]">
