@@ -31,12 +31,14 @@ const Profile = () => {
     oldPassword: "",
     newPassword: "",
     imageUrl: "",
+    match: "",
 
     validName: false,
     validEmail: false,
     validOldPassword: false,
     validNewPassword: false,
     validImageUrl: false,
+    validMatch: false,
   });
 
   const handleInputChange = (e) => {
@@ -57,18 +59,19 @@ const Profile = () => {
     }
 
     axios
-      .putForm(`${baseUrl}/user.php/${auth.id}`, {
+      .postForm(`${baseUrl}/user.php/${auth.id}`, {
         name,
         email,
         oldPassword,
         newPassword,
         imageUrl,
+        type: "PUT",
       })
       .then((response) => {
         if (response.status === 200) {
           console.log(response.data);
           setSuccessMsg(response.data.success);
-          sessionStorage.setItem("user", JSON.stringify(response.data));
+          sessionStorage.setItem("user", JSON.stringify(response.data.data));
         }
       })
       .catch((e) => {
@@ -135,12 +138,18 @@ const Profile = () => {
       validNewPassword: PASSWORD_REGEX.test(formData.newPassword),
     }));
   }, [formData.newPassword]);
+  useEffect(() => {
+    setFormData((prev) => ({
+      ...prev,
+      validMatch: formData.newPassword === formData.match,
+    }));
+  }, [formData.match]);
 
   useEffect(() => {
-    const { validEmail, validName, validOldPassword, validNewPassword } =
+    const { validEmail, validName, validOldPassword, validNewPassword, validMatch } =
       formData;
     setError(
-      !validEmail || !validOldPassword || !validName || !validNewPassword
+      !validEmail || !validOldPassword || !validName || !validNewPassword || !validMatch
     );
     setErrMsg("");
     setSuccessMsg("");
@@ -215,6 +224,16 @@ const Profile = () => {
             handleChange={handleInputChange}
             isValid={formData.validNewPassword}
             errorMsg="Le mot de passe doit avoir au moins 8 charachtères"
+          />
+          <Input
+            title="Confirmer le nouveau mot de passe"
+            type="password"
+            name="match"
+            placeholder="Confirmer votre nouveau mot de passe"
+            value={formData.match}
+            handleChange={handleInputChange}
+            isValid={formData.validMatch}
+            errorMsg="Le mot de passe ne correspond pas"
           />
         </div>
         <div className="flex flex-col w-full">

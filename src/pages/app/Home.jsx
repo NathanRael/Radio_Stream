@@ -51,7 +51,7 @@ const Home = () => {
       <div className="space-y-20">
         <div className="flex w-full flex-col items-center justify-center gap-8">
           {postData?.map((post) => (
-            <Suspense fallback={<PostCardLoading />}>
+            <Suspense key={post.id} fallback={<PostCardLoading />}>
               <PostCard
                 key={post.id}
                 {...post}

@@ -11,7 +11,7 @@ axios.defaults.withCredentials = true;
 const Login = () => {
   const navigate = useNavigate();
   const { inView } = useGlobalContext();
-  const {successMsg, errMsg, setErrMsg, setSuccessMsg, login} = useAuth();
+  const { successMsg, errMsg, setErrMsg, setSuccessMsg, login } = useAuth();
   const inputRef = useRef(null);
   const [error, setError] = useState(false);
   const [formData, setFormData] = useState({
@@ -29,13 +29,11 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
     const { email, password } = formData;
     if (error) {
       return console.log("Verifier vos champs");
     }
     login(formData);
-    
   };
 
   useEffect(() => {
@@ -68,7 +66,7 @@ const Login = () => {
       />
       <form
         className="flex items-center justify-between  w-[334px] flex-col gap-10"
-        onSubmit={handleSubmit}
+        onSubmit={(e) => e.preventDefault()}
       >
         <div className="flex flex-col items-center justify-center gap-6">
           <InputLg
@@ -93,7 +91,7 @@ const Login = () => {
               S'inscrire
             </Link>
           </p>
-          <ButtonLg text="Se connecter" />
+          <ButtonLg handleClick={handleSubmit} text="Se connecter" />
         </div>
       </form>
     </section>

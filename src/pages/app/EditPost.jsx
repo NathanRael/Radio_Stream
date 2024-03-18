@@ -52,11 +52,12 @@ const EditPost = () => {
   const handleSubmitPost = (e) => {
     const { title, desc, imageUrl } = formData;
     if (title !== "" && desc !== "") {
-      axios
-        .putForm(`${baseUrl}/event.php/${id}`, {
+      axios // Editing
+        .postForm(`${baseUrl}/event.php/${id}`, {
           title,
           desc,
           imageUrl,
+          type: "PUT",
         })
         .then((res) => {
           if (res.status === 200) {
