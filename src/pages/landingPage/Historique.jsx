@@ -5,32 +5,28 @@ import { ABOUT_TEXT } from "../../constants/index";
 import "../../animations/Historique.css";
 import useIntersection from "../../hook/UseIntersection";
 import useWindowSize from "../../hook/useWindowSize";
+import useGlobalContext from "../../hook/useGlobalContext";
 const Historique = () => {
   const [showMore, setShowMore] = useState(false);
-  const [width] = useWindowSize();
-  const [historyRef, isHistoryRefVisible] = useIntersection({
-    root: null,
-    rootMargin: width <= 420 ? "120px" : "30px",
-    threshold: 1.0,
-  });
+  const {historyRef, isHistoryRefVisible, width} = useGlobalContext();
   const maxTextLen = 420;
 
   return (
     <section
-      className={`space-y-10 mt-[172px] box transition duration-300 ease-out  flex items-center justify-between max-lg:flex-col gap-6 overflow-x-hidden`}
+      className={`space-y-10 mt-[420px] box transition duration-300 ease-out  flex items-center justify-between max-lg:flex-col gap-6 overflow-x-hidden`}
       id="Historique"
       ref={historyRef}
     >
-      <p
-        className={` transition duration-300 ease-out xl:delay-150 text-black text-title-2 max-md:text-subtitle-2 max-xl:text-center dark:text-white
+      <div
+        className={` overflow-hidden cursor-cell hover:*:-translate-y-2 relative border-b-2 border-t-2 border-black dark:border-white transition duration-300 ease-out xl:delay-150 text-black text-title-2 max-md:text-subtitle-2 max-xl:text-center dark:text-white
       ${
         isHistoryRefVisible
           ? "translate-x-0 opacity-1"
           : "opacity-0 -translate-x-[20rem]"
       }`}
       >
-        Historique
-      </p>
+        <p className={`transition duration-200 title`}>Historique</p>
+      </div>
       <div
         className={`flex items-center justify-between max-xl:flex-col max-xl:gap-y-10 transition duration-300 ease-out delay-300 ${
           isHistoryRefVisible

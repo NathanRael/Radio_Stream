@@ -1,0 +1,25 @@
+.hero-down-indicator > div {
+    animation: 1s infinite ease-in-out down-indicator alternate ;
+}
+
+.hero-down-indicator div:nth-child(1){
+    animation-delay: 0.1s;
+}
+.hero-down-indicator div:nth-child(2){
+    animation-delay: 0.2s;
+}
+.hero-down-indicator div:nth-child(3){
+    animation-delay: 0.3s;
+}
+.hero-down-indicator div:nth-child(4){
+    animation-delay: 0.4s;
+}
+
+@keyframes down-indicator {
+    0%,10%{
+        opacity: 1;
+    }
+    20%,100%{
+        opacity: 0;
+    }
+}

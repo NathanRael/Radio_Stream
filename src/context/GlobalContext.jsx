@@ -1,5 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import useIntersection from "../hook/UseIntersection";
+import useWindowSize from "../hook/useWindowSize";
 
 const GlobalContext = createContext({});
 
@@ -15,6 +17,13 @@ export const GloBalProvider = ({ children }) => {
   const splitedPath = location.pathname.split("/");
   const currentDir = splitedPath[splitedPath.length - 1];
   const [inView, setInView] = useState({});
+  const [width] = useWindowSize();
+  //animation
+  const [historyRef, isHistoryRefVisible] = useIntersection({
+    root: null,
+    rootMargin: width <= 420 ? "120px" : "30px",
+    threshold: 1.0,
+  });
 
   const Load = () => {
     setIsLoading(false);
@@ -65,6 +74,8 @@ export const GloBalProvider = ({ children }) => {
   return (
     <GlobalContext.Provider
       value={{
+        historyRef,
+        isHistoryRefVisible,
         isLoading,
         isNavToggled,
         setIsNavToggled,
@@ -75,6 +86,7 @@ export const GloBalProvider = ({ children }) => {
         activeNav,
         inView,
         currentDir,
+        width,
       }}
     >
       {children}

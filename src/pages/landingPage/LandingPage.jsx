@@ -45,6 +45,7 @@ const LandingPage = () => {
         </div>
         <Historique />
         <RadioSection />
+
         <Application />
         <Footer />
       </section>
