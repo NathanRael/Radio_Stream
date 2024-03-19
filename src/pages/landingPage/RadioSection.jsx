@@ -3,13 +3,10 @@ import RadioPlayer from "../../components/RadioPlayer";
 import useIntersection from "../../hook/UseIntersection";
 import ImgIcon from "../../components/ImgIcon";
 import useWindowSize from "../../hook/useWindowSize";
+import useGlobalContext from "../../hook/useGlobalContext";
 const RadioSection = () => {
   const [width] = useWindowSize();
-  const [radioRef, isRadioVisible] = useIntersection({
-    root: null,
-    rootMargin: width <= 720 ? "260px" : "500px",
-    threshold: 1.0,
-  });
+  const { radioRef, isRadioVisible, isAppliTitleVisible } = useGlobalContext();
 
   return (
     <div
@@ -27,7 +24,7 @@ const RadioSection = () => {
       />
       <div
         className={`transition duration-500 ease-in-out bg-white dark:bg-black w-full h-full fixed top-0 left-0 -z-20 ${
-          isRadioVisible ? "opacity-1 " : " opacity-0 "
+          isRadioVisible || isAppliTitleVisible ? "opacity-1 " : " opacity-0 "
         }`}
       ></div>
       <div

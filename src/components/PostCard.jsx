@@ -28,7 +28,7 @@ const PostCard = ({
   const [saveIconUpdate, setSaveIconUpdate] = useState(saveClicked);
   const maxLen = 120;
   return (
-    <div className="relative shadow-md dark:shadow-none flex max-md:w-full items-between justify-between p-4 rounded-xl border border-white-10 w-[60%] flex-col gap-6">
+    <div className="relative shadow-md dark:shadow-none flex max-md:w-full items-between justify-between p-4 rounded-3xl border border-white-10 w-[60%] flex-col gap-6">
       <div className="flex items-center justify-between ">
         <div className="flex gap-2 items-center">
           <ProfileImg size="size-[56px]" />

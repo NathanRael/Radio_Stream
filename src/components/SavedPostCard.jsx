@@ -31,7 +31,7 @@ const SavedPostCard = ({
   const maxLen = 80;
   return (
     <div
-      className={` relative overflow-hidden p-3 rounded-2xl border border-black-10  card-gradient ${className} `}
+      className={` relative overflow-hidden p-3 rounded-3xl border border-black-10  card-gradient ${className} `}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
@@ -56,7 +56,7 @@ const SavedPostCard = ({
         />
       </div>
       <div
-        className={`bg-black-60 p-4 rounded-xl post-card-trans delay-150 flex items-start justify-between flex-col min-h-[360px]  gap-10 ${
+        className={`bg-black-60 p-4 rounded-2xl post-card-trans delay-150 flex items-start justify-between flex-col min-h-[360px]  gap-10 ${
           !hover ? "opacity-0 translate-y-[10rem]" : ""
         }`}
       >

@@ -8,6 +8,7 @@ export const AppProvider = ({ children }) => {
   const [postData, setPostData] = useState([]);
   const [savedPost, setSavedPost] = useState([]);
   const { auth, setSuccessMsg, setErrMsg, resetMessage } = useAuth();
+  const [search, setSearch] = useState("");
 
   const savePost = (id) => {
     axios
@@ -86,7 +87,19 @@ export const AppProvider = ({ children }) => {
         resetMessage();
       });
   };
-
+  const searchPost = () =>{
+    if (search != "") {
+      axios
+        .get(`${baseUrl}/event.php?search=${search.toLowerCase()}`)
+        .then((res) => {
+          if (res.status === 200) {
+            setPostData(res.data.data);
+          }
+        });
+    } else {
+      getAllPost();
+    }
+  }
   const getAllPost = () => {
     axios
       .get(`${baseUrl}/event.php`)
@@ -109,6 +122,9 @@ export const AppProvider = ({ children }) => {
         getSavedPost,
         getAllPost,
         removePost,
+        search,
+        setSearch,
+        searchPost
       }}
     >
       {children}

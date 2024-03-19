@@ -21,9 +21,12 @@ const Home = () => {
     savePost,
     getSavedPost,
     postData,
+    setPostData,
     savedPost,
     getAllPost,
     removePost,
+    search,
+    searchPost,
   } = useAppContext();
 
   const [containerRef, isVisible] = UseIntersection({
@@ -36,6 +39,10 @@ const Home = () => {
     getAllPost();
     getSavedPost();
   }, []);
+
+  useEffect(() => {
+      searchPost();
+  }, [search]);
 
   return (
     <section

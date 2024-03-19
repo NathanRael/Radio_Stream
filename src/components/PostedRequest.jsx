@@ -9,7 +9,7 @@ const PostedRequest = ({ id, title, desc, date, user, handleReqState }) => {
   );
 
   return (
-    <section className="p-6 flex items-center flex-col justify-center gap-6 rounded-xl dark:border bg-light border-0 dark:bg-black dark:border-white-10 max-sm:w-[100%] w-[464px]">
+    <section className="p-6 flex items-center flex-col justify-center gap-6 rounded-3xl dark:border bg-light border-0 dark:bg-black dark:border-white-10 max-sm:w-[100%] w-[464px]">
       <div className="max-md:flex-col max-md:gap-4 flex items-center justify-between w-full">
         <div className="flex flex-col items-start justify-center">
           <h2 className="text-subtitle-3  text-primary w-full max-md:text-center">

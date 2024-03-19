@@ -4,22 +4,21 @@ import ImgT from "../../components/ImgT";
 import "../../animations/Application.css";
 import { useNavigate } from "react-router-dom";
 import useIntersection from "../../hook/UseIntersection";
+import useGlobalContext from "../../hook/useGlobalContext";
+import { radio1, radio2, radio3 } from "../../constants/images";
 const Application = () => {
   const [active, setActive] = useState({
     decouvrer: true,
     utiliser: false,
     experimenter: false,
   });
+  const { appliTitleRef, isAppliTitleVisible } = useGlobalContext();
   const [appliRef, isAppliVisible] = useIntersection({
     root: null,
     rootMargin: "250px",
     threshold: 1.0,
   });
-  const [appliTitleRef, isAppliTitleVisible] = useIntersection({
-    root: null,
-    rootMargin: "750px",
-    threshold: 1.0,
-  });
+
   const navigate = useNavigate();
 
   return (
@@ -28,101 +27,27 @@ const Application = () => {
       className={`relative box mt-[172px] space-y-10 overflow-hidden   w-full `}
       id="Application"
     >
-      <div ref={appliTitleRef} className="w-full h-[140vh] ">
+      <div
+        ref={appliTitleRef}
+        className={`h-lvh   flex items-center justify-center `}
+      >
         <h1
-          className={`transition duration-200  ${isAppliTitleVisible ? "fixed" : ""} -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2  text-title-2 text-black text-center max-md:text-subtitle-2 dark:text-white ease-out`}
-
-        >
-         <span className={` ${isAppliTitleVisible ? " opacity-1 translate-y-0 " : "opacity-0 "} translate-y-[5rem] transition duration-200 delay-300 ease-in`}> Pour plus de</span> <span className={` ${isAppliTitleVisible ? " opacity-1 " : "opacity-0"} transition duration-200 delay-700 text-primary `}>fun et de partage</span>
-        </h1>
-      </div>
-      {/* <h1
-          className={`transition duration-250 delay-100 text-title-2 text-black text-center max-md:text-subtitle-2 dark:text-white ease-out ${
-            isAppliVisible
-              ? "opacity-1 translate-x-0"
-              : "opacity-0 translate-x-[-5rem]"
+          className={`transition duration-300 delay-300 text-title-2  text-black text-center max-md:text-subtitle-2 dark:text-white ease-out ${
+            isAppliTitleVisible
+              ? "opacity-1 translate-y-[-50%]"
+              : "translate-y-[5rem] opacity-0"
           }`}
         >
           Pour plus de <span className="text-primary">fun et de partage</span>
-        </h1> */}
-      <div
-        className={`relative flex  flex-col items-center justify-center transition ease-out  duration-200 delay-150 ${
-          !isAppliTitleVisible
-            ? "opacity-1 translate-x-0"
-            : "opacity-0 translate-x-[5rem]"
-        }`}
-      >
-        <ul className="p-2 dark:border shadow-md dark:shadow-none dark:border-white-10 bg-white  dark:bg-black rounded-full text-lead max-md:text-lead text-black-40 text-center flex items-center justify-center gap-2 *:transition-colors *:duration-200 ">
-          <li
-            className={`py-2 px-4 rounded-full  ${
-              active.decouvrer
-                ? "bg-primary text-white"
-                : "text-black dark:text-white"
-            } cursor-pointer`}
-            onClick={() =>
-              setActive(() => ({
-                decouvrer: true,
-                utiliser: false,
-                experimenter: false,
-              }))
-            }
-          >
-            Découvrer
-          </li>
-          {/* <li className="text-">|</li> */}
-          <li
-            className={`py-2 px-4 rounded-full  ${
-              active.utiliser
-                ? "bg-primary text-white"
-                : "text-black dark:text-white"
-            } cursor-pointer`}
-            onClick={() =>
-              setActive((prev) => ({
-                decouvrer: false,
-                utiliser: true,
-                experimenter: false,
-              }))
-            }
-          >
-            Utiliser
-          </li>
-          {/* <li className="text-">|</li> */}
-          <li
-            className={`py-2 px-4 rounded-full  ${
-              active.experimenter
-                ? "bg-primary text-white"
-                : "text-black dark:text-white"
-            } cursor-pointer`}
-            onClick={() =>
-              setActive((prev) => ({
-                decouvrer: false,
-                utiliser: false,
-                experimenter: true,
-              }))
-            }
-          >
-            Expérimenter
-          </li>
-        </ul>
-        <Image
-          color="bg-black-10 dark:bg-white-10"
-          active={active.decouvrer}
-          text="Découvrer les différentes fonctionalités de l’application web"
-        />
-        <Image
-          color="bg-light dark:bg-white-40"
-          active={active.utiliser}
-          text="Utiliser le dans votre quotidient"
-        />
-        <Image
-          color="bg-primary"
-          active={active.experimenter}
-          text="Experiemnter l'application"
-        />
-        <h3 className="mt-[348px] text-subtitle-3 text-black max-md:text-lead dark:text-white">
-          <span className="text-primary">L'application web</span> Radio Rofia
-        </h3>
+        </h1>
       </div>
+      <div className="space-y-[84px]">
+        <AppImageSection texte="Decouvrer" image={radio2} />
+        <AppImageSection texte="Utiliser" reverse image={radio3} />
+      </div>
+      <h1 className="text-title-2 text-center w-full text-black dark:text-white">
+        L'application web <span className="text-primary">Radio Rofia</span>
+      </h1>
       <div className="text-center">
         <ButtonLg
           text="Acceder à l'application web"
@@ -144,6 +69,66 @@ const Image = ({ text, active, color }) => {
       } `}
     >
       <p className="text-center text-black-60 dark:text-white">{text}</p>
+    </div>
+  );
+};
+
+const AppImageSection = ({ texte, image, reverse = false }) => {
+  const [imageRef, isImageVisible] = useIntersection({
+    root: null,
+    rootMargin: "250px",
+    threshold: 1.0,
+  });
+  return (
+    <div
+      ref={imageRef}
+      className={`relative w-full flex  items-start  justify-between  max-lg:gap-10 max-lg:flex-col ${
+        reverse ? " flex-row-reverse " : " flex-row"
+      }`}
+    >
+      <div className="flex flex-col gap-6">
+        <h2
+          className={`transition duration-300 relative before-line text-title-2 text-black delay-150 dark:text-white ${
+            isImageVisible
+              ? "opacity-1 translate-y-0"
+              : "translate-y-[5rem] opacity-0"
+          }`}
+        >
+          {texte}
+        </h2>
+        <h2
+          className={`transition duration-300 relative  text-base max-w-[340px] text-black delay-150 dark:text-white ${
+            isImageVisible
+              ? "opacity-1 translate-y-0"
+              : "translate-y-[5rem] opacity-0"
+          }`}
+        >
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio
+          debitis tempore eius, porro quae non cupiditate enim consequuntur
+          necessitatibus vero cum ea magni iste quas sunt exercitationem sed
+          sapiente dicta!
+        </h2>
+      </div>
+      <img
+        src={image}
+        className={`-z-10 fixed w-full h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover blur-md transition duration-200 ${
+          isImageVisible ? "opacity-1" : "opacity-0"
+        }`}
+        alt=""
+      />
+      <div
+        className={`transition duration-300 delay-300 max-sm:w-full w-[420px] h-[80vh] object-cover rounded-3xl relative overflow-hidden ${
+          isImageVisible
+            ? "opacity-1 translate-y-0 scale-[1]"
+            : "opacity-0 translate-y-[6rem] scale-[0.8]"
+        }`}
+      >
+        <img
+          src={image}
+          alt=""
+          className={`transition duration-300 delay-200 ease-in-out object-cover absolute w-full h-full scale-[1.2] hover:scale-[1] `}
+        />
+      </div>
     </div>
   );
 };

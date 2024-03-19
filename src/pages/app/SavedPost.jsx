@@ -52,7 +52,7 @@ const SavedPost = () => {
           ))}
         </div>
       ) : (
-        <Empty text='Aucun évènement sauvegardé'/>
+        <Empty text="Aucun évènement sauvegardé" />
       )}
     </section>
   );

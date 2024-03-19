@@ -17,11 +17,22 @@ export const GloBalProvider = ({ children }) => {
   const splitedPath = location.pathname.split("/");
   const currentDir = splitedPath[splitedPath.length - 1];
   const [inView, setInView] = useState({});
+
   const [width] = useWindowSize();
   //animation
   const [historyRef, isHistoryRefVisible] = useIntersection({
     root: null,
     rootMargin: width <= 420 ? "120px" : "30px",
+    threshold: 1.0,
+  });
+  const [radioRef, isRadioVisible] = useIntersection({
+    root: null,
+    rootMargin: width <= 720 ? "260px" : "500px",
+    threshold: 1.0,
+  });
+  const [appliTitleRef, isAppliTitleVisible] = useIntersection({
+    root: null,
+    rootMargin: "512px",
     threshold: 1.0,
   });
 
@@ -87,6 +98,10 @@ export const GloBalProvider = ({ children }) => {
         inView,
         currentDir,
         width,
+        radioRef,
+        isRadioVisible,
+        appliTitleRef,
+        isAppliTitleVisible,
       }}
     >
       {children}

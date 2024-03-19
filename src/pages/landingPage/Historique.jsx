@@ -8,7 +8,7 @@ import useWindowSize from "../../hook/useWindowSize";
 import useGlobalContext from "../../hook/useGlobalContext";
 const Historique = () => {
   const [showMore, setShowMore] = useState(false);
-  const {historyRef, isHistoryRefVisible, width} = useGlobalContext();
+  const { historyRef, isHistoryRefVisible, width } = useGlobalContext();
   const maxTextLen = 420;
 
   return (
@@ -18,7 +18,7 @@ const Historique = () => {
       ref={historyRef}
     >
       <div
-        className={` overflow-hidden cursor-cell hover:*:-translate-y-2 relative border-b-2 border-t-2 border-black dark:border-white transition duration-300 ease-out xl:delay-150 text-black text-title-2 max-md:text-subtitle-2 max-xl:text-center dark:text-white
+        className={` before-line hover:before:scale-x-[3] overflow-hidden cursor-cell hover:*:-translate-y-2 relative  dark:border-white transition duration-300 ease-out xl:delay-150 text-black text-title-2 max-md:text-subtitle-2 max-xl:text-center dark:text-white
       ${
         isHistoryRefVisible
           ? "translate-x-0 opacity-1"
@@ -34,14 +34,14 @@ const Historique = () => {
             : "opacity-0 translate-x-[20rem]"
         }`}
       >
-        <div className="bg-white shadow-lg  dark:shadow-none text-black rounded-lg p-6 flex gap-6 flex-col items-left max-w-[648px] dark:border dark:border-white-10 dark:bg-black card-anim dark:text-white">
-          <p className="text-base font-FuturaThin ">
+        <div className="bg-white shadow-lg  dark:shadow-none text-black rounded-3xl p-10 flex gap-6 flex-col items-left max-w-[648px] dark:border dark:border-white-10 dark:bg-black card-anim dark:text-white-60">
+          <p className="text-base font-FuturaThin " style={{lineHeight : "32px"}}>
             {showMore ? ABOUT_TEXT : ABOUT_TEXT.slice(0, maxTextLen) + " ..."}
           </p>
           <div className="">
             <ButtonLg
               text={`${showMore ? "Reduire" : "Afficher plus"}`}
-              color="bg-black-10 dark:bg-white-40"
+              color="text-black bg-primary dark:bg-white"
               handleClick={() => setShowMore((prev) => !prev)}
             />
           </div>

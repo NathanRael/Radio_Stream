@@ -210,4 +210,9 @@
     .body-trans{
         @apply transition duration-500
     }
+
+    .before-line{
+        @apply before:bg-white before:absolute before:w-[30%] before:h-1  before:bottom-0
+    }
+ 
 }

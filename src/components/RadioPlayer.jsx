@@ -29,7 +29,7 @@ const RadioPlayer = () => {
     // console.log(isMuted, audioRef.current.volume);
   }, [volume, isMuted, isPlaying]);
   return (
-    <div className="rounded-lg p-6 flex flex-col gap-4 items-center justify-center bg-black-10 overflow-hidden min-w-[330px] max-md:w-full dark:bg-white-10">
+    <div className="rounded-3xl p-10 flex flex-col gap-4 items-center justify-center bg-black-10 overflow-hidden min-w-[330px] max-md:w-full dark:bg-white-10">
       <RadioPlayIcon
         isPlaying={isPlaying}
         handleClick={() => togglePlayPause()}

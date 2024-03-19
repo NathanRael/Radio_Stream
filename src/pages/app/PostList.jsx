@@ -14,8 +14,15 @@ const PostCard = lazy(() => import("../../components/PostCard"));
 const PostList = () => {
   const { inView } = useGlobalContext();
   const inputRef = useRef(null);
-  const { savePost, removePost, postData, savedPost, getAllPost } =
-    useAppContext();
+  const {
+    savePost,
+    removePost,
+    postData,
+    savedPost,
+    getAllPost,
+    searchPost,
+    search,
+  } = useAppContext();
   const { resetMessage, auth, setErrMsg, setSuccessMsg } = useAuth();
   const [selectedFile, setSelectedFile] = useState({
     name: "",
@@ -78,6 +85,9 @@ const PostList = () => {
   };
 
   useEffect(() => {
+    searchPost();
+  }, [search]);
+  useEffect(() => {
     getAllPost();
   }, []);
   useEffect(() => {
@@ -92,7 +102,7 @@ const PostList = () => {
             Liste des publications
           </h1>
           <div className="flex flex-col items-start justify-center gap-8">
-            {postData.length > 0 ? (
+            {postData?.length > 0 ? (
               postData.map((post) => (
                 <Suspense fallback={<PostCardLoading />}>
                   <PostCard

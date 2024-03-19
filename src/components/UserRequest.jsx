@@ -7,7 +7,7 @@ export const UserRequest = ({ id, title, desc, date, state, handleDelete }) => {
   const navigate = useNavigate();
   const dateDiff = getDateDiff(new Date(date), new Date());
   return (
-    <section className="p-6 flex items-center flex-col justify-center gap-6 rounded-xl dark:border bg-light border-0 dark:bg-black dark:border-white-10 max-md:w-full w-[464px]">
+    <section className="p-6 flex items-center flex-col justify-center gap-6 rounded-3xl dark:border bg-light border-0 dark:bg-black dark:border-white-10 max-md:w-full w-[464px]">
       <div className="flex items-center max-md:flex-col max-md:gap-4 justify-between w-full">
         <div className="flex flex-col items-center justify-center">
           <h1 className="lead text-black dark:text-white">{title}</h1>
