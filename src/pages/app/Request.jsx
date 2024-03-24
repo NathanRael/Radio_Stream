@@ -102,7 +102,7 @@ const Request = () => {
             Liste des requêtes
           </h1>
           {!isLoading && (
-            <div className="flex flex-col-reverse items-center xl:items-start justify-center gap-8">
+            <div className="flex flex-col items-center xl:items-start justify-center gap-8">
               {reqData?.length > 0 ? (
                 reqData.map((req) => (
                   <UserRequest

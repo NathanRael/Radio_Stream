@@ -9,6 +9,8 @@ export const AppProvider = ({ children }) => {
   const [savedPost, setSavedPost] = useState([]);
   const { auth, setSuccessMsg, setErrMsg, resetMessage } = useAuth();
   const [search, setSearch] = useState("");
+  const [reqCount, setReqCount] = useState(null);
+
 
   const savePost = (id) => {
     axios
@@ -124,7 +126,9 @@ export const AppProvider = ({ children }) => {
         removePost,
         search,
         setSearch,
-        searchPost
+        searchPost,
+        reqCount,
+        setReqCount
       }}
     >
       {children}

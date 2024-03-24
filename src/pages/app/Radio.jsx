@@ -11,11 +11,12 @@ const Radio = () => {
         <i className="bi bi-boombox me-2"></i>
         Radio
       </h1>
-      <div className="mx-auto max-w-[334px]">
+      <div className="mx-auto max-w-[334px] space-y-10">
         <p className="text-subtitle-3 text-black dark:text-white text-center mb-4">
           Radio Rofia <span className="text-primary">91.4 Mhz</span>
         </p>
         <RadioPlayer />
+        <RadioPlayer server />
       </div>
     </section>
   );

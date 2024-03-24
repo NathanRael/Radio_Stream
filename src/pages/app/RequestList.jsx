@@ -2,12 +2,14 @@ import axios from "axios";
 import PostedRequest from "../../components/PostedRequest";
 import { baseUrl } from "../../constants";
 import useGlobalContext from "../../hook/useGlobalContext";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import useAuth from "../../hook/useAuth";
 import Empty from "../../components/Empty";
+import useAppContext from "../../hook/useAppContext";
 
 const RequestList = () => {
   const { inView } = useGlobalContext();
+  const { setReqCount, reqCount } = useAppContext();
   const [reqData, setReqData] = useState([]);
   const { resetMessage, setErrMsg, setSuccessMsg } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
@@ -36,7 +38,6 @@ const RequestList = () => {
   };
 
   const updateReqStatus = (id, state) => {
-    // const currentReq = reqData.find((req) => req.id === id);
     axios
       .patch(`${baseUrl}/userRequest.php/${id}`, {
         state,
@@ -56,6 +57,9 @@ const RequestList = () => {
         resetMessage();
       });
   };
+  useEffect(() => {
+    setReqCount(reqData.length);
+  }, [reqData]);
 
   useEffect(() => {
     getReqData();
@@ -68,19 +72,21 @@ const RequestList = () => {
         Requêtes Utilisateurs
       </h1>
 
-      {!isLoading ?  (reqData.length > 0 ? (
-        <section className=" grid xl:grid-cols-2  xl:place-content-between gap-y-6 w-full  place-items-center">
-          {reqData.map((req) => (
-            <PostedRequest
-              key={req.id}
-              {...req}
-              handleReqState={updateReqStatus}
-            />
-          ))}
-        </section>
+      {!isLoading ? (
+        reqData.length > 0 ? (
+          <section className=" grid xl:grid-cols-2  xl:place-content-between gap-y-6 w-full  place-items-center">
+            {reqData.map((req) => (
+              <PostedRequest
+                key={req.id}
+                {...req}
+                handleReqState={updateReqStatus}
+              />
+            ))}
+          </section>
+        ) : (
+          <Empty text="Pas de demande pour l'instant" />
+        )
       ) : (
-        <Empty text="Pas de demande pour l'instant" />
-      )) : (
         ""
       )}
     </section>

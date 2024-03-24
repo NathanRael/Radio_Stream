@@ -1,6 +1,5 @@
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import Header from "../landingPage/Header";
-import AppContext from "../../context/GlobalContext";
 import { useContext, useEffect, useState } from "react";
 import { NAVLINK } from "../../constants/index";
 import { IconLg } from "../../components/Buttons";
@@ -8,11 +7,15 @@ import useAuth from "../../hook/useAuth";
 import { AppProvider } from "../../context/AppProvider";
 import MessagePopup from "../../components/MessagePopup";
 import { initBody } from "../../functions";
+import Notification from "../../components/Notification";
+import useGlobalContext from "../../hook/useGlobalContext";
+import useAppContext from "../../hook/useAppContext";
 
 const AppLayout = () => {
   const { isLoggedIn, successMsg, errMsg } = useAuth();
   const navigate = useNavigate();
-  const { isNavToggled, activeNav } = useContext(AppContext);
+  const { isNavToggled, activeNav } = useGlobalContext();
+  const { reqCount } = useAppContext();
   const [isButtonVisible, setIsButtonVisible] = useState(false);
 
   const handleVisible = (e) => {
@@ -28,7 +31,7 @@ const AppLayout = () => {
   }, []);
 
   return (
-    <AppProvider>
+    <>
       {!sessionStorage.user ? (
         <Navigate to="/login" />
       ) : (
@@ -83,6 +86,8 @@ const AppLayout = () => {
                     text={nav.text}
                     icon={nav.icon}
                     active={activeNav === nav.location.split("/")[2]}
+                    notification={nav.text === "Liste requêtes"}
+                    notifValue={reqCount || "..."}
                   />
                 ))}
               </ul>
@@ -98,20 +103,28 @@ const AppLayout = () => {
           {/* <Footer/> */}
         </section>
       )}
-    </AppProvider>
+    </>
   );
 };
 
 export default AppLayout;
 
-const NavLink = ({ active, text, icon = "", handleClick }) => {
+const NavLink = ({
+  active,
+  text,
+  icon = "",
+  handleClick,
+  notification,
+  notifValue,
+}) => {
   return (
     <li
-      className={` cursor-pointer w-full  flex gap-2 text-base font-FuturaMd items-center justify-start px-6 py-3 text-black dark:text-white hover:bg-black-10 dark:hover:bg-white-10 rounded-xl ${
+      className={`relative cursor-pointer w-full  flex gap-2 text-base font-FuturaMd items-center justify-start px-6 py-3 text-black dark:text-white hover:bg-black-10 dark:hover:bg-white-10 rounded-xl ${
         active ? "bg-primary" : ""
       }`}
       onClick={handleClick}
     >
+      {notification && <Notification value={notifValue} />}
       <i className={`${icon} text-icon`}></i>
       <p>{text}</p>
     </li>

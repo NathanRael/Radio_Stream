@@ -49,7 +49,7 @@ const RadioSection = () => {
             : "opacity-0 translate-x-[20rem]"
         }`}
       >
-        <RadioPlayer />
+        <RadioPlayer/>
       </div>
     </div>
   );
