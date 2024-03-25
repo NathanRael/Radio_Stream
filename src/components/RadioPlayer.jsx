@@ -5,7 +5,7 @@ import "../animations/RadioPlayer.css";
 import SoundWave from "../components/SoundWave";
 import Audio from "../assets/audio.mp3";
 import axios from "axios";
-const RadioPlayer = ({ server = false, source }) => {
+const RadioPlayer = ({ server = false, source = "http://rdj966.net:8000/rdj966.mp3" }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [volume, setVolume] = useState(1);
@@ -25,12 +25,17 @@ const RadioPlayer = ({ server = false, source }) => {
     setIsMuted((prev) => !prev);
   };
 
+  const fetchSource = () => {
+    axios.get(source).then((res) => {
+      console.log(res);
+    });
+  };
 
   useEffect(() => {
     audioRef.current.volume = isMuted ? 0 : volume;
     // console.log(isMuted, audioRef.current.volume);
   }, [volume, isMuted, isPlaying]);
-  
+
   return !server ? (
     <div className="rounded-3xl p-10 flex flex-col gap-4 items-center justify-center bg-black-10 overflow-hidden min-w-[330px] max-md:w-full dark:bg-white-10">
       <RadioPlayIcon
@@ -43,7 +48,7 @@ const RadioPlayer = ({ server = false, source }) => {
         }`}
       >
         {" "}
-        Miley Cyrus- Flower"
+        {isPlaying ? "La radio pour tous" : ""}
       </p>
       <div className="flex gap-2 items-center justify-center">
         <Icon
@@ -63,7 +68,7 @@ const RadioPlayer = ({ server = false, source }) => {
         />
       </div>
       <audio controls ref={audioRef} className="w-0 h-0 hidden" playsInline>
-        <source src={Audio} type="audio/mpeg" />
+        <source src={source || Audio} type="audio/mpeg" />
       </audio>
 
       <div className="flex soundWave">
@@ -80,7 +85,7 @@ const RadioPlayer = ({ server = false, source }) => {
         color={`${isPlaying ? "text-white bg-danger" : "text-black bg-white"}`}
       />
       <audio controls ref={audioRef} className="w-0 h-0 hidden">
-        <source src={Audio} type="audio/mpeg" />
+        <source src={source || Audio} type="audio/mpeg" />
       </audio>
       <div className="flex soundWave">
         <SoundWave animate={isPlaying} />

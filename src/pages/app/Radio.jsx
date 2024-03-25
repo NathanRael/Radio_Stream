@@ -1,10 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import RadioPlayer from "../../components/RadioPlayer";
 import AppContext from "../../context/GlobalContext";
 import useGlobalContext from "../../hook/useGlobalContext";
+import axios from "axios";
 
 const Radio = () => {
   const { inView } = useGlobalContext();
+  // useEffect(() => {
+  //   axios.get("http://rdj966.net:8000/", {
+  //     withCredentials : false,
+      
+  //   }).then((res) => console.log(res));
+  // }, []);
   return (
     <section className={`app-box ${inView.radio ? "" : "page-anim"} `}>
       <h1 className="max-lg:text-center text-subtitle-2 dark:text-white mb-8  text-black">
@@ -15,7 +22,7 @@ const Radio = () => {
         <p className="text-subtitle-3 text-black dark:text-white text-center mb-4">
           Radio Rofia <span className="text-primary">91.4 Mhz</span>
         </p>
-        <RadioPlayer />
+        <RadioPlayer  />
         <RadioPlayer server />
       </div>
     </section>

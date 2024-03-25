@@ -21,7 +21,7 @@ import Unauthorized from "./pages/_auth/Unauthorized";
 import Forbidden from "./pages/_auth/Forbidden";
 import Loader from "./components/Loader.jsx";
 import { AppProvider } from "./context/AppProvider.jsx";
-import WebRTC from "./test/webRTC.jsx";
+// import WebRTC from "./test/webRTC.jsx";
 
 const LandingPage = lazy(() => import("./pages/landingPage/LandingPage.jsx"));
 
@@ -55,7 +55,7 @@ const App = () => {
               <Route path="/signup-2" element={<SignUp2 />} />
               <Route path="/login" element={<Login />} />
             </Route>
-            <Route path="/webRTC" element={<WebRTC />} />
+            {/* <Route path="/webRTC" element={<WebRTC />} /> */}
             <Route element={<AppLayout />}>
               {/* Public route */}
               <Route path="user/home" element={<Home />} />
