@@ -8,11 +8,12 @@ import { Suspense, lazy, useContext, useEffect } from "react";
 import RadioSection from "./RadioSection";
 import useIntersection from "../../hook/UseIntersection";
 import { useLocation } from "react-router-dom";
+import useAppContext from "../../hook/useAppContext";
 const Hero = lazy(() => import("./Hero"));
 
 const LandingPage = () => {
   const loaction = useLocation();
-  const { isLoading, isNavToggled } = useContext(AppContext);
+  const { isLoading, isNavToggled } = useAppContext();
   const [heroRef, isHeroVisible] = useIntersection(
     {
       root: null,
@@ -45,7 +46,6 @@ const LandingPage = () => {
         </div>
         <Historique />
         <RadioSection />
-
         <Application />
         <Footer />
       </section>

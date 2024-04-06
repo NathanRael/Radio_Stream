@@ -24,7 +24,7 @@ const SavedPost = () => {
   return (
     <section className={`app-box ${inView.savedPost ? "" : "page-anim"} `}>
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-subtitle-2 text-black dark:text-white">
+        <h1 className="text-subtitle-2 max-md:text-subtitle-3 text-black dark:text-white">
           <i className="bi bi-bookmark me-2"></i>
           Sauvegardes
         </h1>

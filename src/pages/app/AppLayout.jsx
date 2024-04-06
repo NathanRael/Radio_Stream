@@ -12,7 +12,7 @@ import useGlobalContext from "../../hook/useGlobalContext";
 import useAppContext from "../../hook/useAppContext";
 
 const AppLayout = () => {
-  const { isLoggedIn, successMsg, errMsg } = useAuth();
+  const { isLoggedIn, successMsg, errMsg, auth } = useAuth();
   const navigate = useNavigate();
   const { isNavToggled, activeNav } = useGlobalContext();
   const { reqCount } = useAppContext();
@@ -88,6 +88,8 @@ const AppLayout = () => {
                     active={activeNav === nav.location.split("/")[2]}
                     notification={nav.text === "Liste requêtes"}
                     notifValue={reqCount || "..."}
+                    secured={nav.secured}
+                    isAdmin={auth.roles === "admin"}
                   />
                 ))}
               </ul>
@@ -116,17 +118,34 @@ const NavLink = ({
   handleClick,
   notification,
   notifValue,
+  secured,
+  isAdmin,
 }) => {
-  return (
-    <li
-      className={`relative cursor-pointer w-full  flex gap-2 text-base font-FuturaMd items-center justify-start px-6 py-3 text-black dark:text-white hover:bg-black-10 dark:hover:bg-white-10 rounded-xl ${
-        active ? "bg-primary" : ""
-      }`}
-      onClick={handleClick}
-    >
-      {notification && <Notification value={notifValue} />}
-      <i className={`${icon} text-icon`}></i>
-      <p>{text}</p>
-    </li>
-  );
+  if (isAdmin) {
+    return (
+      <li
+        className={`relative cursor-pointer w-full  flex gap-2 text-base font-FuturaMd items-center justify-start px-6 py-3 text-black dark:text-white hover:bg-black-10 dark:hover:bg-white-10 rounded-xl ${
+          active ? "bg-primary" : ""
+        }`}
+        onClick={handleClick}
+      >
+        {notification && <Notification value={notifValue} />}
+        <i className={`${icon} text-icon`}></i>
+        <p>{text}</p>
+      </li>
+    );
+  } else if (!secured) {
+    return (
+      <li
+        className={`relative cursor-pointer w-full  flex gap-2 text-base font-FuturaMd items-center justify-start px-6 py-3 text-black dark:text-white hover:bg-black-10 dark:hover:bg-white-10 rounded-xl ${
+          active ? "bg-primary" : ""
+        }`}
+        onClick={handleClick}
+      >
+        {notification && <Notification value={notifValue} />}
+        <i className={`${icon} text-icon`}></i>
+        <p>{text}</p>
+      </li>
+    );
+  }
 };

@@ -69,8 +69,8 @@ const App = () => {
                 <Route path="user/requestList" element={<RequestList />} />
                 <Route path="user/postList" element={<PostList />} />
                 <Route path="user/postList/:id/edit" element={<EditPost />} />
-                <Route path="user/profile" element={<Profile />} />
               </Route>
+              <Route path="user/profile" element={<Profile />} />
             </Route>
             <Route path="*" element={<NotFound />} />
             <Route path="/forbidden" element={<Forbidden />} />

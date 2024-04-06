@@ -22,32 +22,40 @@ export const NAVLINK = [
     {
         text : 'Accueil',
         icon : 'bi bi-ui-checks-grid',
-        location : '/user/home'
+        location : '/user/home',
+        secured : false,
     },
     {
         text : 'Radio',
         icon : 'bi bi-boombox',
-        location : '/user/radio'
+        location : '/user/radio',
+        secured : false,
     },
     {
         text : 'Requêtes',
         icon : 'bi bi-list-task',
-        location : '/user/request'
+        location : '/user/request',
+        secured : false,
     },
     {
         text : 'Sauvegardes',
         icon : 'bi bi-bookmark',
-        location : '/user/savedPost'
+        location : '/user/savedPost',
+        secured : false,
     },
     {
         text : 'Liste requêtes',
         icon : 'bi bi-lock',
-        location : '/user/requestList'
+        location : '/user/requestList',
+        secured : true,
+        
     },
     {
         text : 'Publications',
         icon : 'bi bi-lock',
-        location : '/user/postList'
+        location : '/user/postList',
+        secured : true,
+        
     },
 ]
 

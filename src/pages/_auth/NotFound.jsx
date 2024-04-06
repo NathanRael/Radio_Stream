@@ -12,7 +12,7 @@ const NotFound = () => {
         Page not found
       </p>
       <p
-        onClick={() => navigate(-1)}
+        onClick={() => navigate("/user/home")}
         className="cursor-pointer text-lead text-primary text-center"
       >
         Return Back

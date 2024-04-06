@@ -91,7 +91,11 @@ const Login = () => {
               S'inscrire
             </Link>
           </p>
-          <ButtonLg handleClick={handleSubmit} text="Se connecter" />
+          <ButtonLg
+            handleClick={handleSubmit}
+            disabled={error}
+            text="Se connecter"
+          />
         </div>
       </form>
     </section>

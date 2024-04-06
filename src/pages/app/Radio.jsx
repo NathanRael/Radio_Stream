@@ -9,12 +9,12 @@ const Radio = () => {
   // useEffect(() => {
   //   axios.get("http://rdj966.net:8000/", {
   //     withCredentials : false,
-      
+
   //   }).then((res) => console.log(res));
   // }, []);
   return (
     <section className={`app-box ${inView.radio ? "" : "page-anim"} `}>
-      <h1 className="max-lg:text-center text-subtitle-2 dark:text-white mb-8  text-black">
+      <h1 className="max-lg:text-center  text-subtitle-2 dark:text-white mb-8  text-black">
         <i className="bi bi-boombox me-2"></i>
         Radio
       </h1>
@@ -22,7 +22,7 @@ const Radio = () => {
         <p className="text-subtitle-3 text-black dark:text-white text-center mb-4">
           Radio Rofia <span className="text-primary">91.4 Mhz</span>
         </p>
-        <RadioPlayer  />
+        <RadioPlayer />
         <RadioPlayer server />
       </div>
     </section>

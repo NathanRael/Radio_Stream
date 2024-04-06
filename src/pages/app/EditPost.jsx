@@ -13,7 +13,7 @@ axios.defaults.withCredentials = true;
 const EditPost = () => {
   const { inView } = useGlobalContext();
   const { id } = useParams();
-  const { setErrMsg, setSuccessMsg, resetMessage } = useAuth();
+  const { setErrMsg, setSuccessMsg, resetMessage, auth } = useAuth();
   const navigate = useNavigate();
   const inputRef = useRef(null);
   const [isLoading, setIsloading] = useState(true);
@@ -101,7 +101,7 @@ const EditPost = () => {
     inputRef.current.focus();
     getPost(id);
   }, []);
-  return (
+  return auth.roles === "admin" ? (
     <section className={`app-box ${inView.editPost ? "" : "page-anim"} `}>
       <Load isLoading={isLoading} />
 
@@ -168,6 +168,8 @@ const EditPost = () => {
         </div>
       </div>
     </section>
+  ) : (
+    navigate("/unauthorized")
   );
 };
 

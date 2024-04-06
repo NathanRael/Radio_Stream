@@ -1,16 +1,10 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import useAuth from "../../hook/useAuth";
 
 const AdminLayout = () => {
-  const isAdmin = true;
-  return (
-    <>
-      {isAdmin ? (
-        <Outlet />
-      ) : (
-        <h1 className="text-title-2 tetx-center text-danger">Non-Autorisé</h1>
-      )}
-    </>
-  );
+  const { auth } = useAuth();
+  const navigate = useNavigate();
+  return <>{auth.roles === "admin" ? <Outlet /> : navigate("/unauthorized")}</>;
 };
 
 export default AdminLayout;

@@ -5,7 +5,7 @@ import "../../animations/Application.css";
 import { useNavigate } from "react-router-dom";
 import useIntersection from "../../hook/UseIntersection";
 import useGlobalContext from "../../hook/useGlobalContext";
-import { radio1, radio2, radio3 } from "../../constants/images";
+import { radio1, radio2, radio3, app1, app2, app3 } from "../../constants/images";
 const Application = () => {
   const [active, setActive] = useState({
     decouvrer: true,
@@ -42,8 +42,8 @@ const Application = () => {
         </h1>
       </div>
       <div className="space-y-[84px]">
-        <AppImageSection texte="Decouvrer" image={radio2} />
-        <AppImageSection texte="Utiliser" reverse image={radio3} />
+        <AppImageSection texte="Decouvrer" image={app1} />
+        <AppImageSection texte="Utiliser" reverse image={app3} />
       </div>
       <h1 className="text-title-2 text-center w-full text-black dark:text-white">
         L'application web <span className="text-primary">Radio Rofia</span>
@@ -109,15 +109,15 @@ const AppImageSection = ({ texte, image, reverse = false }) => {
           sapiente dicta!
         </h2>
       </div>
-      <img
+      {/* <img
         src={image}
-        className={`-z-10 fixed w-full h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover blur-md transition duration-200 ${
+        className={`-z-10 fixed w-[100vw] h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover blur-md transition duration-200 ${
           isImageVisible ? "opacity-1" : "opacity-0"
         }`}
         alt=""
-      />
+      /> */}
       <div
-        className={`transition duration-300 delay-300 max-sm:w-full w-[420px] h-[80vh] object-cover rounded-3xl relative overflow-hidden ${
+        className={`bg-black transition duration-300 delay-300 max-sm:w-full w-[420px] h-[60vh] object-cover rounded-3xl relative overflow-hidden ${
           isImageVisible
             ? "opacity-1 translate-y-0 scale-[1]"
             : "opacity-0 translate-y-[6rem] scale-[0.8]"
@@ -126,7 +126,7 @@ const AppImageSection = ({ texte, image, reverse = false }) => {
         <img
           src={image}
           alt=""
-          className={`transition duration-300 delay-200 ease-in-out object-cover absolute w-full h-full scale-[1.2] hover:scale-[1] `}
+          className={`transition duration-300 delay-200 ease-in-out object-contain absolute w-full h-full scale-[1.2] hover:scale-[1] `}
         />
       </div>
     </div>
