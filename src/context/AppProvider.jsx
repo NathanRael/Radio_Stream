@@ -10,7 +10,7 @@ export const AppProvider = ({ children }) => {
   const { auth, setSuccessMsg, setErrMsg, resetMessage } = useAuth();
   const [search, setSearch] = useState("");
   const [reqCount, setReqCount] = useState(null);
-
+  let PostDataLen = 0;
 
   const savePost = (id) => {
     axios
@@ -89,7 +89,7 @@ export const AppProvider = ({ children }) => {
         resetMessage();
       });
   };
-  const searchPost = () =>{
+  const searchPost = () => {
     if (search != "") {
       axios
         .get(`${baseUrl}/event.php?search=${search.toLowerCase()}`)
@@ -101,7 +101,7 @@ export const AppProvider = ({ children }) => {
     } else {
       getAllPost();
     }
-  }
+  };
   const getAllPost = () => {
     axios
       .get(`${baseUrl}/event.php`)
@@ -111,6 +111,10 @@ export const AppProvider = ({ children }) => {
       })
       .catch((e) => console.log(e));
   };
+
+  useEffect(() => {
+    PostDataLen = postData;
+  }, [postData]);
   return (
     <AppContext.Provider
       value={{
@@ -128,7 +132,8 @@ export const AppProvider = ({ children }) => {
         setSearch,
         searchPost,
         reqCount,
-        setReqCount
+        setReqCount,
+        PostDataLen,
       }}
     >
       {children}

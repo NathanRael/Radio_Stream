@@ -21,6 +21,7 @@ const Home = () => {
     savePost,
     getSavedPost,
     postData,
+    postDataLen,
     setPostData,
     savedPost,
     getAllPost,
@@ -28,8 +29,14 @@ const Home = () => {
     search,
     searchPost,
   } = useAppContext();
+  const [actualDataLen, setactualDataLen] = useState(3);
 
   const [containerRef, isVisible] = UseIntersection({
+    root: null,
+    rootMargin: "0px",
+    threshold: 1.0,
+  });
+  const [loadRef, isLoadRefVisible] = UseIntersection({
     root: null,
     rootMargin: "0px",
     threshold: 1.0,
@@ -41,7 +48,25 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-      searchPost();
+    console.log("isVis : " + isLoadRefVisible);
+    console.log("len : " + actualDataLen);
+    const handleLoad = () => {
+      isLoadRefVisible
+        ? setactualDataLen((prev) =>
+            actualDataLen + 1 <= postDataLen ? prev + 1 : postDataLen
+          )
+        : null;
+    };
+
+    setTimeout(handleLoad, 2000);
+
+    return () => {
+      clearTimeout(handleLoad);
+    };
+  }, [isLoadRefVisible, postDataLen]);
+
+  useEffect(() => {
+    searchPost();
   }, [search]);
 
   return (
@@ -57,7 +82,7 @@ const Home = () => {
       </h1>
       <div className="space-y-20">
         <div className="flex w-full flex-col items-center justify-center gap-8">
-          {postData?.map((post) => (
+          {postData?.slice(0, actualDataLen).map((post) => (
             <Suspense key={post.id} fallback={<PostCardLoading />}>
               <PostCard
                 key={post.id}
@@ -70,7 +95,7 @@ const Home = () => {
             </Suspense>
           ))}
         </div>
-        <div className="w-full mx-auto">
+        <div ref={loadRef} className="w-full mx-auto">
           <LoadingIcon />
         </div>
       </div>
