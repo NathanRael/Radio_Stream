@@ -136,14 +136,14 @@ const PostList = () => {
               name="title"
               handleChange={handleInputChange}
               title="Titre"
-              placeholder="Entrer le titre du requête "
+              placeholder="Entrer le titre de la publication "
             />
             <Textarea
               value={formData.desc}
               name="desc"
               handleChange={handleInputChange}
               title="Description"
-              placeholder="Entrer la desciprtion du requête"
+              placeholder="Entrer la desciprtion de la publication"
             />
             {selectedFile?.path ? (
               <img

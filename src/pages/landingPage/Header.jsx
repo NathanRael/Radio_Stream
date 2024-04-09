@@ -9,7 +9,7 @@ import useGlobalContext from "../../hook/useGlobalContext";
 import useAppContext from "../../hook/useAppContext";
 import useAuth from "../../hook/useAuth";
 import { currentPage, imageDir } from "../../constants";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 const Header = ({
   isForLanding = false,
   isTitleVisible = false,
@@ -134,13 +134,11 @@ const Header = ({
         </div>
       )}
       <div
-        className={`${
+        className={` flex items-center justify-between  gap-6  max-md:fixed left-4 max-md:flex-row-reverse transition-all duration-500 top-4 z-30  ${
           auth.name ? "max-w-[828px]" : "max-w-[320px]"
-        }  flex items-center justify-between  gap-6  max-md:fixed left-4 max-md:flex-row-reverse transition-all duration-500 top-4 z-30 ${
-          isNavToggled ? "icon-hidden" : "max-md:-top-1/2"
-        }`}
+        } ${isNavToggled ? "icon-hidden" : "max-md:-top-1/2"} `}
       >
-        {!isForLanding && (
+        {!isForLanding && /home|postlist/i.test(currentDir) && (
           <>
             <div className="max-sm:w-[140px]  w-full max-sm:hidden flex items-center justify-between px-4 py-2 rounded-lg bg-light dark:bg-black dark:border dark:border-white-10 gap-4 focus:border focus:border-p">
               <i className="bi bi-search text-black  dark:text-white"></i>
@@ -154,7 +152,9 @@ const Header = ({
             </div>
             <div
               className={`transition duration-300 ${
-                toggledSearch ? "-translate-x-1/2 opacity-1" : " translate-x-[10rem] opacity-0"
+                toggledSearch
+                  ? "-translate-x-1/2 opacity-1"
+                  : " translate-x-[10rem] opacity-0"
               } fixed top-[84px] left-1/2    w-[95%] hidden max-sm:flex items-center justify-between px-4 py-2 rounded-lg bg-light dark:bg-black dark:border dark:border-white-10 gap-4 focus:border focus:border-p`}
             >
               <i className="bi bi-search text-black  dark:text-white"></i>

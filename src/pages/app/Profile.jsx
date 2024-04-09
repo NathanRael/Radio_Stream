@@ -63,7 +63,7 @@ const Profile = () => {
         name,
         email,
         oldPassword,
-        newPassword,
+        newPassword: newPassword || "",
         imageUrl,
         type: "PUT",
       })
@@ -146,10 +146,20 @@ const Profile = () => {
   }, [formData.match]);
 
   useEffect(() => {
-    const { validEmail, validName, validOldPassword, validNewPassword, validMatch } =
-      formData;
+    const {
+      validEmail,
+      validName,
+      validOldPassword,
+      validNewPassword,
+      validMatch,
+      newPassword,
+    } = formData;
     setError(
-      !validEmail || !validOldPassword || !validName || !validNewPassword || !validMatch
+      !validEmail ||
+        !validOldPassword ||
+        !validName ||
+        (newPassword !== "" ? !validNewPassword : false) ||
+        !validMatch
     );
     setErrMsg("");
     setSuccessMsg("");
