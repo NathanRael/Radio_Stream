@@ -130,8 +130,8 @@ const SignUp = () => {
         onSubmit={handleSubmit}
       >
         <div className="flex items-center justify-center w-full gap-2">
-          <StepGrow disabled={!inView.signup} text="Etape 1/2" />
-          <StepGrow disabled={inView.signup} text="Etape 2/2" />
+          <StepGrow full={inView.signup} disabled={!inView.signup} text="Etape 1/2" />
+          <StepGrow disabled text="Etape 2/2" />
         </div>
         <div className="flex flex-col items-center justify-center gap-6">
           <InputLg

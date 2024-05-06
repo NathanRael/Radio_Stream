@@ -9,6 +9,8 @@ export const AuthProvider = ({ children }) => {
   const location = useLocation();
   const [successMsg, setSuccessMsg] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const [sendingReq, setSendingReq] = useState(false);
+
   const [auth, setAuth] = useState(
     JSON.parse(sessionStorage.getItem("user")) || {}
   );
@@ -32,6 +34,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = (data) => {
     const { email, password } = data;
+    setSendingReq(true);
     axios
       .post("http://localhost/Rofia/api/login.php/", {
         email,
@@ -50,6 +53,9 @@ export const AuthProvider = ({ children }) => {
         inputRef.current.focus();
       })
       .finally(() => {
+        setTimeout(() => {
+          setSendingReq(false);
+        }, 300);
         setTimeout(() => {
           setErrMsg("");
           setSuccessMsg("");
@@ -92,6 +98,7 @@ export const AuthProvider = ({ children }) => {
         login,
         checkIsLoggedIn,
         resetMessage,
+        sendingReq,
       }}
     >
       {children}

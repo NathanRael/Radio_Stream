@@ -1,17 +1,13 @@
-import { ButtonIconLg, ButtonLg } from "../../components/Buttons";
 import LoadingIcon from "../../components/LoadingIcon";
-// import RecentPost from "../../components/RecentPost";
 import UseIntersection from "../../hook/UseIntersection";
 import useGlobalContext from "../../hook/useGlobalContext";
-import { baseUrl } from "../../constants";
 import { Suspense, lazy, useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "../../hook/useAuth";
 import useAppContext from "../../hook/useAppContext";
 import PostCardLoading from "../../animations/PostCardLoading";
-import RecentPostLoading from "../../animations/RecentPostLoading";
+import Empty from "../../components/Empty";
 axios.defaults.withCredentials = true;
-const RecentPostCard = lazy(() => import("../../components/RecentPostCard"));
 const PostCard = lazy(() => import("../../components/PostCard"));
 
 const Home = () => {
@@ -22,12 +18,12 @@ const Home = () => {
     getSavedPost,
     postData,
     postDataLen,
-    setPostData,
     savedPost,
     getAllPost,
     removePost,
     search,
     searchPost,
+    searchLoading,
   } = useAppContext();
   const [actualDataLen, setactualDataLen] = useState(3);
 
@@ -48,8 +44,6 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    console.log("isVis : " + isLoadRefVisible);
-    console.log("len : " + actualDataLen);
     const handleLoad = () => {
       isLoadRefVisible
         ? setactualDataLen((prev) =>
@@ -57,9 +51,7 @@ const Home = () => {
           )
         : null;
     };
-
-    setTimeout(handleLoad, 2000);
-
+    setTimeout(handleLoad, 1000);
     return () => {
       clearTimeout(handleLoad);
     };
@@ -82,22 +74,30 @@ const Home = () => {
       </h1>
       <div className="space-y-20">
         <div className="flex w-full flex-col items-center justify-center gap-8">
-          {postData?.slice(0, actualDataLen).map((post) => (
-            <Suspense key={post.id} fallback={<PostCardLoading />}>
-              <PostCard
-                key={post.id}
-                {...post}
-                isAdmin={auth.roles === "admin"}
-                handleSavePost={savePost}
-                saveClicked={savedPost.some((v) => v.postId === post.id)}
-                handleDelete={removePost}
-              />
-            </Suspense>
-          ))}
+          {searchLoading ? (
+            <PostCardLoading />
+          ) : postData?.length > 0 ? (
+            postData?.slice(0, actualDataLen).map((post) => (
+              <Suspense key={post.id} fallback={<PostCardLoading />}>
+                <PostCard
+                  key={post.id}
+                  {...post}
+                  isAdmin={auth.roles === "admin"}
+                  handleSavePost={savePost}
+                  saveClicked={savedPost.some((v) => v.postId === post.id)}
+                  handleDelete={removePost}
+                />
+              </Suspense>
+            ))
+          ) : (
+            <Empty text="Aucune publication trouvée" />
+          )}
         </div>
-        <div ref={loadRef} className="w-full mx-auto">
-          <LoadingIcon />
-        </div>
+        {postData?.length > 0 && (
+          <div ref={loadRef} className="w-full mx-auto">
+            <LoadingIcon />
+          </div>
+        )}
       </div>
     </section>
   );

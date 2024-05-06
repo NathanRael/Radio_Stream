@@ -31,7 +31,7 @@ export const ButtonLg = ({
     <button
       disabled={disabled}
       onClick={handleClick}
-      className={`${color} px-8 py-4 rounded-full text-base  font-FuturaMd ${
+      className={`${color} ${disabled ? "cursor-not-allowed" : "cursor-pointer" } px-8 py-4 rounded-full text-base  font-FuturaMd ${
         defaultAnim ? "btn-anim" : "btn-anim-custom"
       }`}
     >
@@ -66,6 +66,7 @@ export const ButtonIconLg = ({
   handleClick,
   link = null,
   disabled = false,
+  animated
 }) => {
   return (
     <>{
@@ -75,7 +76,7 @@ export const ButtonIconLg = ({
         onClick={handleClick}
         className={`${color} px-8 py-4 rounded-full text-base font-FuturaMd text-black flex items-center justify-center gap-x-4 btn-anim`}
       >
-        <i className={`${icon} text-[20px]`}></i>
+        <i className={`${icon} ${animated ? "animate-spin" : ""} text-[20px]`}></i>
         <p>{text}</p>
       </button>
       ) : (

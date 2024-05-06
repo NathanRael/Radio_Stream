@@ -1,5 +1,5 @@
 import { FileInput } from "../../../components/Inputs";
-import { ButtonLg, IconLg } from "../../../components/Buttons";
+import { ButtonIconLg, ButtonLg, IconLg } from "../../../components/Buttons";
 import { useNavigate } from "react-router-dom";
 import StepGrow from "../../../components/StepGrow";
 import ProfileImg from "../../../components/ProfileImg";
@@ -7,10 +7,12 @@ import useGlobalContext from "../../../hook/useGlobalContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import MessagePopup from "../../../components/MessagePopup";
+import useAuth from "../../../hook/useAuth";
 const SignUp2 = () => {
   const navigate = useNavigate();
   const { inView } = useGlobalContext();
   const [successMsg, setSuccessMsg] = useState("");
+  const { sendingReq } = useAuth();
   const [errMsg, setErrMsg] = useState("");
   const [selectedFile, setSelectedFile] = useState({
     name: "",
@@ -53,9 +55,9 @@ const SignUp2 = () => {
         console.log(e.response.data.error);
       });
   };
-  useEffect(() => {
-    !sessionStorage.getItem("signUpInfo") && navigate("/signup");
-  }, []);
+  // useEffect(() => {
+  //   !sessionStorage.getItem("signUpInfo") && navigate("/signup");
+  // }, []);
 
   return (
     <section className={`form-box ${inView.signup2 ? "" : "page-anim-left"}`}>
@@ -86,8 +88,8 @@ const SignUp2 = () => {
       </h1>
       <div className="flex items-center justify-between  w-[334px] flex-col gap-10">
         <div className="flex items-center justify-center w-full gap-2">
-          <StepGrow full={inView.signup2} text="Etape 1/2" />
-          <StepGrow disabled={!inView.signup2} text="Etape 2/2" />
+          <StepGrow  full text="Etape 1/2" />
+          <StepGrow disabled={!inView.signup2} full={inView.signup2} text="Etape 2/2" />
         </div>
         <form
           onSubmit={(e) => e.preventDefault()}
@@ -107,7 +109,15 @@ const SignUp2 = () => {
             color="bg-black-10 dark:bg-white-10 text-black dark:text-white"
             handleClick={(e) => handleSubmit(e, true)}
           />
-          <ButtonLg text="S'inscrire" handleClick={handleSubmit} />
+          {sendingReq ? (
+            <ButtonIconLg
+              icon="bi bi-arrow-clockwise"
+              animated
+              text="Inscription"
+            />
+          ) : (
+            <ButtonLg text="S'inscrire" handleClick={handleSubmit} />
+          )}
         </div>
       </div>
     </section>

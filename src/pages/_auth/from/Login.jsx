@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { InputLg } from "../../../components/Inputs";
-import { ButtonLg } from "../../../components/Buttons";
+import { ButtonIconLg, ButtonLg, IconLg } from "../../../components/Buttons";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useRef, useState } from "react";
 import MessagePopup from "../../../components/MessagePopup";
@@ -11,7 +12,8 @@ axios.defaults.withCredentials = true;
 const Login = () => {
   const navigate = useNavigate();
   const { inView } = useGlobalContext();
-  const { successMsg, errMsg, setErrMsg, setSuccessMsg, login } = useAuth();
+  const { successMsg, errMsg, setErrMsg, setSuccessMsg, login, sendingReq } =
+    useAuth();
   const inputRef = useRef(null);
   const [error, setError] = useState(false);
   const [formData, setFormData] = useState({
@@ -91,11 +93,22 @@ const Login = () => {
               S'inscrire
             </Link>
           </p>
-          <ButtonLg
-            handleClick={handleSubmit}
-            disabled={error}
-            text="Se connecter"
-          />
+
+            
+            {sendingReq ? (
+            <ButtonIconLg
+              icon="bi bi-arrow-clockwise"
+              animated
+              text="Connexion"
+            />
+          ) : (
+            <ButtonLg
+              handleClick={handleSubmit}
+              disabled={error}
+              text="Se connecter"
+            />
+          )}
+          
         </div>
       </form>
     </section>

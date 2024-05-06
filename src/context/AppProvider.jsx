@@ -9,6 +9,7 @@ export const AppProvider = ({ children }) => {
   const [savedPost, setSavedPost] = useState([]);
   const { auth, setSuccessMsg, setErrMsg, resetMessage } = useAuth();
   const [search, setSearch] = useState("");
+  const [searchLoading, setSearchLoading] = useState(true);
   const [reqCount, setReqCount] = useState(null);
   let PostDataLen = 0;
 
@@ -90,18 +91,21 @@ export const AppProvider = ({ children }) => {
       });
   };
   const searchPost = () => {
-    if (search != "") {
-      axios
-        .get(`${baseUrl}/event.php?search=${search.toLowerCase()}`)
-        .then((res) => {
-          if (res.status === 200) {
-            setPostData(res.data.data);
-          }
-        });
-    } else {
-      getAllPost();
-    }
+    setSearchLoading(true);
+    axios
+      .get(`${baseUrl}/event.php?search=${search.toLowerCase()}`)
+      .then((res) => {
+        if (res.status === 200) {
+          setPostData(res.data.data);
+        }
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setSearchLoading(false);
+        }, 200)
+      });
   };
+ 
   const getAllPost = () => {
     axios
       .get(`${baseUrl}/event.php`)
@@ -134,6 +138,7 @@ export const AppProvider = ({ children }) => {
         reqCount,
         setReqCount,
         PostDataLen,
+        searchLoading,
       }}
     >
       {children}
