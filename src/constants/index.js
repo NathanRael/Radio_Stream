@@ -1,16 +1,18 @@
 export const PSEUDO_REGEX = /^[a-z0-9]+[a-z0-9_-]{4,}$/i;
-export const EMAIL_REGEX = /^[a-z0-9]{3,}@[a-z]{3,}.com$/i;
+export const EMAIL_REGEX = /^[a-z0-9]{3,}@[a-z]{3,}\.com$/i;
 // export const EMAIL_REGEX = /^[a-z0-9]+@[a-z]+[.].{3,}$/i;
 export const PASSWORD_REGEX = /^[a-z].{8,}$/i;
-export const baseUrl = 'http://localhost/rofia/api';
+
+export const hostIp = "172.20.10.3"
+export const baseUrl = `http://${hostIp}/rofia/api`;
 
 export const ABOUT_TEXT = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt praesentium eum non iusto error quo beatae commodi ipsam, voluptas animi molestias accusantium excepturi quae molestiae repudiandae vel reprehenderit suscipit inventore.     Sunt, incidunt numquam aliquid, provident nobis, corrupti ullam obcaecati adipisci aspernatur eos quod. Eum quis totam obcaecati harum nostrum animi iure, aperiam quam ut saepe culpa rem, ipsam dolore official zazd
 numquam aliquid, provident nobis, corrupti ullam obcaecati adipisci aspernatur eos quod. Eum quis totam obcaecati harum nostrum animi iure, aperiam quam ut saepe culpa rem, ipsam dolore official zaz
 `
 
-export const imageDir = "http://localhost/Rofia/images/";
+export const imageDir = `http://${hostIp}/Rofia/images/`;
 
-export const HERO_TEXT = "Ecouter la radio de l'université de Fianarantsoa."
+export const HERO_TEXT = "Ecoutez, vibrez, et rester informé avec notre app radio"
 export const currentPage = {
   "home" : "bi bi-ui-checks-grid",
   "radio" : "bi bi-boombox",

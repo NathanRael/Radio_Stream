@@ -49,7 +49,7 @@ const Login = () => {
   return (
     <section className={`form-box ${inView.login ? "" : "page-anim-right"}`}>
       <h1 className="text-subtitle-1 max-md:text-subtitle-3 text-center text-black dark:text-light w-full mt-10">
-        Bienvenue sur <span className="text-primary">radio rofia</span>{" "}
+        Bienvenue sur <span className="text-primary">radio anonym</span>{" "}
       </h1>
       <MessagePopup
         message={successMsg}
@@ -94,8 +94,7 @@ const Login = () => {
             </Link>
           </p>
 
-            
-            {sendingReq ? (
+          {sendingReq ? (
             <ButtonIconLg
               icon="bi bi-arrow-clockwise"
               animated
@@ -108,7 +107,6 @@ const Login = () => {
               text="Se connecter"
             />
           )}
-          
         </div>
       </form>
     </section>

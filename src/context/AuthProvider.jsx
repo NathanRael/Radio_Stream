@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createContext, useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { baseUrl } from "../constants";
 axios.defaults.withCredentials = true;
 const AuthContext = createContext({});
 
@@ -17,9 +18,7 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const logout = () => {
-    axios
-      .get("http://localhost/Rofia/api/logout.php/")
-      .then((res) => console.log(res?.data));
+    axios.get(`${baseUrl}/logout.php`).then((res) => console.log(res?.data));
     sessionStorage.clear();
     setIsLoggedIn(false);
     navigate("/login");
@@ -36,7 +35,7 @@ export const AuthProvider = ({ children }) => {
     const { email, password } = data;
     setSendingReq(true);
     axios
-      .post("http://localhost/Rofia/api/login.php/", {
+      .post(`${baseUrl}/login.php`, {
         email,
         password,
       })
@@ -69,7 +68,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const checkIsLoggedIn = useCallback(async () => {
-    const res = await axios.get("http://localhost/Rofia/api/login.php/", {
+    const res = await axios.get(`${baseUrl}/login.php/`, {
       withCredentials: true,
     });
 

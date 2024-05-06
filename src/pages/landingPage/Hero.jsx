@@ -5,11 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { HERO_TEXT } from "../../constants/index";
 import { useEffect, useRef, useState } from "react";
 import TypeWriter from "../../components/TypeWriter";
-import UseIntersection from "../../hook/UseIntersection";
 import SvgIcon from "../../components/SvgIcon";
 import RadioBg from "../../assets/images/radio-1.jpg";
 import disk from "../../assets/images/disk.svg";
-import radio from "../../assets/images/radio2.svg";
+
 import ImgIcon from "../../components/ImgIcon";
 import useGlobalContext from "../../hook/useGlobalContext";
 

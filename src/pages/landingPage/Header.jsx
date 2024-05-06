@@ -74,7 +74,7 @@ const Header = ({
         >
           Radio{" "}
           <span className={isHeroVisible ? "text-black" : "text-primary"}>
-            Rofia
+            Anonym
           </span>
         </a>
         <div

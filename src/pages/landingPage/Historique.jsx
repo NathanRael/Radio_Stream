@@ -25,7 +25,7 @@ const Historique = () => {
           : "opacity-0 -translate-x-[20rem]"
       }`}
       >
-        <p className={`transition duration-200 title`}>Historique</p>
+        <p className={`transition duration-200 title`}>Qui somme nous ?</p>
       </div>
       <div
         className={`flex items-center justify-between max-xl:flex-col max-xl:gap-y-10 transition duration-300 ease-out delay-300 ${

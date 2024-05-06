@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import MessagePopup from "../../../components/MessagePopup";
 import useAuth from "../../../hook/useAuth";
+import { baseUrl } from "../../../constants";
 const SignUp2 = () => {
   const navigate = useNavigate();
   const { inView } = useGlobalContext();
@@ -38,7 +39,7 @@ const SignUp2 = () => {
     e.preventDefault();
 
     axios
-      .postForm("http://localhost/Rofia/api/user.php/", {
+      .postForm(`${baseUrl}/user.php/`, {
         name,
         email,
         password,
@@ -88,8 +89,12 @@ const SignUp2 = () => {
       </h1>
       <div className="flex items-center justify-between  w-[334px] flex-col gap-10">
         <div className="flex items-center justify-center w-full gap-2">
-          <StepGrow  full text="Etape 1/2" />
-          <StepGrow disabled={!inView.signup2} full={inView.signup2} text="Etape 2/2" />
+          <StepGrow full text="Etape 1/2" />
+          <StepGrow
+            disabled={!inView.signup2}
+            full={inView.signup2}
+            text="Etape 2/2"
+          />
         </div>
         <form
           onSubmit={(e) => e.preventDefault()}

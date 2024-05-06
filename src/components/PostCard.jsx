@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getDateDiff } from "../functions";
 import ProfileImg from "../components/ProfileImg";
+import { hostIp } from "../constants";
 
 const PostCard = ({
   id,
@@ -21,7 +22,7 @@ const PostCard = ({
   saveClicked = false,
   imageUrl,
 }) => {
-  const imageDir = "http://localhost/Rofia/images/";
+  const imageDir = `http://${hostIp}/Rofia/images/`;
   const [showMore, setShowMore] = useState(false);
   const [showCrud, setShowCrud] = useState(false);
   const navigate = useNavigate();
