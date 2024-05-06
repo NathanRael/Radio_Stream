@@ -21,6 +21,7 @@ import Unauthorized from "./pages/_auth/Unauthorized";
 import Forbidden from "./pages/_auth/Forbidden";
 import Loader from "./components/Loader.jsx";
 import { AppProvider } from "./context/AppProvider.jsx";
+import Audio from "./pages/app/Audio.jsx";
 // import WebRTC from "./test/webRTC.jsx";
 
 const LandingPage = lazy(() => import("./pages/landingPage/LandingPage.jsx"));
@@ -66,6 +67,7 @@ const App = () => {
 
               {/* admin route */}
               <Route element={<AdminLayout />}>
+                <Route path="user/audio" element={<Audio/>}/>
                 <Route path="user/requestList" element={<RequestList />} />
                 <Route path="user/postList" element={<PostList />} />
                 <Route path="user/postList/:id/edit" element={<EditPost />} />
