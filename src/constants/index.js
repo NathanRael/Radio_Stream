@@ -3,7 +3,7 @@ export const EMAIL_REGEX = /^[a-z0-9]{3,}@[a-z]{3,}\.com$/i;
 // export const EMAIL_REGEX = /^[a-z0-9]+@[a-z]+[.].{3,}$/i;
 export const PASSWORD_REGEX = /^[a-z].{8,}$/i;
 
-export const hostIp = "192.168.0.112"
+export const hostIp = "localhost"
 export const baseUrl = `http://${hostIp}/rofia/api`;
 
 export const ABOUT_TEXT = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt praesentium eum non iusto error quo beatae commodi ipsam, voluptas animi molestias accusantium excepturi quae molestiae repudiandae vel reprehenderit suscipit inventore.     Sunt, incidunt numquam aliquid, provident nobis, corrupti ullam obcaecati adipisci aspernatur eos quod. Eum quis totam obcaecati harum nostrum animi iure, aperiam quam ut saepe culpa rem, ipsam dolore official zazd

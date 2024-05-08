@@ -67,7 +67,7 @@ export const AuthProvider = ({ children }) => {
     sessionStorage.setItem("user", JSON.stringify(data));
   };
 
-  const checkIsLoggedIn = useCallback(async () => {
+  const checkIsLoggedIn = async () => {
     const res = await axios.get(`${baseUrl}/login.php/`, {
       withCredentials: true,
     });
@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }) => {
       console.log(res.data.user);
       setIsLoggedIn(res.data.user);
     }
-  }, [isLoggedIn]);
+  };
 
   useEffect(() => {
     checkIsLoggedIn();
