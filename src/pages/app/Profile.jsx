@@ -17,7 +17,7 @@ import axios from "axios";
 const Profile = () => {
   const navigate = useNavigate();
   const { inView } = useGlobalContext();
-  const { auth } = useAuth();
+  const { auth, logout, getCurrentSession } = useAuth();
   const userRef = useRef(null);
   const [error, setError] = useState(false);
   const { setSuccessMsg, setErrMsg, resetMessage } = useAuth();
@@ -57,7 +57,6 @@ const Profile = () => {
     if (error) {
       return console.log("Verifier vos champs");
     }
-
     axios
       .postForm(`${baseUrl}/user.php/${auth.id}`, {
         name,
@@ -71,7 +70,7 @@ const Profile = () => {
         if (response.status === 200) {
           console.log(response.data);
           setSuccessMsg(response.data.success);
-          sessionStorage.setItem("user", JSON.stringify(response.data.data));
+          getCurrentSession();
         }
       })
       .catch((e) => {
@@ -88,8 +87,7 @@ const Profile = () => {
       .delete(`${baseUrl}/user.php/${auth.id}`)
       .then((response) => {
         if (response.status === 200) {
-          setSuccessMsg(response.data.success);
-          sessionStorage.clear();
+          logout();
           navigate("/login");
         }
       })

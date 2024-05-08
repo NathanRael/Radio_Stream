@@ -4,12 +4,12 @@ import { useEffect } from "react";
 import { initBody } from "../../functions";
 
 const AuthLayout = () => {
-  const { isLoggedIn, auth } = useAuth();
+  const { auth } = useAuth();
   useEffect(() => {
     console.log("Login");
     initBody();
   }, []);
-  return <>{auth.user ? <Navigate to="/user/home" /> : <Outlet />}</>;
+  return <>{auth?.name ? <Navigate to="/user/home" /> : <Outlet />}</>;
 };
 
 export default AuthLayout;

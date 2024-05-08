@@ -11,17 +11,21 @@ export const AuthProvider = ({ children }) => {
   const [successMsg, setSuccessMsg] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [sendingReq, setSendingReq] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [auth, setAuth] = useState(
     JSON.parse(sessionStorage.getItem("user")) || {}
   );
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const logout = () => {
-    axios.get(`${baseUrl}/logout.php`).then((res) => console.log(res?.data));
-    sessionStorage.clear();
-    setIsLoggedIn(false);
-    navigate("/login");
+  const clearAllCokkie = () => {
+    let cookies = document.cookie.split(";");
+
+    for (var i = 0; i < cookies.length; i++) {
+      let cookie = cookies[i];
+      let eqPos = cookie.indexOf("=");
+      let name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00GMT;path=/";
+    }
   };
 
   const resetMessage = () => {
@@ -29,6 +33,13 @@ export const AuthProvider = ({ children }) => {
       setSuccessMsg("");
       setErrMsg("");
     }, 2000);
+  };
+
+  const logout = () => {
+    axios.get(`${baseUrl}/logout.php`).then((res) => console.log(res?.data));
+    sessionStorage.clear();
+    clearAllCokkie();
+    navigate("/login");
   };
 
   const login = (data) => {
@@ -41,8 +52,7 @@ export const AuthProvider = ({ children }) => {
       })
       .then((response) => {
         setSuccessMsg(response?.data.success);
-        storeAuth(response?.data?.session);
-        setIsLoggedIn(response?.data?.session);
+        storeAuth(response?.data?.data);
         console.log(response?.data.success);
         navigate("/user/home");
       })
@@ -64,22 +74,35 @@ export const AuthProvider = ({ children }) => {
 
   const storeAuth = (data) => {
     setAuth(data);
-    sessionStorage.setItem("user", JSON.stringify(data));
+    // sessionStorage.setItem("user", JSON.stringify(data));
   };
 
-  const checkIsLoggedIn = async () => {
+  const getCurrentSession = async () => {
+    setLoading(true);
     const res = await axios.get(`${baseUrl}/login.php/`, {
       withCredentials: true,
     });
 
     if (res.status === 200) {
-      console.log(res.data.user);
-      setIsLoggedIn(res.data.user);
+      setAuth(res.data.data);
     }
+
+    setLoading(false);
+  };
+
+  const PostCurrentSession = (data) => {
+    axios
+      .postForm(`${baseUrl}/session.php`, {
+        id: data.id,
+        name: data.name,
+        email: data?.email,
+        password: data?.password,
+      })
+      .catch((e) => console.log(e));
   };
 
   useEffect(() => {
-    checkIsLoggedIn();
+    getCurrentSession();
   }, []);
 
   return (
@@ -88,16 +111,16 @@ export const AuthProvider = ({ children }) => {
         auth,
         setAuth,
         logout,
-        isLoggedIn,
         storeAuth,
         successMsg,
         errMsg,
         setErrMsg,
         setSuccessMsg,
         login,
-        checkIsLoggedIn,
         resetMessage,
         sendingReq,
+        getCurrentSession,
+        loading,
       }}
     >
       {children}

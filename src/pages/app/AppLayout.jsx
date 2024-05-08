@@ -1,4 +1,4 @@
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import Header from "../landingPage/Header";
 import { useContext, useEffect, useState } from "react";
 import { NAVLINK } from "../../constants/index";
@@ -12,17 +12,19 @@ import useGlobalContext from "../../hook/useGlobalContext";
 import useAppContext from "../../hook/useAppContext";
 
 const AppLayout = () => {
-  const { isLoggedIn, successMsg, errMsg, auth } = useAuth();
+  const { successMsg, errMsg, auth, getCurrentSession, loading } = useAuth();
   const navigate = useNavigate();
   const { isNavToggled, activeNav } = useGlobalContext();
   const { reqCount } = useAppContext();
   const [isButtonVisible, setIsButtonVisible] = useState(false);
+  const location = useLocation();
 
   const handleVisible = (e) => {
     setIsButtonVisible(window.scrollY >= 120 ? true : false);
   };
 
   useEffect(() => {
+    getCurrentSession();
     initBody();
     window.addEventListener("scroll", handleVisible);
     return () => {
@@ -32,7 +34,7 @@ const AppLayout = () => {
 
   return (
     <>
-      {!sessionStorage.user ? (
+      {!auth?.name && !loading ? (
         <Navigate to="/login" />
       ) : (
         <section>
