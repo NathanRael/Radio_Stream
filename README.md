@@ -1,4 +1,4 @@
-# Radio Rofia
+# Radio Stream
 Radio Landing page and web app featuring micro-interaction and animation
 
 ## Technologies
