@@ -4,7 +4,7 @@ Radio Landing page and web app featuring micro-interaction and animation
 ## Tools
 - React Js
 - TailwindCss
-- Php (in the radio_stream_backend repo)
+- Php ( used in the [backend](https://github.com/NathanRael/radio_stream_backend) repo)
 - Mysql
 
 ## Features
