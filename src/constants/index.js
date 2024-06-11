@@ -3,84 +3,88 @@ export const EMAIL_REGEX = /^[a-z0-9]{3,}@[a-z]{3,}\.com$/i;
 // export const EMAIL_REGEX = /^[a-z0-9]+@[a-z]+[.].{3,}$/i;
 export const PASSWORD_REGEX = /^[a-z].{8,}$/i;
 
-export const hostIp = "localhost"
-export const baseUrl = `http://${hostIp}/rofia/api`;
+export const hostIp = "nathanrael-radio-stream.000webhostapp.com";
+export const baseUrl = `https://${hostIp}/api`;
+
+// export const hostIp = "localhost";
+// export const baseUrl = `http://${hostIp}/rofia/api`;
+// export const hostIp = "nathanrael-radio-stream.free.nf";
+// export const baseUrl = `http://${hostIp}/api`;
 
 export const ABOUT_TEXT = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt praesentium eum non iusto error quo beatae commodi ipsam, voluptas animi molestias accusantium excepturi quae molestiae repudiandae vel reprehenderit suscipit inventore.     Sunt, incidunt numquam aliquid, provident nobis, corrupti ullam obcaecati adipisci aspernatur eos quod. Eum quis totam obcaecati harum nostrum animi iure, aperiam quam ut saepe culpa rem, ipsam dolore official zazd
 numquam aliquid, provident nobis, corrupti ullam obcaecati adipisci aspernatur eos quod. Eum quis totam obcaecati harum nostrum animi iure, aperiam quam ut saepe culpa rem, ipsam dolore official zaz
-`
+`;
 
 export const imageDir = `http://${hostIp}/Rofia/images/`;
 
-export const HERO_TEXT = "Ecoutez, vibrez, et rester informé avec notre app radio"
+export const HERO_TEXT =
+  "Ecoutez, vibrez, et rester informé avec notre app radio";
 export const currentPage = {
-  "home" : "bi bi-ui-checks-grid",
-  "radio" : "bi bi-boombox",
-  "request" : "bi bi-list-task",
-  "savedPost" : "bi bi-bookmark",
-  "requestList" : "bi bi-lock",
-  "postList" : "bi bi-lock",
-}
+  home: "bi bi-ui-checks-grid",
+  radio: "bi bi-boombox",
+  request: "bi bi-list-task",
+  savedPost: "bi bi-bookmark",
+  requestList: "bi bi-lock",
+  postList: "bi bi-lock",
+};
 export const NAVLINK = [
-    {
-        text : 'Accueil',
-        icon : 'bi bi-ui-checks-grid',
-        location : '/user/home',
-        secured : false,
-    },
-    {
-        text : 'Radio',
-        icon : 'bi bi-boombox',
-        location : '/user/radio',
-        secured : false,
-    },
-    {
-        text : 'Requêtes',
-        icon : 'bi bi-list-task',
-        location : '/user/request',
-        secured : false,
-    },
-    {
-        text : 'Sauvegardes',
-        icon : 'bi bi-bookmark',
-        location : '/user/savedPost',
-        secured : false,
-    },
-    {
-        text : 'Liste requêtes',
-        icon : 'bi bi-lock',
-        location : '/user/requestList',
-        secured : true,
-        
-    },
-    {
-        text : 'Publications',
-        icon : 'bi bi-lock',
-        location : '/user/postList',
-        secured : true,
-        
-    },
-]
+  {
+    text: "Accueil",
+    icon: "bi bi-ui-checks-grid",
+    location: "/user/home",
+    secured: false,
+  },
+  {
+    text: "Radio",
+    icon: "bi bi-boombox",
+    location: "/user/radio",
+    secured: false,
+  },
+  {
+    text: "Requêtes",
+    icon: "bi bi-list-task",
+    location: "/user/request",
+    secured: false,
+  },
+  {
+    text: "Sauvegardes",
+    icon: "bi bi-bookmark",
+    location: "/user/savedPost",
+    secured: false,
+  },
+  {
+    text: "Liste requêtes",
+    icon: "bi bi-lock",
+    location: "/user/requestList",
+    secured: true,
+  },
+  {
+    text: "Publications",
+    icon: "bi bi-lock",
+    location: "/user/postList",
+    secured: true,
+  },
+];
 
-export const POST =  {
-    "data": [
-      {
-        "id": "100458112765e9f99e1e62f0.02017360.d27a57a8af737f199907c077f36726f1",
-        "title": "Gaming Party 1.0",
-        "desc": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse similique ex blanditiis odit amet ipsam dolorem, vel, velit perferendis explicabo perspiciatis ipsum nam temporibus accusamus deleniti exercitationem magnam. Sequi, sed!",
-        "date": "2024-01-07 20:30:06"
-      },
-      {
-        "id": "202301258465e9f27fa70d47.33367115.d0c724e6047dd100f5cf9c44c9fcfb7c",
-        "title": "Hackaton",
-        "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt praesentium eum non iusto error quo beatae commodi ipsam, voluptas animi molestias accusantium excepturi quae molestiae repudiandae vel reprehenderit suscipit inventore.     Sunt, incidunt numquam aliquid, provident nobis, corrupti ullam obcaecati adipisci aspernatur eos quod. Eum quis totam obcaecati harum nostrum animi iure, aperiam quam ut saepe culpa rem, ipsam dolore official ",
-        "date": "2024-03-07 20:01:28"
-      },
-      {
-        "id": "86118140765e9f2d24e45c0.13716778.90cbed67eb2f1bdfdb10f15bd3bea9a2",
-        "title": "Color Party",
-        "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt praesentium eum non iusto error quo beatae commodi ipsam, voluptas animi molestias accusantium excepturi quae molestiae repudiandae vel reprehenderit suscipit inventore.     Sunt, incidunt numquam aliquid, provident nobis, corrupti ullam obcaecati adipisci aspernatur eos quod. Eum quis totam obcaecati harum nostrum animi iure, aperiam quam ut saepe culpa rem, ipsam dolore official ",
-        "date": "2024-03-09 20:01:28"
-      }
-    ]
-  }
+export const POST = {
+  data: [
+    {
+      id: "100458112765e9f99e1e62f0.02017360.d27a57a8af737f199907c077f36726f1",
+      title: "Gaming Party 1.0",
+      desc: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse similique ex blanditiis odit amet ipsam dolorem, vel, velit perferendis explicabo perspiciatis ipsum nam temporibus accusamus deleniti exercitationem magnam. Sequi, sed!",
+      date: "2024-01-07 20:30:06",
+    },
+    {
+      id: "202301258465e9f27fa70d47.33367115.d0c724e6047dd100f5cf9c44c9fcfb7c",
+      title: "Hackaton",
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt praesentium eum non iusto error quo beatae commodi ipsam, voluptas animi molestias accusantium excepturi quae molestiae repudiandae vel reprehenderit suscipit inventore.     Sunt, incidunt numquam aliquid, provident nobis, corrupti ullam obcaecati adipisci aspernatur eos quod. Eum quis totam obcaecati harum nostrum animi iure, aperiam quam ut saepe culpa rem, ipsam dolore official ",
+      date: "2024-03-07 20:01:28",
+    },
+    {
+      id: "86118140765e9f2d24e45c0.13716778.90cbed67eb2f1bdfdb10f15bd3bea9a2",
+      title: "Color Party",
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt praesentium eum non iusto error quo beatae commodi ipsam, voluptas animi molestias accusantium excepturi quae molestiae repudiandae vel reprehenderit suscipit inventore.     Sunt, incidunt numquam aliquid, provident nobis, corrupti ullam obcaecati adipisci aspernatur eos quod. Eum quis totam obcaecati harum nostrum animi iure, aperiam quam ut saepe culpa rem, ipsam dolore official ",
+      date: "2024-03-09 20:01:28",
+    },
+  ],
+};

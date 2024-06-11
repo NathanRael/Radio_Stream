@@ -135,7 +135,7 @@ const Header = ({
       )}
       <div
         className={` flex items-center justify-between  gap-6  max-md:fixed left-4 max-md:flex-row-reverse transition-all duration-500 top-4 z-30  ${
-          auth.name ? "max-w-[828px]" : "max-w-[320px]"
+          auth?.name ? "max-w-[828px]" : "max-w-[320px]"
         } ${isNavToggled ? "icon-hidden" : "max-md:-top-1/2"} `}
       >
         {!isForLanding && /home|postlist/i.test(currentDir) && (
