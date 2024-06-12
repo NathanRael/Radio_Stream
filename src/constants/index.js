@@ -3,11 +3,11 @@ export const EMAIL_REGEX = /^[a-z0-9]{3,}@[a-z]{3,}\.com$/i;
 // export const EMAIL_REGEX = /^[a-z0-9]+@[a-z]+[.].{3,}$/i;
 export const PASSWORD_REGEX = /^[a-z].{8,}$/i;
 
-export const hostIp = "nathanrael-radio-stream.000webhostapp.com";
-export const baseUrl = `https://${hostIp}/api`;
+// export const hostIp = "nathanrael-radio-stream.000webhostapp.com";
+// export const baseUrl = `https://${hostIp}/api`;
 
-// export const hostIp = "localhost";
-// export const baseUrl = `http://${hostIp}/rofia/api`;
+export const hostIp = "localhost";
+export const baseUrl = `http://${hostIp}/rofia/api`;
 // export const hostIp = "nathanrael-radio-stream.free.nf";
 // export const baseUrl = `http://${hostIp}/api`;
 

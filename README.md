@@ -1,15 +1,22 @@
-# Radio Rofia
+# Radio Stream
 Radio Landing page and web app featuring micro-interaction and animation
 
-## Technologies
+## Tools
 - React Js
 - TailwindCss
-- Php (not yet implementend)
+- Php ( used in the [backend](https://github.com/NathanRael/radio_stream_backend) repo)
+- Mysql
 
 ## Features
-- Dark mode
-(More will come soon)
+- Micro animation to enhance user experiences
+- Fully functional authentication
+- Online radio
+- CRUD operation for event, saved_event and user request
 
 ## Design 
 The design has done by [figma](https://www.figma.com/file/xZDpyUbaxGDLkKHErLvfoX/Rofia?type=design&node-id=0-1&mode=design&t=tGiscH0UNQRnLfFk-0)
+
+## Author 
+ - Natanaël RALAIVOAVY
+ - Email : ralaivoavy.natanael@gmail.com
 

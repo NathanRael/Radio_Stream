@@ -41,7 +41,7 @@ const SavedPost = () => {
           {savedPost.map((post) => (
             <Suspense key={post.id} fallback={<RecentPostLoading />}>
               <SavedPostCard
-                className="max-w-[320px]"
+                className="min-w-[320px]"
                 key={post.id}
                 {...post}
                 isAdmin={auth.roles === "admin"}
@@ -51,6 +51,7 @@ const SavedPost = () => {
             </Suspense>
           ))}
         </div>
+        
       ) : (
         <Empty text="Aucun évènement sauvegardé" />
       )}
