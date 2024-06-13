@@ -132,7 +132,7 @@ const NavLink = ({
         onClick={handleClick}
       >
         {notification && <Notification value={notifValue} />}
-        <i className={`${icon} text-icon`}></i>
+        <i className={`${icon} text-[16px]`}></i>
         <p>{text}</p>
       </li>
     );
@@ -145,7 +145,7 @@ const NavLink = ({
         onClick={handleClick}
       >
         {notification && <Notification value={notifValue} />}
-        <i className={`${icon} text-icon`}></i>
+        <i className={`${icon} text-[16px]`}></i>
         <p>{text}</p>
       </li>
     );
