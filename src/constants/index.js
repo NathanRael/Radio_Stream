@@ -6,8 +6,8 @@ export const PASSWORD_REGEX = /^[a-z].{8,}$/i;
 export const hostIp = "nathanrael-radio-stream.000webhostapp.com";
 export const baseUrl = `https://${hostIp}/api`;
 
-// export const hostIp = "localhost";
-// export const baseUrl = `http://${hostIp}/rofia/api`;
+// export const hostIp = "nathanrael-radio-stream.000webhostapp.com";;
+// export const baseUrl = `https://${hostIp}/api`;
 // export const hostIp = "nathanrael-radio-stream.free.nf";
 // export const baseUrl = `http://${hostIp}/api`;
 
